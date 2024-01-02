@@ -2,9 +2,10 @@
 title: About Me
 subtitle: Why would you want to hire me
 comments: false
+published: true
 ---
 
-Hello! I'm Anthony M. Carrella, a dynamic professional with a zest for innovation and problem-solving. Here's why you'll find my portfolio compelling:
+Hello! I'm Anthony M. Carrella, a dynamic professional with a flair for innovation and problem-solving. Here's why you'll find my portfolio compelling:
 
 - **Innovative Thinker**: I thrive on creativity and have a proven track record of thinking outside the box to deliver exceptional results.
 - **Commitment to Excellence**: My dedication to quality is unmatched. I believe in doing things right the first time and always aim for excellence in everything I do.
