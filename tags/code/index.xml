@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>code on SweetB Hugo</title>
-    <link>http://anthonymichael.work/tags/code/</link>
+    <link>https://anthonymichael.work/tags/code/</link>
     <description>Recent content in code on SweetB Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>youremail@domain.com (Some Person)</managingEditor>
     <webMaster>youremail@domain.com (Some Person)</webMaster>
     <lastBuildDate>Tue, 08 Mar 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://anthonymichael.work/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://anthonymichael.work/tags/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Code Sample</title>
-      <link>http://anthonymichael.work/post/2016-03-08-code-sample/</link>
+      <link>https://anthonymichael.work/post/2016-03-08-code-sample/</link>
       <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
-      <guid>http://anthonymichael.work/post/2016-03-08-code-sample/</guid>
+      <guid>https://anthonymichael.work/post/2016-03-08-code-sample/</guid>
       <description>&lt;p&gt;The following are two code samples using syntax highlighting.&lt;/p&gt;</description>
     </item>
   </channel>
