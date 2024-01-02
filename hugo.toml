@@ -68,6 +68,12 @@ identifier = "samples"
 name = "Samples"
 weight = 2
 
+[[menu.main]]
+name = "First Post"
+parent = "samples"
+url = "post/2023-12-31-first-post"
+weight = 1
+
 # [[menu.main]]
 # name = "Big Image Sample"
 # parent = "samples"
