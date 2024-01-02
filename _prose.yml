@@ -1,0 +1,52 @@
+prose:
+  #rooturl: "content"
+  media: "static/media"
+  ignore: [".github", ".gitignore", ".gitmodules", "themes", ".gitkeep"]
+  siteurl: "https://anthonymichael.work"
+  metadata:
+    post:
+      - name: "title"
+        field:
+          element: "text"
+          label: "Title"
+          placeholder: "Enter post title here"
+      
+      - name: "subtitle"
+        field:
+          element: "text"
+          label: "Subtitle"
+          placeholder: "Enter post subtitle here"
+
+      - name: "date"
+        field:
+          element: "text"
+          label: "Date"
+          placeholder: "YYYY-MM-DD"
+          value: CURRENT_DATETIME
+
+      - name: "tags"
+        field:
+          element: "multiselect"
+          label: "Tags"
+          placeholder: "Select or add tags"
+          alterable: true
+          options:
+            - name: "example"
+              value: "example"
+            - name: "code"
+              value: "code"
+          # You can add more predefined tags here
+
+      - name: "draft"
+        field:
+          element: "checkbox"
+          label: "Draft"
+          help: "Check if the post is a draft"
+          value: true
+      
+      - name: "bigimg"
+        field:
+          element: "textarea"
+          label: "Big Image"
+          help: "Enter image data in format: [{ src: '/img/path.jpg', desc: 'Description' }]"
+          placeholder: "[{ src: '/img/path.jpg', desc: 'Description' }]"
