@@ -1,0 +1,3 @@
+[submodule "themes/sweetb-hugo"]
+	path = themes/sweetb-hugo
+	url = https://github.com/jlumbroso/sweetb-hugo.git
