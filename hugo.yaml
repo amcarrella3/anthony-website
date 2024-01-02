@@ -1,0 +1,52 @@
+DefaultContentLanguage: "en"
+baseurl: "https://anthonymichael.work"
+title: "Anthony Michael Carrella"
+theme: "sweetb-hugo"
+pygmentsCodeFences: true
+pygmentsCodefencesGuessSyntax: true
+pygmentsStyle: "trac"
+pygmentsUseClasses: true
+
+Params:
+  since: 2023
+  comments: true
+  commit: false
+  dateFormat: "January 2, 2006"
+  delayDisqus: true
+  favicon: "img/favicon.ico"
+  logo: "img/avatar-icon.png"
+  mainSections: ["post", "posts"]
+  navbarCenteredLogo: false
+  navbarFloating: false
+  readingTime: false
+  rss: true
+  showRelatedPosts: true
+  socialShare: true
+  subtitle: "Community Leadership with Soul"
+  useHLJS: true
+  wordCount: true
+
+Author:
+  github: "https://github.com/amcarrella3"
+  linkedin: "anthony-m-carrella-81329b99"
+  name: "Anthony Michael Carrella"
+  website: "anthonymichael.work"
+
+menu:
+  main:
+    - name: "Home"
+      url: ""
+      weight: 1
+    - name: "About"
+      url: "page/about/"
+      weight: 3
+    - identifier: "samples"
+      name: "Samples"
+      weight: 2
+    - name: "First Post"
+      parent: "samples"
+      url: "post/2023-12-31-first-post"
+      weight: 1
+    - name: "Tags"
+      url: "tags"
+      weight: 3
