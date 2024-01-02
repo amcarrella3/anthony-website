@@ -1,6 +1,6 @@
 DefaultContentLanguage = "en"
 baseurl = "https://anthonymichael.work"
-title = "SweetB Hugo"
+title = "Anthony Michael Carrella"
 # Using theme as git submodule 
 theme = "sweetb-hugo"
 # Or when using theme as hugo module
@@ -15,6 +15,7 @@ pygmentsUseClasses = true
 #googleAnalytics = "XXX"
 
 [Params]
+since = 2023
 #  homeTitle = "SweetB Hugo Theme" # Set a different text for the header on the home page
 comments = true 
 commit = false 
@@ -25,62 +26,32 @@ logo = "img/avatar-icon.png" # Expecting square dimensions
 mainSections = ["post", "posts"] 
 navbarCenteredLogo = false 
 navbarFloating = false 
-readingTime = true 
+readingTime = false 
 rss = true 
 showRelatedPosts = true 
 socialShare = true 
-subtitle = "Build a beautiful and simple website in minutes" 
+subtitle = "Community Leadership with Soul" 
 useHLJS = true 
 wordCount = true 
 #  hideAuthor = true
 #  gcse = "012345678901234567890:abcdefghijk" # Get your code from google.com/cse. Make sure to go to "Look and Feel" and change Layout to "Full Width" and Theme to "Classic"
 #  disclaimerText = "The opinions expressed herein are my own personal opinions and do not represent my employer’s view in any way."
 
-#[[Params.bigimg]]
-#  src = "img/triangle.jpg"
-#  desc = "Triangle"
-#[[Params.bigimg]]
-#  src = "img/sphere.jpg"
-#  desc = "Sphere"
-#  # position: see values of CSS background-position.
-#  position = "center top"
-#[[Params.bigimg]]
-#  src = "img/hexagon.jpg"
-#  desc = "Hexagon"
-
 [Author]
 # Set only your "username" for default hosts and full URLs otherwise (e.g., "https://MyGitLab.org/username")
-500px = "username" 
-bandcamp = "username" 
-bitbucket = "username" 
-codepen = "username" 
-discord = "invite code (https://discord.gg/XXXXXXX)" 
-email = "youremail@domain.com" 
-facebook = "username" 
-github = "username" 
-gitlab = "username" 
-instagram = "username" 
-itchio = "username" 
-kaggle = "username" 
-linkedin = "username" 
-mastodon = "url" 
-medium = "username" 
-name = "Some Person" 
-paypal = "username" 
-reddit = "username" 
-slack = "username" 
-snapchat = "username" 
-soundcloud = "username" 
-spotify = "username" 
-stackoverflow = "users/XXXXXXX/username" 
-strava = "userid" 
-telegram = "username" 
-twitter = "username" 
-vk = "username" 
-website = "yourwebsite.com" 
-weibo = "username" 
-xing = "username" 
-youtube = "user/username" # or channel/channelname
+# email = "youremail@domain.com" 
+# facebook = "username" 
+github = "https://github.com/amcarrella3"
+# instagram = "username" 
+linkedin = "anthony-m-carrella-81329b99"
+# mastodon = "url" 
+# medium = "username" 
+name = "Anthony Michael Carrella"
+# paypal = "username" 
+# spotify = "username" 
+# twitter = "username" 
+website = "anthonymichael.work"
+# youtube = "user/username" # or channel/channelname
 
 [[menu.main]]
 name = "Home"
@@ -97,23 +68,23 @@ identifier = "samples"
 name = "Samples"
 weight = 2
 
-[[menu.main]]
-name = "Big Image Sample"
-parent = "samples"
-url = "post/2017-03-07-bigimg-sample"
-weight = 1
+# [[menu.main]]
+# name = "Big Image Sample"
+# parent = "samples"
+# url = "post/2017-03-07-bigimg-sample"
+# weight = 1
 
-[[menu.main]]
-name = "Math Sample"
-parent = "samples"
-url = "post/2017-03-05-math-sample"
-weight = 2
+# [[menu.main]]
+# name = "Math Sample"
+# parent = "samples"
+# url = "post/2017-03-05-math-sample"
+# weight = 2
 
-[[menu.main]]
-name = "Code Sample"
-parent = "samples"
-url = "post/2016-03-08-code-sample"
-weight = 3
+# [[menu.main]]
+# name = "Code Sample"
+# parent = "samples"
+# url = "post/2016-03-08-code-sample"
+# weight = 3
 
 [[menu.main]]
 name = "Tags"
