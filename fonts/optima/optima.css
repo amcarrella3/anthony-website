@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Optima';
+    src: url('/fonts/optima/Optima-Regular-01.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Optima';
+    src: url('/fonts/optima/Optima-Bold-02.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Optima';
+    src: url('/fonts/optima/Optima-Italic-03.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Optima';
+    src: url('/fonts/optima/Optima-BoldItalic-04.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Optima';
+    src: url('/fonts/optima/Optima-ExtraBlack-05.ttf') format('truetype');
+    font-weight: 900; /* Extra Black is often represented as 900 weight */
+    font-style: normal;
+}

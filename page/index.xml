@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on SweetB Hugo</title>
+    <link>http://anthonymichael.work/page/</link>
+    <description>Recent content in Pages on SweetB Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
+    <webMaster>youremail@domain.com (Some Person)</webMaster>
+    <atom:link href="http://anthonymichael.work/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About me</title>
+      <link>http://anthonymichael.work/page/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>youremail@domain.com (Some Person)</author>
+      <guid>http://anthonymichael.work/page/about/</guid>
+      <description>Hello! I&amp;rsquo;m Jordan Avery, a dynamic professional with a zest for innovation and problem-solving. Here&amp;rsquo;s why you&amp;rsquo;ll find my portfolio compelling:&#xA;Innovative Thinker: I thrive on creativity and have a proven track record of thinking outside the box to deliver exceptional results. Commitment to Excellence: My dedication to quality is unmatched. I believe in doing things right the first time and always aim for excellence in everything I do. Adaptive and Versatile: Whether it&amp;rsquo;s learning new technologies or adapting to changing market trends, I&amp;rsquo;m always ready to embrace new challenges and opportunities.</description>
+    </item>
+  </channel>
+</rss>
