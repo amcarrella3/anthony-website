@@ -1,10 +1,10 @@
 prose:
   #rooturl: "content"
   media: "static/media"
-  ignore: [".github", ".gitignore", ".gitmodules", "themes", ".gitkeep"]
+  ignore: [".github", ".gitignore", ".gitmodules", "themes", ".gitkeep", "_prose.yml"]
   siteurl: "https://anthonymichael.work"
   metadata:
-    post:
+    "content/post":
       - name: "title"
         field:
           element: "text"
