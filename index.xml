@@ -6,8 +6,15 @@
     <description>Recent content on Anthony Michael Carrella</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Dec 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://anthonymichael.work/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First post!</title>
+      <link>https://anthonymichael.work/post/2023-12-31-first-post/</link>
+      <pubDate>Sun, 31 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://anthonymichael.work/post/2023-12-31-first-post/</guid>
+      <description>Hello and welcome to my first blog post! This site is built with Hugo, a fast and efficient static site generator, and it&amp;rsquo;s designed using the SweetB Hugo theme (check it out on GitHub). This theme is a variant of the popular Beautiful Hugo (found here), and I&amp;rsquo;ve chosen it for its clean and modern design.&#xA;Behind the Scenes I&amp;rsquo;ve selected a mix of Space Grotesk, Optima, and Lexend Deca fonts to ensure readability and a sleek look.</description>
+    </item>
     <item>
       <title>Photoswipe Gallery Sample</title>
       <link>https://anthonymichael.work/post/2017-03-20-photoswipe-gallery-sample/</link>
