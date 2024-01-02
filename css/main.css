@@ -159,7 +159,7 @@ figure:not(.dark) img, img.white {
 /* --- Navbar --- */
 
 .navbar-custom {
-  background: #FFF; /*#F5F5F5;*/
+  background: #FEFEFE; /*#F5F5F5;*/
   border-bottom: 0px; /*1px solid  #EAEAEA;*/
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -985,6 +985,7 @@ only activates if the site param floatingNavbar is set to false
 nav .collapse a {
   text-decoration: none;
   color: #333;
+  background-color: #fefefe;
   font-size: 20px;
   margin: 0 0px /*15px*/; /* spacing between links */
   position: relative;
