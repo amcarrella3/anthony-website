@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Chapaza';
+    src: url('/fonts/chapaza/chapaza.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chapaza';
+    src: url('/fonts/chapaza/chapaza-italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}

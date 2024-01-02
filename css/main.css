@@ -162,14 +162,29 @@ figure:not(.dark) img, img.white {
   background: #FEFEFE; /*#F5F5F5;*/
   border-bottom: 0px; /*1px solid  #EAEAEA;*/
   font-family: "Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  position: absolute;
   z-index: 500;
+}
+
+/* phone  only */
+@media only screen and (max-width: 767px) {
+  .navbar-custom {
+    background: #FEFEFE; /*#F5F5F5;*/
+    border-bottom: 0px; /*1px solid  #EAEAEA;*/
+    font-family: "Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    position: absolute;
+    z-index: 500;
+  }
 }
 
 .navbar-custom .nav li a {
   /*text-transform: uppercase;*/
   font-size: 16px;
   letter-spacing: 1px;
+}
+
+.navbar-brand {
+  font-family: "Chapaza", serif;
+  font-size: 30px;
 }
 
 .navbar-custom .navbar-brand,
