@@ -44,9 +44,9 @@ prose:
           help: "Check if the post is a draft"
           value: true
       
-      - name: "bigimg"
-        field:
-          element: "textarea"
-          label: "Big Image"
-          help: "Enter image data in format: [{ src: '/img/path.jpg', desc: 'Description' }]"
-          placeholder: "[{ src: '/img/path.jpg', desc: 'Description' }]"
+      # - name: "bigimg"
+      #   field:
+      #     element: "textarea"
+      #     label: "Big Image"
+      #     help: "Enter image data in format: [{ src: '/img/path.jpg', desc: 'Description' }]"
+      #     placeholder: "[{ src: '/img/path.jpg', desc: 'Description' }]"
