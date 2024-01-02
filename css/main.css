@@ -982,7 +982,7 @@ only activates if the site param floatingNavbar is set to false
 /* --- Hover navbar --- */
 
 
-nav .collapse a {
+nav a:not(.navbar-brand) {
   text-decoration: none;
   color: #333;
   background-color: #fefefe;
@@ -994,8 +994,8 @@ nav .collapse a {
   z-index: 100;
 }
 
-nav .collapse a::before,
-nav .collapse a::after {
+nav a:not(.navbar-brand)::before,
+nav a:not(.navbar-brand)::after {
   content: '';
   position: absolute;
   width: 50%; /* Each line is half the width of the link */
@@ -1006,37 +1006,37 @@ nav .collapse a::after {
   transform: scaleX(0);
 }
 
-nav .collapse a::before {
+nav a:not(.navbar-brand)::before {
   left: 50%;
   transform-origin: left;
 }
 
-nav .collapse a::after {
+nav a:not(.navbar-brand)::after {
   right: 50%;
   transform-origin: right;
 }
 
-nav .collapse a:hover::before,
-nav .collapse a:hover::after {
+nav a:not(.navbar-brand):hover::before,
+nav a:not(.navbar-brand):hover::after {
   transform: scaleX(1);
 }
 
 /* New styles for 'current' class */
-nav .collapse a.current {
+nav a:not(.navbar-brand).current {
   color: #DB633F!important;;
   /* Example: Change text color for current link */
 }
 
-nav .collapse a.current::before,
-nav .collapse a.current::after {
+nav a:not(.navbar-brand).current::before,
+nav a:not(.navbar-brand).current::after {
   background-color: #DB633F!important;
   /* Example: Change line color for current link */
 }
 
 /* New styles for 'current' class */
-nav .collapse a.current,
-nav .collapse a.current::before,
-nav .collapse a.current::after {
+nav a:not(.navbar-brand).current,
+nav a:not(.navbar-brand).current::before,
+nav a:not(.navbar-brand).current::after {
   transform: scaleX(1); /* This keeps the underline visible */
 }
 
