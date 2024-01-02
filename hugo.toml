@@ -1,5 +1,5 @@
 DefaultContentLanguage = "en"
-baseurl = "http://anthonymichael.work"
+baseurl = "https://anthonymichael.work"
 title = "SweetB Hugo"
 # Using theme as git submodule 
 theme = "sweetb-hugo"
