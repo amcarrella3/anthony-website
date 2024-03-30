@@ -16,3 +16,23 @@ Or you can delete these file if you don't need it.
 <!-- or you could include some additional css libraries:
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.css" integrity="sha256-I1UoFd33KHIydu88R9owFaQWzwkiZV4hXXug5aYaM28=" crossorigin="anonymous" />
 -->
+
+
+
+<!-- Fix to the navbar in mobile -->
+<style>
+@media only screen and (max-width: 767px) {
+  nav .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+  }
+  .navbar-custom {
+    display: flex !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  .container {
+    padding-top: 2em !important;
+  }
+}
+</style>
