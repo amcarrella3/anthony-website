@@ -21,7 +21,7 @@ Params:
   readingTime: false
   rss: true
   showRelatedPosts: true
-  socialShare: true
+  socialShare: false
   subtitle: "Community Leadership with Soul"
   useHLJS: true
   wordCount: true
