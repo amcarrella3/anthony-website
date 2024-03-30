@@ -1,6 +1,6 @@
 DefaultContentLanguage: "en"
 baseurl: "https://anthonymichael.work"
-title: "Anthony Michael Carrella"
+title: "Anthony M. Carrella"
 theme: "sweetb-hugo"
 pygmentsCodeFences: true
 pygmentsCodefencesGuessSyntax: true
@@ -29,7 +29,7 @@ Params:
 Author:
   github: "https://github.com/amcarrella3"
   linkedin: "anthony-m-carrella-81329b99"
-  name: "Anthony Michael Carrella"
+  name: "Anthony M. Carrella"
   website: "anthonymichael.work"
 
 menu:
