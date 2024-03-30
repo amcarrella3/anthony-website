@@ -1,6 +1,6 @@
 ---
-title: About Me
-subtitle: Why would you want to hire me
+title: About Anthony
+subtitle: 
 comments: false
 published: true
 ---
