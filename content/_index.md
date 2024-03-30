@@ -4,3 +4,5 @@
 
 
 {{< carousel source="images" items="1" height="500" unit="px" duration="7000" >}}
+
+# Leader, Communicator, Creator
