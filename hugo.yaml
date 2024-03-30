@@ -34,19 +34,22 @@ Author:
 
 menu:
   main:
-    - name: "Home"
-      url: ""
-      weight: 1
+    # - name: "Home"
+    #   url: ""
+    #   weight: 1
     - name: "About"
       url: "page/about/"
-      weight: 3
-    - identifier: "samples"
-      name: "Samples"
-      weight: 2
-    - name: "First Post"
-      parent: "samples"
-      url: "post/2023-12-31-first-post"
       weight: 1
-    - name: "Tags"
-      url: "tags"
-      weight: 3
+    - name: "Contact"
+      url: "page/contact/"
+      weight: 2
+    # - identifier: "samples"
+    #   name: "Samples"
+    #   weight: 2
+    # - name: "First Post"
+    #   parent: "samples"
+    #   url: "post/2023-12-31-first-post"
+    #   weight: 1
+    # - name: "Tags"
+    #   url: "tags"
+    #   weight: 3
