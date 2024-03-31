@@ -38,10 +38,12 @@ menu:
     #   url: ""
     #   weight: 1
     - name: "About"
-      url: "about/"
+      #url: "about/"
+      url: "/#about-me"
       weight: 1
     - name: "Contact"
-      url: "contact/"
+      # url: "contact/"
+      url: "/#lets-partner-together"
       weight: 2
     # - identifier: "samples"
     #   name: "Samples"
