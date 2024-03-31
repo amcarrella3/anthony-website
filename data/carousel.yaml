@@ -1,7 +1,13 @@
 images: 
-  - image: /img/carousel-demo/1.png
-    content_html: "1"
-  - image: /img/carousel-demo/2.png
-    content_html: "2"
-  - image: /img/carousel-demo/3.png
-    content_html: "3"
+  - image: /media/carousel/communicating.webp
+    content_html: "communicating"
+    crop_vertical_center: 3
+  - image: /media/carousel/creating.webp
+    content_html: "creating"
+    crop_vertical_center: 5
+  - image: /media/carousel/leading.webp
+    content_html: "leading"
+    crop_vertical_center: 2
+  - image: /media/carousel/teaching.webp
+    content_html: "teaching"
+    crop_vertical_center: 4
