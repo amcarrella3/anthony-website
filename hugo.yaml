@@ -8,6 +8,7 @@ pygmentsStyle: "trac"
 pygmentsUseClasses: true
 
 Params:
+  hideTitleInFooter: true
   since: 2023
   comments: true
   commit: false
