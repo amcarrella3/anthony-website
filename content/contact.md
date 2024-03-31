@@ -5,4 +5,14 @@ comments: false
 published: true
 ---
 
-To be completed.
+{{< columns >}}
+
+![Headshot of Anthony Carrella](/media/headshots/square1.jpg)
+
+{{< column >}}
+
+{{< faIcon "fas fa-phone" >}} **Phone:** 555-402-0104
+
+{{< faIcon "fas fa-envelope" >}} **Email:** [`anthony@overbrookpresb.org`](mailto:anthony@overbrookpresb.org)
+
+{{< endcolumns >}}
