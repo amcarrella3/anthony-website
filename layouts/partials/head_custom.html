@@ -18,6 +18,7 @@ Or you can delete these file if you don't need it.
 -->
 
 
+<link rel="stylesheet" href="{{ "/fonts/italiana/italiana.css" | absURL }}" />
 
 <!-- Fix to the navbar in mobile -->
 <style>
@@ -39,6 +40,9 @@ Or you can delete these file if you don't need it.
 
 <!-- Override font of navbar -->
 <style>
+.navbar-brand {
+  font-size: 1.7em;
+}
 .navbar-custom {
   font-family: "Space Grotesk"; /*"Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif*/
 }
@@ -47,5 +51,9 @@ Or you can delete these file if you don't need it.
   .navbar-custom {
     font-family: "Space Grotesk"; /*"Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif*/
   }
+}
+body .carousel .prev, body .carousel .next {
+  display: none;
+  visibility: hidden;
 }
 </style>
