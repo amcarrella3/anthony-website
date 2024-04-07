@@ -1,0 +1,9 @@
+{{ $characters := slice "♦︎" "♢" "✦" "✧" "✤" }}
+{{ $id := .Get 0 | default "4" }}
+{{ $inline := .Get 1 | default "true" }}
+{{ $character := index $characters ($id | int) }}
+{{ if eq $inline "true" }}
+  <span class="elegant-separator"><span class="el-sep-{{ $id }}">{{ $character }}</span></span>
+{{ else }}
+  <div class="elegant-separator" style="text-align:center; font-size: 2em;"><span class="el-sep-{{ $id }}">{{ $character }}</span></div>
+{{ end }}

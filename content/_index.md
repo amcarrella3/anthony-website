@@ -7,8 +7,6 @@
 
 # Leader, Communicator, Creator
 
-## About Me
-
 {{< includeMarkdown "about.md" >}}
 
 ## Let's Partner Together
