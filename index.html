@@ -62,6 +62,7 @@ Innovative Thinker: I thrive on creativity and have a proven track record of thi
 
 
 
+<link rel="stylesheet" href="https://anthonymichael.work/fonts/italiana/italiana.css"/>
 
 
 <style>
@@ -83,6 +84,9 @@ Innovative Thinker: I thrive on creativity and have a proven track record of thi
 
 
 <style>
+.navbar-brand {
+  font-size: 1.7em;
+}
 .navbar-custom {
   font-family: "Space Grotesk";  
 }
@@ -91,6 +95,10 @@ Innovative Thinker: I thrive on creativity and have a proven track record of thi
   .navbar-custom {
     font-family: "Space Grotesk";  
   }
+}
+body .carousel .prev, body .carousel .next {
+  display: none;
+  visibility: hidden;
 }
 </style>
   </head>
@@ -238,13 +246,19 @@ Innovative Thinker: I thrive on creativity and have a proven track record of thi
     }
     h1 {
         text-align: center;
-        color: #bbb;
-        font-style: italic;
+        font-family: "Italiana";
+        font-size: 50px;
     }
      
-    nav .container-fluid {
-        padding-left: 10px;
-        padding-right: 10px;
+    nav .container-fluid, .container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .navbar {
+      min-height: 70px;
+      margin-top: 20px;
+      border: 0px;
     }
     
     h2 {
