@@ -2,7 +2,6 @@
 title: Anthony Michael Carrella
 subtitle: null
 comments: false
-published: false
 ---
 
 I consider myself a contemplative leader, communicator, and creative. I partner with individuals and organizations and equip them to live into their fullest potential.
