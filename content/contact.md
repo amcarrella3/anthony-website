@@ -11,7 +11,7 @@ published: true
 
 {{< column >}}
 
-{{< faIcon "fas fa-phone" >}} **Phone:** 555-402-0104
+{{< faIcon "fas fa-phone" >}} **Phone:** (732)-599-8114
 
 {{< faIcon "fas fa-envelope" >}} **Email:** [`anthony@overbrookpresb.org`](mailto:anthony@overbrookpresb.org)
 
