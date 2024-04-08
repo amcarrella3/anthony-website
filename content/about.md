@@ -30,6 +30,8 @@ With a unique blend of design thinking, creative problem-solving, and lifelong l
 
 
 
+
+
 {{< elegantSeparator "4" "false" >}}
 
 Whether you're looking to reform, modernize, or embark on a new venture, I'm ready to guide or partner with you through the journey.
