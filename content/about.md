@@ -9,6 +9,7 @@ I consider myself a contemplative leader, communicator, and creative. I partner 
 
 With a unique blend of design thinking, creative problem-solving, and lifelong learning, I develop pragmatic and harmonious solutions for community, communications, and creative initiatives.
 
+
 {{< elegantSeparator "4" "false" >}}
 
 - **{{< customSpan "other" >}}**CONTEMPLATIVE LEADERSHIP**{{< /customSpan >}} — I lead from a place of openness, deep listening, and stillness,** considering how my actions align with my intentions. Through a daily practice of inner work I cultivate and participate in environments where contemplation aids in making decisions and communicating authentically. My job is to help organizations innovate, adapt, and thrive by empowering others to lead with the same presence and purpose freely available for all of us to discern.
@@ -27,5 +28,7 @@ With a unique blend of design thinking, creative problem-solving, and lifelong l
 
 
 Whether you're looking to reform, modernize, or embark on a new venture, I'm ready to guide or partner with you through the journey.
+
+
 
 {{< elegantSeparator "4" "false" >}}
