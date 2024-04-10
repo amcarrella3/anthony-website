@@ -1,16 +1,10 @@
 images: 
-  - image: /media/carousel/communicating.webp
-    content_html: "communicating"
-    crop_vertical_center: 3
-  - image: /media/carousel/creating.webp
-    content_html: "creating"
-    crop_vertical_center: 5
-  - image: /media/carousel/leading.webp
-    content_html: "leading"
-    crop_vertical_center: 2
-  - image: /media/carousel/teaching.webp
-    content_html: "teaching"
-    crop_vertical_center: 4
   - image: /media/carousel/B_W reading.jpg
-    content_html: "teaching"
+    content_html: 
+    crop_vertical_center: 2
+  - image: /media/carousel/BLURRED_Storytelling.webp
+    content_html:
+    crop_vertical_center: 5
+  - image: /media/carousel/BLURRED_LEAD_opc_singing.jpeg
+    content_html:
     crop_vertical_center: 2
