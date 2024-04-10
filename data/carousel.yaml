@@ -11,3 +11,6 @@ images:
   - image: /media/carousel/teaching.webp
     content_html: "teaching"
     crop_vertical_center: 4
+  - image: /media/carousel/B_W reading.jpg
+    content_html: "teaching"
+    crop_vertical_center: 2
