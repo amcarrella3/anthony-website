@@ -1,10 +1,13 @@
 images: 
   - image: /media/carousel/B_W reading.jpg
     content_html: 
-    crop_vertical_center: 2
+    crop_vertical_center: 20
+    crop_horizontal_center: 10
   - image: /media/carousel/BLURRED_Storytelling.webp
     content_html:
-    crop_vertical_center: 5
+    crop_vertical_center: 50
+    crop_horizontal_center: 55
   - image: /media/carousel/BLURRED_LEAD_opc_singing.jpeg
     content_html:
-    crop_vertical_center: 2
+    crop_vertical_center: 20
+    crop_horizontal_center: 50
