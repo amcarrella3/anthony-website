@@ -40,7 +40,7 @@ menu:
     #   weight: 1
     - name: "About"
       #url: "about/"
-      url: "/#leader-communicator-creator"
+      url: "/#about"
       weight: 1
     - name: "Contact"
       # url: "contact/"
