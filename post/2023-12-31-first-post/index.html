@@ -113,24 +113,16 @@ Behind the Scenes I’ve selected a mix of Space Grotesk, Optima, and Lexend Dec
 
 
 
-<link rel="stylesheet" href="https://anthonymichael.work/fonts/italiana/italiana.css"/>
+<link rel="stylesheet" href="https://use.typekit.net/rhm8bdb.css"/>
 
 
 <style>
-@media only screen and (max-width: 767px) {
-  nav .container-fluid {
-      padding-left: 10px;
-      padding-right: 10px;
+  .carousel {
+    margin-bottom: 35px;
   }
-  .navbar-custom {
-    display: flex !important;
-    left: 10px !important;
-    right: 10px !important;
+  .elegant-separator {
+    margin-top: 40px;
   }
-  .container {
-    padding-top: 2em !important;
-  }
-}
 </style>
 
 
@@ -140,14 +132,6 @@ li {
   padding-top: 10px;
   list-style-type: none;
   
-}
-
-li strong {
-  color: rgb(56, 146, 90);
-  font-weight: normal;
-}
-li .other {
-  font-family: "Italiana";
 }
 
 .navbar-brand {
@@ -173,6 +157,76 @@ body .carousel .prev, body .carousel .next {
   -ms-hyphens: auto;
   hyphens: auto;
 }
+</style>
+
+
+<style>
+  .navbar-custom {
+    font-family: "mostra-nuova";  
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .navbar-custom {
+      font-family: "mostra-nuova";  
+    }
+  }
+  
+  body {
+    font-family: "mostra-nuova", sans-serif;  
+    font-size: 25px;
+    color: #000;
+    position: relative;
+    background: #FFF;
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+  }
+  
+  .intro-header .page-heading .page-subheading,
+  .intro-header .post-heading .post-subheading {
+    font-size: 32px;
+    line-height: 1.1;
+    display: block;
+    font-family: "mostra-nuova", sans-serif;  
+    font-weight: 300;
+    margin: 10px 0 0;
+  }
+  
+  .intro-header.big-img .img-desc {
+    background: rgba(30, 30, 30, 0.6);
+    position: absolute;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: #EEE;
+    font-family: "mostra-nuova", sans-serif;  
+    right: 0;
+    bottom: 0;
+    display: none;
+  }
+</style>
+
+<style>
+  @media only screen and (max-width: 767px) {
+    .navbar-custom {
+      display: flex !important;
+      left: 10px !important;
+      right: 10px !important;
+    }
+    .container {
+      padding-top: 2em !important;
+    }
+  
+    nav .container-fluid, .container {
+      padding-left: 0px ! important;
+      padding-right: 0px ! important;
+    }
+    .navbar-brand {
+      font-size: 1em;
+    }
+    h3 {
+      font-size: 0.55em ! important;
+    }
+  }
 </style>
   </head>
   <body>
