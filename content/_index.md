@@ -5,8 +5,6 @@
 
 {{< carousel source="images" items="1" height="650" unit="px" duration="7000" cropVerticalCenter="top" >}}
 
-# Leader, Communicator, Creator
-
 {{< includeMarkdown "about.md" >}}
 
 ## Let's Partner Together
