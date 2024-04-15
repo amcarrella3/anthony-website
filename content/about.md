@@ -30,7 +30,7 @@ I foster and encourage safe, diverse environments where creativity thrives and e
 
 ### LIFE LONG LEARNING
 
-I create conditions for cultures to thrive by supporting individuals' thirst for new knowledge and skills.  This commitment to lifelong learning as a liberatory and transformative act is at the core of my approach to personal and collective development, helping entire organizations encounter challenges with curiosity and adaptability.  Through a critical pedagogy grounded in the work of Paulo Freire, the learning communities I serve actively engage with our world's realities, injustices, and contradictions, beckoning close examination of the social, political, and economic forces shaping our lives.  Together, we form critical consciousness and co-construct knowledge that paves the way for institutional reform and lasting transformation.
+I create conditions for cultures to thrive by supporting individuals' thirst for new knowledge and skills.  This commitment to lifelong learning as a liberatory act is at the core of my approach to personal and collective development, helping entire organizations encounter challenges with curiosity and adaptability.  Through a critical pedagogy grounded in the work of Paulo Freire, the learning communities I serve actively engage with our world's realities, injustices, and contradictions, beckoning close examination of the social, political, and economic forces shaping our lives.  Together, we form critical consciousness and co-construct knowledge that paves the way for institutional reform and lasting transformation.
 
 
 
