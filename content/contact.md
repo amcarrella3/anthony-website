@@ -15,6 +15,6 @@ Whether you're looking to reform, modernize, or embark on a new venture, I'm rea
 
 {{< faIcon "fas fa-phone" >}} **Phone** &nbsp;(609) 789-0585
 
-{{< faIcon "fas fa-envelope" >}} **Email** &nbsp;[anthony@overbrookpresb.org](mailto:anthony@overbrookpresb.org)
+{{< faIcon "fas fa-envelope" >}} **Email** &nbsp;[info@anthonymichael.work](mailto:info@anthonymichael.work)
 
 {{< endcolumns >}}
