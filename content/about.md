@@ -6,7 +6,9 @@ comments: false
 
 {{< anchor "about" >}}
 
+{{< center >}}
 I am an experienced **CONTEMPLATIVE LEADER**, **COMMUNICATOR**, and **CREATIVE**.
+{{</center >}}
 
 I equip individuals and organizations to live into their fullest potential.  As a multidisciplinarian, institutions utilize my emotional intelligence, human-centred design skills, and lifelong learning aspirations to fulfil their missions holistically, enhance their cultures, and grow.
 

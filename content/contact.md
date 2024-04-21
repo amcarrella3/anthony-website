@@ -13,8 +13,8 @@ Whether you're looking to reform, modernize, or embark on a new venture, I'm rea
 
 {{< column >}}
 
-{{< faIcon "fas fa-phone" >}} **Phone** &nbsp;(609) 789-0585
+{{< faIcon "fas fa-phone" >}} &nbsp;(609) 789-0585
 
-{{< faIcon "fas fa-envelope" >}} **Email** &nbsp;[info@anthonymichael.work](mailto:info@anthonymichael.work)
+{{< faIcon "fas fa-envelope" >}} &nbsp;[info@anthonymichael.work](mailto:info@anthonymichael.work)
 
 {{< endcolumns >}}
