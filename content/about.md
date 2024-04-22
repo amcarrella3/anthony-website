@@ -22,7 +22,7 @@ I cultivate and participate in environments where contemplation is the bedrock o
 
 I attune myself to the needs and immerse myself in the aspirations of the people and places I serve.  Through a process of active listening and rich reflection, I frequently and actively engage with an organization's mission, values, and culture to inform the path forward.  Partnering with stakeholders and beneficiaries, my teams and I foster dynamic work environments where we co-create cultures of non-violent communication and creative collaboration.  Building these ongoing partnerships of trust and empathy is rooted in our commitment to bringing about meaningful change in our local context and the world at large.
 
-### STRATEGIC & DESIGN THINKING
+### STRATEGIC COMMUNICATION & DESIGN THINKING
 
 I utilize an experiential, human-centred design approach to organize information, identify opportunities, streamline processes, and create beautiful and functional solutions for all. 
 
