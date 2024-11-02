@@ -29,7 +29,7 @@ Strategy, to me, is the alchemy of vision and precision—a disciplined art that
 
 ### COLLABORATION
 
-Collaboration is the symphony of diverse minds converging into harmonious innovation. I foster dynamic environments where every perspective is not just heard but celebrated as vital to the whole. Through active listening and the practice of non-violent communication, I lead people to transcend individual limitations, weaving their unique strengths into a tapestry of collective genius. This synergy doesn't merely achieve excellence; it forges a noble legacy of unity and shared triumphs.
+Collaboration is the convergence of diverse perspectives into purposeful innovation. I cultivate environments where every voice is valued, and each perspective is recognized as essential to the whole. Through active listening and non-violent communication, I guide teams to move beyond perceived limitations, inviting each stakeholder to leverage their unique strengths toward a cohesive and impactful vision. This synergy goes beyond meeting diversity, equity, and inclusion goals; it establishes a foundation for a noble institutional legacy, where collaboration fosters true shared participation and lasting achievement.
 
 ### EVOLUTION
 
