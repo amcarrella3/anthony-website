@@ -158,12 +158,63 @@ body.export-capture .portal-threshold { display: none; }   /* never bake the gat
 .portal-threshold__gate:hover .portal-threshold__ring { animation-duration: 2.8s; border-color: rgba(var(--glow), 0.58); }
 @keyframes threshold-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes threshold-breathe { 0%, 100% { transform: scale(0.9); opacity: 0.58; } 50% { transform: scale(1.05); opacity: 1; } }
-/* crossing: the gate rushes toward you and dissolves — "thrust into the piece" */
-.portal-threshold.is-crossing { animation: threshold-cross 1.4s cubic-bezier(0.6, 0, 0.3, 1) forwards; pointer-events: none; }
-@keyframes threshold-cross { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+/* crossing: you FALL IN. The gate dissolves + collapses INWARD (recedes, blurs
+   away) while the piece swells up to meet you — inward energy, not a lunge out. */
+.portal-threshold.is-crossing { animation: threshold-cross 1.15s cubic-bezier(0.55, 0, 0.85, 0.35) forwards; pointer-events: none; }
+@keyframes threshold-cross {
+  from { opacity: 1; transform: scale(1); filter: blur(0); }
+  to   { opacity: 0; transform: scale(0.7); filter: blur(10px); }
+}
 .portal-threshold.is-crossing .portal-threshold__ring { animation: none; }
+/* the whole view is pulled into the piece — a gentle inward surge that settles */
+@keyframes fall-in { 0% { transform: scale(1); } 55% { transform: scale(1.09); } 100% { transform: scale(1); } }
+body.is-entering #field { animation: fall-in 1.4s cubic-bezier(0.4, 0, 0.2, 1) both; }
 @media (prefers-reduced-motion: reduce) {
   .portal-threshold__ring { animation: none; }
   .portal-threshold.is-crossing { animation: threshold-fade 0.5s forwards; }
+  body.is-entering #field { animation: none; }
 }
 @keyframes threshold-fade { to { opacity: 0; } }
+
+/* ── the entry PROCESSION (experimental — only when ?exp=1) ──────────────────
+   An endless road of the ancients walking past while you prepare to enter.
+   The FIGURES are PROVISIONAL placeholders (Anthony's drawn/vectorized walkers
+   replace them); the roster will come from his Thymer people-web. */
+.portal-procession {
+  position: absolute; left: 0; right: 0; top: 7%;
+  height: 7.4rem; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+}
+/* the timeless street — provisional buildings drifting SLOWER than the walkers
+   (parallax = depth). His drawn buildings replace these. */
+.portal-street {
+  position: absolute; left: 0; top: 0; height: 4rem;
+  display: flex; width: max-content; opacity: 0.5;
+  animation: procession 96s linear infinite;
+}
+.portal-street svg { height: 100%; width: auto; display: block; stroke: rgba(var(--glow), 0.3); stroke-width: 1.4; fill: none; }
+.portal-road { position: absolute; left: 0; right: 0; bottom: 1.35rem; height: 1px; background: rgba(var(--glow), 0.16); }
+.portal-procession__track {
+  position: absolute; bottom: 0; left: 0;
+  display: flex; align-items: flex-end; gap: 3.4rem; width: max-content;
+  animation: procession 52s linear infinite;
+}
+@keyframes procession { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.procession-figure { display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.55; }
+.procession-figure__mark {
+  width: 9px; height: 20px; border-radius: 45% 45% 30% 30%;
+  background: rgba(var(--glow), 0.5);
+  animation: fig-step 1.15s ease-in-out infinite;
+}
+.procession-figure:nth-child(even) .procession-figure__mark { animation-delay: -0.55s; }
+.procession-figure__name {
+  font: 400 0.6rem/1 ui-monospace, Menlo, monospace;
+  letter-spacing: 0.13em; text-transform: uppercase; white-space: nowrap;
+  color: rgba(238, 230, 214, 0.5);
+}
+@keyframes fig-step { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .portal-procession__track { animation: none; }
+  .procession-figure__mark { animation: none; }
+}

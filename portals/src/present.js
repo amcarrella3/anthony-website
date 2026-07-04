@@ -81,15 +81,51 @@ export function initPresent({ field, manifest, save }) {
   // loads/buffers behind it. Crossing it (a click — a real user gesture) FORCES
   // every video to play, so nothing waits on autoplay policy, then dissolves you
   // into the piece. Provisional look; Anthony's to author.
+  // PROVISIONAL procession roster — placeholder names only. The real roster comes
+  // from Anthony's Thymer people-web + his traditions document; the walking
+  // FIGURES are his to author (drawn/vectorized). Gated behind ?exp=1 so the live
+  // rooms and shared link are untouched while this is experimental.
+  // A curated historical cross-section from Anthony's "Map of Traditions" (474
+  // people / 149 traditions) + the archetypes he named — public/historical
+  // figures ONLY (no living private contacts). Real roster + figures come next.
+  const PROCESSION = [
+    'a Lascaux hunter', 'a Lenape gatherer', 'a Greek scribe', 'Sappho',
+    'Guillaume de Machaut', 'Meister Eckhart', 'Josquin des Prez', 'Palestrina',
+    'Teresa of Ávila', 'John of the Cross', 'Dieterich Buxtehude', 'J.S. Bach',
+    'Handel', 'Henry Purcell', 'Django Reinhardt', 'Simone Weil', 'Thomas Merton', 'Augustine',
+  ];
+  // PROVISIONAL skyline for the "timeless street" — Greek temple, tipi, European
+  // house, cave, longhouse, dome, columns. Placeholder massing only; Anthony's
+  // drawn/vectorized buildings replace these (his sketch is the seed).
+  const STREET_SVG = '<svg viewBox="0 0 900 110" preserveAspectRatio="xMinYMax meet" xmlns="http://www.w3.org/2000/svg">'
+    + '<g><polyline points="20,92 20,60 120,60 120,92"/><line x1="40" y1="60" x2="40" y2="92"/><line x1="60" y1="60" x2="60" y2="92"/><line x1="80" y1="60" x2="80" y2="92"/><line x1="100" y1="60" x2="100" y2="92"/><polyline points="12,60 70,40 128,60"/></g>'
+    + '<g><polyline points="168,92 205,42 242,92"/><line x1="196" y1="52" x2="216" y2="38"/><line x1="214" y1="52" x2="194" y2="38"/></g>'
+    + '<g><polyline points="288,92 288,58 350,58 350,92"/><polyline points="282,58 319,38 356,58"/><rect x="311" y="72" width="15" height="20"/></g>'
+    + '<g><path d="M400,92 Q452,42 504,92"/><path d="M442,92 Q452,66 464,92"/></g>'
+    + '<g><path d="M542,92 L542,66 Q582,50 622,66 L622,92"/><line x1="566" y1="70" x2="566" y2="92"/><line x1="598" y1="70" x2="598" y2="92"/></g>'
+    + '<g><path d="M668,92 A42,42 0 0 1 752,92"/><line x1="710" y1="50" x2="710" y2="42"/></g>'
+    + '<g><line x1="802" y1="92" x2="802" y2="56"/><line x1="824" y1="92" x2="824" y2="56"/><polyline points="794,56 813,44 832,56"/></g>'
+    + '</svg>';
   function showThreshold() {
     if (threshold || !document.body.classList.contains('is-shared')) return;
+    const exp = window.__COSMOS_EXP__ === true || new URLSearchParams(location.search).get('exp') === '1';
     threshold = document.createElement('div');
-    threshold.className = 'portal-threshold';
-    threshold.innerHTML =
+    threshold.className = 'portal-threshold' + (exp ? ' has-procession' : '');
+    let inner =
       '<button class="portal-threshold__gate" type="button" aria-label="enter the portal">'
       + '<span class="portal-threshold__ring"></span>'
       + '<span class="portal-threshold__label">enter</span>'
       + '</button>';
+    if (exp) {
+      const fig = (n) => '<span class="procession-figure"><span class="procession-figure__mark"></span><span class="procession-figure__name">' + n + '</span></span>';
+      const line = PROCESSION.map(fig).join('');   // doubled → seamless endless loop
+      inner += '<div class="portal-procession" aria-hidden="true">'
+        + '<div class="portal-street">' + STREET_SVG + STREET_SVG + '</div>'   // PROVISIONAL buildings — his to draw
+        + '<div class="portal-road"></div>'
+        + '<div class="portal-procession__track">' + line + line + '</div>'
+        + '</div>';
+    }
+    threshold.innerHTML = inner;
     field.appendChild(threshold);
     const cross = () => {
       if (!threshold) return;
@@ -97,7 +133,8 @@ export function initPresent({ field, manifest, save }) {
       window.dispatchEvent(new CustomEvent('cosmos:entered'));   // gesture — let audio unlock too
       const t = threshold; threshold = null;
       t.classList.add('is-crossing');
-      setTimeout(() => t.remove(), 1400);
+      document.body.classList.add('is-entering');   // the view falls INTO the piece
+      setTimeout(() => { t.remove(); document.body.classList.remove('is-entering'); }, 1400);
     };
     threshold.querySelector('.portal-threshold__gate').addEventListener('click', cross);
   }
