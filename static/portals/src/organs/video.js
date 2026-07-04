@@ -10,6 +10,7 @@ export function createVideo(slot) {
     el.loop = true;
     el.autoplay = true;
     el.playsInline = true;
+    el.preload = 'auto';                 // buffer ahead so the threshold hides the wait
     el.setAttribute('muted', '');
     el.setAttribute('playsinline', '');
     parent.appendChild(el);
@@ -18,6 +19,9 @@ export function createVideo(slot) {
     el.src = './' + String(slot.feed.source || '').replace(/^\//, '');
     const go = () => el.play().catch(() => {});
     go();
+    // keep trying as data arrives + if the tab was backgrounded during load
+    el.addEventListener('loadeddata', go, { once: true });
+    el.addEventListener('canplay', go, { once: true });
   }
   function stop() { try { el.pause(); } catch (_) {} }
   return { mount, start, stop };
