@@ -5,7 +5,7 @@
 
 {{< carousel source="images" items="1" height="650" unit="px" duration="7000" cropVerticalCenter="top" >}}
 
-{{< includeMarkdown "about.md" >}}
+{{< anchor "about" >}}
 
 ## Let's Partner Together
 

@@ -38,14 +38,19 @@ menu:
     # - name: "Home"
     #   url: ""
     #   weight: 1
-    - name: "About"
-      #url: "about/"
-      url: "/#about"
+    - name: "Portals"
+      url: "/portals/"
       weight: 1
-    - name: "Contact"
-      # url: "contact/"
-      url: "/#lets-partner-together"
+    - name: "Writing"
+      url: "/writing/"
       weight: 2
+    # About retired 2026-07-04 — old bio archived in studio repo (archive/about-2023-*.md); new one TBD
+    - name: "About"
+      url: "/#about"
+      weight: 3
+    - name: "Contact"
+      url: "/#lets-partner-together"
+      weight: 4
     # - identifier: "samples"
     #   name: "Samples"
     #   weight: 2
