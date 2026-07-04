@@ -1,0 +1,7 @@
+{
+  "_note": "Thymer collections available to the ＋thymer feed picker. Ask Claude to pull any other collection from your workspace and it will be added here.",
+  "collections": [
+    { "id": "natural-observations", "name": "Natural Observations", "file": "data/thymer/natural-observations.json" },
+    { "id": "gratitude", "name": "Gratitude", "file": "data/thymer/gratitude.json" }
+  ]
+}

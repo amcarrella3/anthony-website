@@ -1,0 +1,230 @@
+{
+  "_note": "THE COMPOSITION MANIFEST — the tool's spine. Each slot = place (%, of the frame) + optional shape (hand-drawn mask, from assets/shapes) + feed (the format) + optional style (fill color). palette = Anthony's chosen colors. The editor writes this file on every change.",
+  "palette": {
+    "paper": "#ffebd1",
+    "ink": "#ffffff"
+  },
+  "membrane": {
+    "svg": "assets/frame/portal.svg"
+  },
+  "pieces": [
+    {
+      "id": "epigram-gratitude",
+      "feed": {
+        "type": "epigram",
+        "source": "data/epigram.json"
+      },
+      "place": {
+        "leftPct": 38.678892039934425,
+        "topPct": 28.90401223292439,
+        "widthPct": 23.905848033014923,
+        "heightPct": 10.865540489073785,
+        "rotationDeg": -8
+      },
+      "shape": null,
+      "z": 1,
+      "fit": "cover",
+      "shadow": {
+        "x": 40,
+        "y": -5,
+        "blur": 16,
+        "color": "#d8caca",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "p4jxk0",
+      "feed": {
+        "type": "video",
+        "source": "assets/media/uploads/img-1914-82b9582d.mov"
+      },
+      "place": {
+        "widthPct": 30.800793697531972,
+        "heightPct": 16.500795076863756,
+        "rotationDeg": -8,
+        "leftPct": 52.987924295815944,
+        "topPct": 76.08182877135799
+      },
+      "shape": "freeform-mask-314b82",
+      "fit": "cover",
+      "z": 5,
+      "style": {},
+      "media": {
+        "posX": 100,
+        "posY": 66,
+        "zoom": 1.2
+      },
+      "shadow": {
+        "x": 8,
+        "y": -5,
+        "blur": 60,
+        "color": "#ffffff",
+        "opacity": 1
+      },
+      "motion": {
+        "type": "breathe",
+        "speed": 2.1,
+        "amount": 2.8
+      }
+    },
+    {
+      "id": "p4eky0",
+      "feed": {
+        "type": "video",
+        "source": "assets/media/uploads/img-4768-43426a87.mov"
+      },
+      "place": {
+        "widthPct": 26.114035409259188,
+        "heightPct": 29.89038688878876,
+        "rotationDeg": 2,
+        "leftPct": 11.040632674755324,
+        "topPct": 81.75073827086078
+      },
+      "shape": "membrane-interior",
+      "fit": "cover",
+      "z": 9,
+      "style": {},
+      "shadow": null,
+      "motion": {
+        "type": "spin",
+        "speed": 1,
+        "amount": 1
+      }
+    },
+    {
+      "id": "p1vzh90",
+      "feed": {
+        "type": "video",
+        "source": "assets/media/uploads/animate-collage-exactly-as-appears-20260-937850d1.mp4"
+      },
+      "place": {
+        "widthPct": 98,
+        "heightPct": 92.68881777964293,
+        "rotationDeg": -4,
+        "leftPct": 46.51863934606501,
+        "topPct": 46.82135307845511
+      },
+      "shape": "freeform-mask-10b98d",
+      "fit": "cover",
+      "z": -1,
+      "style": {}
+    },
+    {
+      "id": "p2r62a8",
+      "feed": {
+        "type": "video",
+        "source": "assets/media/uploads/img-4696-7020e8f0.mov"
+      },
+      "place": {
+        "widthPct": 5,
+        "heightPct": 5,
+        "rotationDeg": -45,
+        "leftPct": 44.56031670393315,
+        "topPct": 86.42889434649268
+      },
+      "shape": "freeform-mask-5d3f40",
+      "fit": "cover",
+      "z": 10,
+      "style": {}
+    },
+    {
+      "id": "pehm2",
+      "feed": {
+        "type": "text",
+        "source": ""
+      },
+      "place": {
+        "leftPct": 45.27565175248494,
+        "topPct": 58.24776425118418,
+        "widthPct": 34,
+        "heightPct": 12,
+        "rotationDeg": 0
+      },
+      "shape": null,
+      "fit": "cover",
+      "z": 11,
+      "style": {},
+      "text": "This is some text",
+      "textStyle": {
+        "size": 2.1,
+        "font": "'Courier New', Courier, monospace",
+        "color": "#171310",
+        "align": "center"
+      },
+      "shadow": {
+        "x": 4,
+        "y": 8,
+        "blur": 16,
+        "color": "#000000",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "p2tgi5",
+      "feed": {
+        "type": "thymer-viewport",
+        "source": "data/thymer/natural-observations.json"
+      },
+      "place": {
+        "leftPct": 22.0635704423047,
+        "topPct": 56.79292729168064,
+        "widthPct": 25.23254601816037,
+        "heightPct": 12.861105654057862,
+        "rotationDeg": 0
+      },
+      "shape": "freeform-mask-5492a5",
+      "fit": "cover",
+      "z": 12,
+      "style": {},
+      "textStyle": {
+        "size": 1
+      }
+    },
+    {
+      "id": "pdqm50",
+      "feed": {
+        "type": "image",
+        "source": "assets/media/uploads/img-4818-aa0f0e64.jpeg"
+      },
+      "place": {
+        "widthPct": 14.07182910029298,
+        "heightPct": 14.625906222069304,
+        "rotationDeg": -45,
+        "leftPct": 63.81429597004211,
+        "topPct": 9.849112005070559
+      },
+      "shape": "freeform-mask-53971c",
+      "fit": "cover",
+      "z": 13,
+      "style": {}
+    },
+    {
+      "id": "pg1a42",
+      "feed": {
+        "type": "thymer-viewport",
+        "source": "data/thymer/natural-observations.json"
+      },
+      "place": {
+        "leftPct": 50,
+        "topPct": 45,
+        "widthPct": 34,
+        "heightPct": 30,
+        "rotationDeg": 0
+      },
+      "shape": null,
+      "fit": "cover",
+      "z": 14,
+      "style": {},
+      "textStyle": {
+        "size": 1
+      }
+    }
+  ],
+  "paperImage": null,
+  "frame": {
+    "aspect": "as-composed"
+  },
+  "export": {
+    "duration": 6
+  }
+}

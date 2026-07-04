@@ -1,0 +1,179 @@
+/* editor.css — the TOOL's chrome.
+   Utilitarian by intent. Appears ONLY in edit mode (press e). Never the artwork:
+   in view mode this stylesheet paints nothing. */
+
+.editor-hud {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 9999;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font: 11px/1.5 ui-monospace, Menlo, monospace;
+  color: #111;
+  background: rgba(243, 240, 234, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  padding: 6px 10px;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+/* respect the hidden attribute — author display:flex would otherwise override the
+   UA [hidden] rule and leak chrome into view mode. This keeps the art pristine. */
+.editor-hud[hidden] { display: none; }
+.editor-hud button,
+.editor-hud select {
+  font: inherit;
+  color: #111;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  padding: 2px 6px;
+  cursor: pointer;
+}
+.editor-hud__col { display: inline-flex; gap: 4px; align-items: center; opacity: 0.85; }
+.editor-hud__col input[type="color"] {
+  width: 20px; height: 16px; padding: 0; cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.28); background: none;
+}
+.editor-hud__src { width: 130px; }
+.editor-hud__tag  { letter-spacing: 0.12em; opacity: 0.55; }
+.editor-hud__sel  { display: inline-flex; gap: 8px; align-items: center; }
+.editor-hud__id   { opacity: 0.7; }
+.editor-hud__save { opacity: 0.4; transition: opacity 1s ease; }
+.editor-hud__hint { opacity: 0.4; }
+
+/* slot affordances — only in edit mode */
+body.is-editing .slot {
+  outline: 1px solid rgba(0, 0, 0, 0.28);
+  cursor: move;
+  touch-action: none;
+}
+body.is-editing .slot.is-selected { outline: 1.5px solid rgba(0, 0, 0, 0.72); }
+body.is-editing .slot > * { pointer-events: none; }   /* drag the slot, not its content */
+
+.slot__resize {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 11px;
+  height: 11px;
+  background: #111;
+  cursor: nwse-resize;
+  display: none;
+}
+body.is-editing .slot > .slot__resize { display: block; pointer-events: auto; }
+
+.slot__rotate {
+  position: absolute; left: 50%; top: -22px; margin-left: -6px;
+  width: 12px; height: 12px; border-radius: 50%; background: #111;
+  cursor: grab; display: none;
+}
+body.is-editing .slot > .slot__rotate { display: block; pointer-events: auto; }
+
+/* drop-to-place highlight while dragging a file over the board */
+.stage.drop-over { outline: 2px dashed rgba(0, 0, 0, 0.35); outline-offset: -6px; }
+
+/* transient tool message (edit mode only) */
+.editor-toast {
+  position: fixed; left: 50%; bottom: 52px; transform: translateX(-50%); z-index: 10000;
+  font: 12px/1.4 ui-monospace, Menlo, monospace; color: #111;
+  background: rgba(243, 240, 234, 0.95); border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 6px 12px; max-width: 80vw; text-align: center;
+}
+.editor-toast[hidden] { display: none; }
+body:not(.is-editing) .editor-toast { display: none; }   /* never over the art */
+
+/* the brush: a full-board capture surface, edit-mode only */
+.draw-surface {
+  position: absolute; inset: 0; z-index: 9000;
+  cursor: crosshair; touch-action: none;
+}
+.editor-hud__brush { display: inline-flex; gap: 8px; align-items: center; }
+.editor-hud__brush[hidden] { display: none; }
+
+/* right-click menu — controls on the objects, edit-mode only */
+.ctx-menu {
+  position: fixed; z-index: 10001; min-width: 168px; padding: 4px;
+  background: rgba(243, 240, 234, 0.98); border: 1px solid rgba(0, 0, 0, 0.2);
+  font: 12px/1.5 ui-monospace, Menlo, monospace; color: #111;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+.ctx-menu[hidden] { display: none; }
+body:not(.is-editing) .ctx-menu { display: none; }
+.ctx-menu__item {
+  display: flex; justify-content: space-between; gap: 24px; width: 100%;
+  background: none; border: 0; font: inherit; color: inherit; text-align: left;
+  padding: 4px 8px; cursor: pointer;
+}
+.ctx-menu__item:hover { background: rgba(0, 0, 0, 0.07); }
+.ctx-menu__kbd { opacity: 0.45; }
+
+/* layers panel — select any piece, edit-mode only */
+.layers {
+  position: fixed; top: 12px; right: 12px; z-index: 9999;
+  width: 152px; max-height: 62vh; overflow-y: auto; padding: 4px;
+  background: rgba(243, 240, 234, 0.94); border: 1px solid rgba(0, 0, 0, 0.18);
+  font: 11px/1.4 ui-monospace, Menlo, monospace;
+}
+body:not(.is-editing) .layers { display: none; }
+.layers__row {
+  display: block; width: 100%; text-align: left; background: none; border: 0;
+  font: inherit; color: #111; padding: 3px 6px; cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.layers__row:hover { background: rgba(0, 0, 0, 0.06); }
+.layers__row.is-current { background: rgba(0, 0, 0, 0.12); font-weight: bold; }
+
+.editor-hud__reframe { display: inline-flex; gap: 4px; align-items: center; }
+.editor-hud__reframe[hidden] { display: none; }
+.editor-hud__reframe input[type="range"] { width: 52px; }
+
+.editor-hud__shadow { display: inline-flex; gap: 4px; align-items: center; }
+.editor-hud__shadow[hidden] { display: none; }
+.editor-hud__shadow input[type="range"] { width: 44px; }
+
+.editor-hud__type { display: inline-flex; gap: 4px; align-items: center; }
+.editor-hud__type[hidden] { display: none; }
+.editor-hud__type input[type="range"] { width: 48px; }
+.editor-hud__collection[hidden] { display: none; }
+
+.editor-hud__motion { display: inline-flex; gap: 4px; align-items: center; }
+.editor-hud__motion input[type="range"] { width: 44px; }
+
+/* the old inline add buttons are replaced by the unified Add menu — declutter */
+.editor-hud > [data-act="add-media"],
+.editor-hud > [data-act="add-shape"],
+.editor-hud > [data-act="draw"],
+.editor-hud > [data-act="shape-rect"],
+.editor-hud > [data-act="shape-ellipse"],
+.editor-hud > [data-act="shape-free"],
+.editor-hud > [data-act="add-text"],
+.editor-hud > [data-act="add-thymer"] { display: none; }
+
+.add-menu {
+  position: fixed; z-index: 10002; min-width: 176px; padding: 4px;
+  display: flex; flex-direction: column;
+  background: rgba(243, 240, 234, 0.98); border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+  font: 12px/1.5 ui-monospace, Menlo, monospace; color: #111;
+}
+.add-menu[hidden] { display: none; }
+body:not(.is-editing) .add-menu { display: none; }
+.add-menu button { appearance: none; border: 0; background: none; text-align: left; font: inherit; color: #111; padding: 5px 8px; cursor: pointer; }
+.add-menu button:hover { background: rgba(0, 0, 0, 0.07); }
+
+.editor-hud__zoom { display: inline-flex; gap: 2px; align-items: center; }
+.editor-hud__zoom .zoom-pct { min-width: 36px; text-align: center; opacity: 0.7; }
+
+.export-menu__dur { display: flex; align-items: center; gap: 6px; padding: 5px 8px; margin-top: 3px; border-top: 1px solid rgba(0, 0, 0, 0.12); opacity: 0.75; }
+.export-menu__dur select { font: inherit; }
+.export-menu__head { padding: 6px 8px 2px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.82em; border-top: 1px solid rgba(0, 0, 0, 0.12); margin-top: 3px; }
+.export-menu [data-share] { font-weight: bold; }
+
+.editor-hud__proj { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.editor-hud__proj .proj-name { font-weight: bold; }
+.proj-menu { max-height: 60vh; overflow-y: auto; }
+.proj-menu__head { padding: 6px 8px 2px; opacity: 0.45; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85em; border-top: 1px solid rgba(0, 0, 0, 0.12); margin-top: 3px; }
+.proj-menu__empty { padding: 4px 8px; opacity: 0.4; }
+.proj-menu [data-open].is-current { font-weight: bold; }

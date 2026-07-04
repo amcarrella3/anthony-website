@@ -1,0 +1,203 @@
+/* composition.css — the field.
+   LAYOUT + BEHAVIOR only. Appearance (color, type, backdrop) is Anthony's to
+   author. Every value here is provisional dev scaffolding. */
+
+:root {
+  --paper:    #f3f0ea;  /* provisional ground — his to author (he drew on warm white) */
+  --membrane: #111111;  /* his ink, as traced */
+  --ink:      #171310;  /* provisional text ink */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  background: var(--paper);
+  overflow: hidden;              /* the field is a held frame, not a scrolling page */
+}
+
+#field {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+}
+
+/* The stage: locked to the membrane's aspect so slots stay aligned to his line. */
+.stage {
+  position: relative;
+  height: 92dvh;
+  aspect-ratio: 1024 / 1536;     /* the portal.svg viewBox */
+  max-width: 94vw;
+}
+
+/* The portal membrane — Anthony's hand-drawn line, vectorized. */
+.portal-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* ── A slot: a frame within the frame ──────────────────────────────
+   Placement/size is set inline by applyPlace(). A slot with no hand-drawn shape
+   yet shows faint WIREFRAME bounds — the space you'll fill / draw into. */
+.slot { position: absolute; }
+/* the masked/clipped layer; handles ride on .slot, outside this, so a mask
+   never hides the resize/rotate toggles. */
+.slot__content {
+  position: absolute; inset: 0;
+  font-family: Georgia, 'Times New Roman', serif;   /* PROVISIONAL base type — his to author, per piece */
+  color: var(--ink);
+}
+body.is-editing .slot--wireframe {
+  outline: 1px solid rgba(23, 19, 16, 0.14);   /* provisional bounds — EDIT MODE ONLY, never in the art */
+}
+
+/* ── knowledge-feed organ · EPIGRAM mode ───────────────────────────
+   Behavior = Claude's. Words = Anthony's (Thymer). Type/color = provisional. */
+.epigram {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  text-wrap: balance;
+  font-family: inherit;                              /* inherits the piece's typography */
+  font-weight: 400;
+  font-size: calc(clamp(1rem, 2vw, 1.75rem) * var(--text-scale, 1));
+  line-height: 1.45;
+  color: var(--ink);
+  opacity: 0;
+  transform: scale(0.99);
+  transition: opacity 3s cubic-bezier(0.37, 0, 0.28, 1),
+              transform 6s cubic-bezier(0.37, 0, 0.28, 1);   /* long, organic */
+}
+.epigram.is-present { opacity: 0.92; transform: scale(1); }
+
+/* ── data-feed organ · THYMER VIEWPORT ─────────────────────────────
+   A scrollable, clickable window into a Thymer collection. Content = Anthony's.
+   Type/scale/treatment = provisional, his to author. */
+.viewport {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: inherit;                                /* inherits the piece's typography */
+  font-size: calc(0.74rem * var(--text-scale, 1));
+  line-height: 1.45;
+  color: var(--ink);
+  scrollbar-width: none;                 /* quiet — no dashboard scrollbar */
+  /* feather the top/bottom edges instead of a hard rectangular cut */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+}
+.viewport::-webkit-scrollbar { width: 0; height: 0; }
+
+.viewport__head {
+  position: sticky;
+  top: 0;
+  padding: 0.35rem 0.1rem 0.5rem;
+  font-size: 0.8em;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  background: linear-gradient(var(--paper) 60%, transparent);
+}
+
+.viewport__list { display: flex; flex-direction: column; }
+
+.viewport__row {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-top: 1px solid rgba(23, 19, 16, 0.08);
+  text-align: left;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.34rem 0.1rem;
+  display: block;
+  opacity: 0.82;
+  transition: opacity 0.5s ease;
+}
+.viewport__row:hover { opacity: 1; }
+.viewport__title { display: block; }
+
+.viewport__detail {
+  display: none;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  padding-top: 0.2rem;
+}
+.viewport__row.is-open { opacity: 1; }
+.viewport__row.is-open .viewport__detail { display: block; }
+
+/* ── motion presets (applied to .slot__content) ────────────────────
+   Breath-and-tide easing; long, organic loops. Respect reduced-motion. */
+@keyframes m-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(var(--m-scale, 1.05)); } }
+@keyframes m-drift {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(var(--m-dist, 10px), calc(var(--m-dist, 10px) * -0.5)); }
+  66% { transform: translate(calc(var(--m-dist, 10px) * -0.8), calc(var(--m-dist, 10px) * -0.9)); }
+}
+@keyframes m-sway { 0%, 100% { transform: rotate(calc(var(--m-deg, 3deg) * -1)); } 50% { transform: rotate(var(--m-deg, 3deg)); } }
+@keyframes m-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes m-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .slot__content { animation: none !important; } }
+
+/* ── rich-text piece ───────────────────────────────────────────────
+   Type + color + alignment + size come from the piece's textStyle (applied to
+   the content wrapper); this just lays it out. */
+.text-block {
+  position: relative;
+  width: 100%;
+  min-height: 1em;
+  padding: 0.15rem 0.3rem;
+  font-size: calc(1.1rem * var(--text-scale, 1));
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  outline: none;
+}
+body.is-editing .text-block[contenteditable="true"] { outline: 1px dashed rgba(0, 0, 0, 0.4); cursor: text; }
+
+/* audio piece — a minimal marker (his to mask / place / style); loops + layers */
+.audio-piece { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.audio-piece audio { display: none; }
+.audio-chip {
+  appearance: none; border: 0; background: none; color: var(--ink);
+  width: 100%; height: 100%; cursor: pointer; line-height: 1;
+  font-size: calc(1.3rem * var(--text-scale, 1));
+}
+.audio-piece.is-playing .audio-chip { opacity: 0.55; }
+body.is-editing .audio-chip { outline: 1px dotted rgba(0, 0, 0, 0.3); }
+
+/* ── media organs · IMAGE / VIDEO ──────────────────────────────────
+   The photo/video (Anthony's lens) fills its slot. Masking (a hand-drawn shape)
+   and color are applied at the slot level, so the media just covers. */
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--fit, cover);   /* per-piece: cover (crop) or contain (letterbox) */
+  display: block;
+}
+
+/* Board mode — no membrane; a provisional neutral ground (his to author). */
+.stage.board-mode {
+  aspect-ratio: auto;
+  width: 92vw;
+  height: 92dvh;
+  background: #ece9e2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .epigram { transition: opacity 0.8s ease; transform: none; }
+  .epigram.is-present { transform: none; }
+}
