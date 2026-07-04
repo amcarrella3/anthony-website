@@ -24,6 +24,7 @@ const ASPECTS = {
 export function initPresent({ field, manifest, save }) {
   manifest.frame = manifest.frame || {};
   if (!manifest.frame.aspect) manifest.frame.aspect = 'as-composed';
+  if (!manifest.frame.ground) manifest.frame.ground = 'black';
 
   // the letterbox window: a transparent rectangle of the chosen aspect, its
   // surround painted by a huge box-shadow so any composition overflow is masked.
@@ -33,6 +34,7 @@ export function initPresent({ field, manifest, save }) {
 
   let on = false;
   let idleTimer = null;
+  let decal = null;
 
   const notTyping = (t) => !(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable));
 
@@ -47,6 +49,33 @@ export function initPresent({ field, manifest, save }) {
     frameEl.style.height = h + 'px';
   }
 
+  // ground: the field BEHIND the composition in present mode — 'black' (museum
+  // void) or 'paper' (the portal's chosen paper colour / uploaded background).
+  function applyGround() {
+    const paper = manifest.frame.ground === 'paper';
+    document.body.classList.toggle('ground-paper', paper);
+    if (paper && manifest.paperImage) {
+      field.style.setProperty('--ground-img', `url("./${String(manifest.paperImage).replace(/^\//, '')}")`);
+      document.body.classList.add('ground-image');
+    } else {
+      document.body.classList.remove('ground-image');
+      field.style.removeProperty('--ground-img');
+    }
+  }
+
+  // the "return through the portal" decal — only on shared/published rooms, where
+  // there's a gallery to go back to. Provisional glowing mark; Anthony's to author.
+  function showDecal() {
+    if (decal || !document.body.classList.contains('is-shared')) return;
+    decal = document.createElement('a');
+    decal.className = 'portal-return';
+    decal.href = './';                                  // the gallery (parent of the room)
+    decal.setAttribute('aria-label', 'return through the portal');
+    decal.innerHTML = '<span class="portal-return__core"></span>';
+    field.appendChild(decal);
+  }
+  function hideDecal() { if (decal) { decal.remove(); decal = null; } }
+
   function onMove() {
     document.body.classList.remove('cursor-idle');
     clearTimeout(idleTimer);
@@ -59,7 +88,9 @@ export function initPresent({ field, manifest, save }) {
     // presentation is never edit mode — drop the tool before the art fills the wall
     if (document.body.classList.contains('is-editing')) window.__editor?.toggle?.();
     document.body.classList.add('is-presenting');
+    applyGround();
     sizeFrame();
+    showDecal();
     window.addEventListener('resize', sizeFrame);
     window.addEventListener('mousemove', onMove);
     onMove();
@@ -70,7 +101,8 @@ export function initPresent({ field, manifest, save }) {
   function exit() {
     if (!on) return;
     on = false;
-    document.body.classList.remove('is-presenting', 'cursor-idle');
+    hideDecal();
+    document.body.classList.remove('is-presenting', 'cursor-idle', 'ground-paper', 'ground-image');
     window.removeEventListener('resize', sizeFrame);
     window.removeEventListener('mousemove', onMove);
     clearTimeout(idleTimer);
@@ -88,19 +120,29 @@ export function initPresent({ field, manifest, save }) {
     window.dispatchEvent(new CustomEvent('cosmos:frame', { detail: key }));
   }
 
-  // keys: p toggles present, Esc leaves it (fullscreen's own Esc is synced below)
+  function setGround(g) {
+    manifest.frame.ground = g === 'paper' ? 'paper' : 'black';
+    save();
+    if (on) applyGround();
+    window.dispatchEvent(new CustomEvent('cosmos:ground', { detail: manifest.frame.ground }));
+  }
+  function toggleGround() { setGround(manifest.frame.ground === 'paper' ? 'black' : 'paper'); }
+
+  // keys: p toggles present, b toggles ground, Esc leaves (fullscreen Esc synced below)
   window.addEventListener('keydown', (e) => {
     if (document.body.classList.contains('is-shared')) return;   // view-only: keys are inert
     if (!notTyping(e.target)) return;
     if (e.key === 'p' || e.key === 'P') { e.preventDefault(); toggle(); }
+    else if (e.key === 'b' || e.key === 'B') { e.preventDefault(); toggleGround(); }
     else if (e.key === 'Escape' && on) { e.preventDefault(); exit(); }
   });
   // if the user leaves fullscreen by any means while presenting, leave present too
   document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && on) exit(); });
 
   return {
-    enter, exit, toggle, setAspect,
+    enter, exit, toggle, setAspect, setGround, toggleGround,
     getAspect: () => manifest.frame.aspect,
+    getGround: () => manifest.frame.ground,
     isOn: () => on,
     aspects: () => Object.keys(ASPECTS),
   };

@@ -5,6 +5,12 @@
 
 :root { --surround: #0b0b0b; }   /* provisional museum black — Anthony's to set */
 
+/* GROUND: what sits behind the composition in present mode. Default = the museum
+   void (surround). 'ground-paper' shows the portal's paper colour; 'ground-image'
+   shows its uploaded background. Toggled per portal (frame.ground). */
+body.is-presenting { --ground-color: var(--surround); }
+body.is-presenting.ground-paper { --ground-color: var(--paper); }
+
 /* the letterbox window — hidden until presenting */
 .present-frame { display: none; }
 body.is-presenting .present-frame {
@@ -12,12 +18,12 @@ body.is-presenting .present-frame {
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   z-index: 50;
-  pointer-events: none;                       /* never intercept the art */
-  box-shadow: 0 0 0 100vmax var(--surround);  /* masks any composition overflow to surround */
+  pointer-events: none;                            /* never intercept the art */
+  box-shadow: 0 0 0 100vmax var(--ground-color);   /* masks any composition overflow to the ground */
 }
 
 body.is-presenting {
-  background: var(--surround);
+  background: var(--ground-color);
   cursor: default;
 }
 /* fill the viewport edge-to-edge; the frame overlay defines what reads as "in shot" */
@@ -26,8 +32,14 @@ body.is-presenting #field {
   inset: 0;
   width: 100vw;
   height: 100dvh;
-  background: var(--surround);
+  background: var(--ground-color);
   z-index: 5;
+}
+/* uploaded background as the ground */
+body.is-presenting.ground-image #field {
+  background-image: var(--ground-img);
+  background-size: cover;
+  background-position: center;
 }
 
 /* hard-hide every tool surface, even if presenting straight from edit mode */
@@ -45,3 +57,35 @@ body.is-presenting.cursor-idle * { cursor: none !important; }
 /* headless export capture: let the stage fill the framed viewport (no 92dvh/94vw
    margin) so the shot is edge-to-edge. Only ever set by the export renderer. */
 body.export-capture .stage { height: 100dvh; max-width: none; }
+body.export-capture .portal-return { display: none; }   /* never bake the nav into a file */
+
+/* ── "return through the portal" decal (published rooms only) ───────────────
+   PROVISIONAL: a glowing, breathing mark that takes a visitor back to the
+   gallery. Its final FORM is Anthony's to author (one of his drawn marks);
+   the glow + breath are the behaviour. */
+.portal-return {
+  position: fixed;
+  left: 50%; bottom: 4.5vh;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 54px; height: 54px;
+  display: grid; place-items: center;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.portal-return__core {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.95), rgba(150, 200, 255, 0.55) 52%, rgba(80, 140, 255, 0.06) 74%);
+  animation: portal-breathe 4.2s ease-in-out infinite;
+}
+@keyframes portal-breathe {
+  0%, 100% { transform: scale(0.88); opacity: 0.72;
+    box-shadow: 0 0 14px 3px rgba(130, 185, 255, 0.45), 0 0 32px 9px rgba(130, 185, 255, 0.18); }
+  50% { transform: scale(1.08); opacity: 1;
+    box-shadow: 0 0 28px 7px rgba(140, 195, 255, 0.72), 0 0 60px 18px rgba(140, 195, 255, 0.34); }
+}
+.portal-return:hover .portal-return__core { animation-duration: 2.1s; }
+@media (prefers-reduced-motion: reduce) {
+  .portal-return__core { animation: none; box-shadow: 0 0 22px 5px rgba(140, 195, 255, 0.5); }
+}
