@@ -132,6 +132,51 @@
       ]
     },
     {
+      "guid": "1GE2YV8ANAS56S5JRRDSRGZEST",
+      "title": "Moving Pictures",
+      "date": "20260704",
+      "dateLabel": "Sat, Jul 4",
+      "status": "Published",
+      "items": [
+        {
+          "type": "heading",
+          "text": "What is it? ",
+          "segments": [
+            {
+              "type": "text",
+              "text": "What is it? "
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "image",
+          "file": "BCY45C4Q6Z1SAX931MPH8ZT18F.jpeg",
+          "alt": "export-f4312b7f.gif"
+        },
+        {
+          "type": "text",
+          "text": "It's collage. It's cinema. It's phtoography. It's knowledge stored and encountered. ",
+          "segments": [
+            {
+              "type": "text",
+              "text": "It's collage. It's cinema. It's phtoography. It's knowledge stored and encountered. "
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        }
+      ]
+    },
+    {
       "guid": "1SYZYRJHMC7K95X9Y9F463D5ZG",
       "title": "thinking today",
       "date": "20260704",
