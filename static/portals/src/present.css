@@ -106,6 +106,16 @@ body.export-capture .portal-return { display: none; }   /* never bake the nav in
   .portal-return__core { animation: none; box-shadow: 0 0 22px 5px rgba(var(--glow), 0.45); }
 }
 
+/* boot veil: covers a published room's very first paint so the portal never
+   flashes before the gate. Same charcoal as the threshold, so fading it out
+   reveals only the ENTER ring — a seamless dissolve. Injected in viewer builds
+   only; main.js fades it once the threshold is up. */
+#boot-veil {
+  position: fixed; inset: 0; z-index: 300;
+  background: radial-gradient(circle at 50% 46%, rgb(27, 23, 16) 0%, rgb(9, 8, 6) 70%);
+  transition: opacity 0.7s ease;
+}
+
 /* ── portal entry THRESHOLD (published rooms only) ──────────────────────────
    Covers the load/buffer; crossing it (a click) force-plays every video and
    dissolves you into the piece. PROVISIONAL look — Anthony's to author. */

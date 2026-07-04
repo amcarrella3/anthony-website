@@ -215,6 +215,9 @@ if (shared) {
   const z = parseFloat(params.get('z')), px = parseFloat(params.get('px')), py = parseFloat(params.get('py'));
   zoom.set({ zoom: isFinite(z) ? z : 1, panX: isFinite(px) ? px : 0, panY: isFinite(py) ? py : 0 });
   present.enter();
+  // dissolve the boot veil → the threshold ring emerges on the same charcoal
+  const veil = document.getElementById('boot-veil');
+  if (veil) requestAnimationFrame(() => { veil.style.opacity = '0'; setTimeout(() => veil.remove(), 800); });
 } else {
   initEditor({ stage, manifest, applyPlace, applyMedia, applyShadow, applyTextStyle, applyMotion, applyPalette, applyBackground, zoom, present, project, recompose: compose, save, addPiece, maxZ, minZ });
 }

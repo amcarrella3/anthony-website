@@ -223,7 +223,7 @@
   "paperImage": null,
   "frame": {
     "aspect": "as-composed",
-    "ground": "black"
+    "ground": "paper"
   },
   "export": {
     "duration": 16,
