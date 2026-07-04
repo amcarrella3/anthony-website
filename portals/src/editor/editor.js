@@ -835,7 +835,8 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
   }
 
   async function uploadMedia(file, pt) {
-    toast('uploading ' + (file.name || 'media') + '…');
+    const isVideo = (file.type || '').startsWith('video/');
+    toast(isVideo ? 'processing video — compressing for the web, a moment…' : ('uploading ' + (file.name || 'media') + '…'), isVideo ? 0 : 4200);
     try {
       const res = await fetch('/api/upload', {
         method: 'POST',

@@ -1,7 +1,6 @@
 {
   "collection": "Writing",
-  "note": "Pulled from Thymer's Writing collection by Claude. Posts with Status 'Draft' are excluded. Re-pull on request when new posts are written.",
-  "pulledAt": "2026-07-04",
+  "note": "Auto-pulled from Thymer at publish time via the local thymercli MCP endpoint.",
   "posts": [
     {
       "guid": "1HB1GAA1AW3SH1ASCD19CGHAN0",
@@ -10,10 +9,216 @@
       "dateLabel": "Sat Jul 4",
       "status": "Published",
       "items": [
-        { "type": "text", "segments": [ { "type": "text", "text": "This is a sample post — " }, { "type": "bold", "text": "edit it, or delete it." } ] },
-        { "type": "text", "segments": [ { "type": "text", "text": "Everything you write in the " }, { "type": "bold", "text": "Writing" }, { "type": "text", "text": " collection publishes to " }, { "type": "italic", "text": "anthonymichael.work/writing" }, { "type": "text", "text": ". To hold a post back, set its " }, { "type": "bold", "text": "Status" }, { "type": "text", "text": " to " }, { "type": "italic", "text": "Draft" }, { "type": "text", "text": "; to take it live, leave Status empty or set it to " }, { "type": "italic", "text": "Published" }, { "type": "text", "text": "." } ] },
-        { "type": "text", "segments": [ { "type": "text", "text": "Write here the way you write anywhere in Thymer — headings, lists, links, quotes — and it becomes a page on your site the next time you publish." } ] },
-        { "type": "quote", "segments": [ { "type": "text", "text": "The words are yours. The plumbing is mine." } ] }
+        {
+          "type": "text",
+          "text": "This is a sample post — edit it, or delete it.",
+          "segments": [
+            {
+              "type": "text",
+              "text": "This is a sample post — "
+            },
+            {
+              "type": "bold",
+              "text": "edit it, or delete it."
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "Everything you write in the Writing collection publishes to anthonymichael.work/writing. To hold a post back, set its Status to Draft; to take it live, leave Status empty or set it to Published.",
+          "segments": [
+            {
+              "type": "text",
+              "text": "Everything you write in the "
+            },
+            {
+              "type": "bold",
+              "text": "Writing"
+            },
+            {
+              "type": "text",
+              "text": " collection publishes to "
+            },
+            {
+              "type": "italic",
+              "text": "anthonymichael.work/writing"
+            },
+            {
+              "type": "text",
+              "text": ". To hold a post back, set its "
+            },
+            {
+              "type": "bold",
+              "text": "Status"
+            },
+            {
+              "type": "text",
+              "text": " to "
+            },
+            {
+              "type": "italic",
+              "text": "Draft"
+            },
+            {
+              "type": "text",
+              "text": "; to take it live, leave Status empty or set it to "
+            },
+            {
+              "type": "italic",
+              "text": "Published"
+            },
+            {
+              "type": "text",
+              "text": "."
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "Write here the way you write anywhere in Thymer — headings, lists, links, quotes — and it becomes a page on your site the next time you publish.",
+          "segments": [
+            {
+              "type": "text",
+              "text": "Write here the way you write anywhere in Thymer — headings, lists, links, quotes — and it becomes a page on your site the next time you publish."
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "quote",
+          "text": "The words are yours. The plumbing is mine.",
+          "segments": [
+            {
+              "type": "text",
+              "text": "The words are yours. The plumbing is mine."
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        }
+      ]
+    },
+    {
+      "guid": "1SYZYRJHMC7K95X9Y9F463D5ZG",
+      "title": "thinking today",
+      "date": "20260704",
+      "dateLabel": "Sat, Jul 4",
+      "status": "Published",
+      "items": [
+        {
+          "type": "text",
+          "text": "Here we go. It is Sat Jul 4 16:46 and I am in Thymer, while also, writing my first blog post. To my website. ",
+          "segments": [
+            {
+              "type": "text",
+              "text": "Here we go. It is "
+            },
+            {
+              "type": "datetime",
+              "text": {
+                "d": "20260704",
+                "t": {
+                  "t": "164656",
+                  "tz": 1
+                },
+                "formatted": "Sat Jul 4 16:46"
+              }
+            },
+            {
+              "type": "text",
+              "text": " and I am in Thymer, while also, writing my first blog post. To my website. "
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "Let's see. ",
+          "segments": [
+            {
+              "type": "text",
+              "text": "Let's see. "
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "1G2J8BRZZ9MSCD2QXAABSY1V1F",
+          "segments": [
+            {
+              "type": "ref",
+              "text": {
+                "guid": "1G2J8BRZZ9MSCD2QXAABSY1V1F"
+              }
+            }
+          ],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "text",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "image",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        },
+        {
+          "type": "document",
+          "text": "",
+          "segments": [],
+          "children": [],
+          "taskstatus": "none"
+        }
       ]
     }
   ]
