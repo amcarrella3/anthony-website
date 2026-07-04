@@ -124,7 +124,8 @@ body.export-capture .portal-return { display: none; }   /* never bake the nav in
   display: grid; place-items: center;
   background: radial-gradient(circle at 50% 46%, rgb(27, 23, 16) 0%, rgb(9, 8, 6) 70%);
   cursor: pointer;
-  animation: threshold-in 0.8s ease both;
+  /* opaque from the instant it exists (no fade-in) — the boot veil dissolving off
+     it is the only transition, so the portal is never visible underneath. */
 }
 body.export-capture .portal-threshold { display: none; }   /* never bake the gate into a file */
 .portal-threshold__gate {
