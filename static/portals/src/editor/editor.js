@@ -107,6 +107,7 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
     </select></label>
     <button data-act="ground" title="present ground — black / paper (b)">ground:&nbsp;<span class="ground-val">black</span></button>
     <button data-act="export-open" title="export a still / loop">⤓&nbsp;export</button>
+    <button data-act="publish" title="publish your portals to anthonymichael.work">⬆&nbsp;publish</button>
     <span class="editor-hud__sel" hidden>
       <span class="editor-hud__id"></span>
       <select class="editor-hud__feed">
@@ -502,6 +503,21 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
     else exportMenu.hidden = true;
   });
   window.addEventListener('pointerdown', (e) => { if (!exportMenu.hidden && !exportMenu.contains(e.target) && e.target !== exportBtn) exportMenu.hidden = true; });
+
+  // ── publish: build + push the portals to anthonymichael.work ───────
+  const publishBtn = q('[data-act="publish"]');
+  publishBtn.addEventListener('click', async () => {
+    if (publishBtn.disabled) return;
+    publishBtn.disabled = true;
+    const label = publishBtn.textContent;
+    publishBtn.textContent = '⬆ publishing…';
+    toast('publishing to the web — about half a minute…', 0);
+    try {
+      const j = await (await fetch('/api/publish', { method: 'POST' })).json();
+      toast(j.ok ? (j.message || 'published — live in ~1 min') : ('publish failed: ' + (j.error || 'error')), j.ok ? 6000 : 8000);
+    } catch (e) { toast('publish failed: ' + (e.message || e), 8000); }
+    finally { publishBtn.disabled = false; publishBtn.textContent = label; }
+  });
 
   // ── projects: new / open / save / rename (many living portals) ─────
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
