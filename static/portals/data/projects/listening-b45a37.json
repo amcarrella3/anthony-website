@@ -1,0 +1,16 @@
+{
+  "palette": {
+    "paper": "#ffe2d6",
+    "ink": "#171310"
+  },
+  "pieces": [],
+  "frame": {
+    "aspect": "as-composed",
+    "ground": "paper"
+  },
+  "export": {
+    "duration": 6,
+    "quality": "web"
+  },
+  "paperImage": null
+}
