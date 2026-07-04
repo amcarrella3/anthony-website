@@ -128,38 +128,6 @@
       "style": {}
     },
     {
-      "id": "pehm2",
-      "feed": {
-        "type": "text",
-        "source": ""
-      },
-      "place": {
-        "leftPct": 87.44375672943258,
-        "topPct": 92.24092082894765,
-        "widthPct": 34,
-        "heightPct": 12,
-        "rotationDeg": 0
-      },
-      "shape": null,
-      "fit": "cover",
-      "z": 11,
-      "style": {},
-      "text": "This is some text",
-      "textStyle": {
-        "size": 2.1,
-        "font": "'Courier New', Courier, monospace",
-        "color": "#171310",
-        "align": "center"
-      },
-      "shadow": {
-        "x": 4,
-        "y": 8,
-        "blur": 16,
-        "color": "#000000",
-        "opacity": 0.3
-      }
-    },
-    {
       "id": "p2tgi5",
       "feed": {
         "type": "thymer-viewport",
@@ -223,7 +191,7 @@
   "paperImage": null,
   "frame": {
     "aspect": "as-composed",
-    "ground": "black"
+    "ground": "paper"
   },
   "export": {
     "duration": 16,

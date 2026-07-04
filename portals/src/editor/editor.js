@@ -511,7 +511,7 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
     publishBtn.disabled = true;
     const label = publishBtn.textContent;
     publishBtn.textContent = '⬆ publishing…';
-    toast('publishing to the web — about half a minute…', 0);
+    toast('publishing to the web — a minute or two…', 0);
     try {
       const j = await (await fetch('/api/publish', { method: 'POST' })).json();
       toast(j.ok ? (j.message || 'published — live in ~1 min') : ('publish failed: ' + (j.error || 'error')), j.ok ? 6000 : 8000);
