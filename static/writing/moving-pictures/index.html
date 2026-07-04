@@ -26,6 +26,15 @@
     pre { background: rgba(0,0,0,0.05); padding: 1rem; overflow-x: auto; font-size: 0.9rem; }
     hr { border: 0; border-top: 1px solid rgba(0,0,0,0.14); margin: 2.4em auto; width: 40%; }
     figure { margin: 1.8em 0; } figure img { display: block; width: 100%; height: auto; }
+    /* breathing colour decals — Traditions & Themes, in Anthony's Thymer colours */
+    .decals { display: flex; gap: 1.5em; flex-wrap: wrap; align-items: flex-start; margin-bottom: 1.4em; }
+    .decals .chip { display: flex; flex-direction: column; align-items: center; gap: 0.6em; }
+    .decal { position: relative; width: 25px; height: 25px; animation: breathe 5.6s ease-in-out infinite; }
+    .decal::before { content: ''; position: absolute; inset: -46%; border-radius: 50%; background: radial-gradient(circle, var(--c) 0%, transparent 64%); opacity: 0.5; }
+    .decal::after { content: ''; position: absolute; inset: 20%; border-radius: 60% 40% 52% 48%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+    .dlabel { font: 600 0.55rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.13em; text-transform: uppercase; color: var(--soft); }
+    @keyframes breathe { 0%, 100% { transform: scale(0.9); opacity: 0.72; } 50% { transform: scale(1.13); opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .decal { animation: none; } }
     .posts { list-style: none; margin-top: 1em; }
     .posts li { padding: 1.5em 0; border-top: 1px solid rgba(0,0,0,0.12); }
     .posts a.title { text-decoration: none; font-weight: 600; font-size: 1.4rem; display: block; }
@@ -37,6 +46,7 @@
 <body>
   <main class="wrap">
     <a class="top" href="../">← Writing</a>
+    <div class="decals"><span class="chip"><span class="decal" style="--c:#b3702f;animation-delay:-0.0s"></span><span class="dlabel">Cinema</span></span><span class="chip"><span class="decal" style="--c:#9c4a3c;animation-delay:-1.3s"></span><span class="dlabel">Collage</span></span></div>
     <h1>Moving Pictures</h1>
     <div class="date">Sat, Jul 4</div>
     <article>
