@@ -4,18 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="theme-color" content="#0b0908" />
+  <meta name="theme-color" content="#0e0f12" />
   <title>Your first post — Anthony Carrella</title>
   <style>
     @font-face{font-family:'Aegean';font-display:swap;src:url(../fonts/Aegean.woff2) format('woff2');}
     @font-face{font-family:'Spartacus';font-display:swap;src:url(../fonts/Spartacus.woff2) format('woff2');}
     @font-face{font-family:'Xiphos';font-display:swap;src:url(../fonts/Xiphos.woff2) format('woff2');}
     @font-face{font-family:'Columns';font-display:swap;src:url(../fonts/Columns.woff2) format('woff2');}
-    :root{--void:#0b0908;--ember:#e8933a;--gold:#d9b45c;--bone:#e9dcc0;--ichor:#c0392b;--dim:#8a7550;--line:rgba(232,147,58,.18)}
+    :root{--void:#0e0f12;--ember:#e8933a;--gold:#d9b45c;--bone:#e9dcc0;--ichor:#c0392b;--dim:#8a7550;--line:rgba(232,147,58,.18)}
     *{margin:0;padding:0;box-sizing:border-box}
     body{background:var(--void);color:var(--bone);min-height:100dvh;font-family:'Aegean',Georgia,serif;
       -webkit-font-smoothing:antialiased;padding-bottom:10px;
-      background-image:radial-gradient(120% 60% at 50% -8%,rgba(232,147,58,.07),transparent 58%),repeating-linear-gradient(0deg,transparent 0 3px,rgba(232,147,58,.015) 3px 4px)}
+      background-image:radial-gradient(130% 60% at 50% -12%,rgba(232,147,58,.035),transparent 52%),repeating-linear-gradient(0deg,transparent 0 3px,rgba(210,218,235,.008) 3px 4px)}
     .frame{max-width:720px;margin:0 auto;padding:0 26px}
     a{color:inherit}
     .hud{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
@@ -51,6 +51,28 @@
     a.title{font-family:'Spartacus';font-size:1.6rem;letter-spacing:.05em;color:var(--gold);line-height:1.16;text-shadow:0 0 10px rgba(217,180,92,.28);text-decoration:none;display:inline-block;margin-top:6px}
     a.title:hover{color:var(--ember);text-shadow:0 0 15px rgba(232,147,58,.6)}
     .excerpt{margin-top:8px;font-size:1.22rem;line-height:1.5;color:var(--bone);opacity:.9}
+    /* ── digital newspaper front page ── */
+    .masthead{text-align:center;padding:6px 0 8px}
+    .masthead .eyebrow{margin-bottom:14px}
+    .edition{margin-top:14px;letter-spacing:.2em;opacity:.72}
+    .frontpage{padding:22px 0 34px}
+    .lead{position:relative;isolation:isolate;padding:30px 34px 32px;margin-bottom:24px;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+    .lead::before{content:'';position:absolute;inset:-2px;z-index:-1;background:linear-gradient(180deg,rgba(232,147,58,.06),rgba(14,15,18,.22));border:1.8px solid rgba(232,147,58,.55);filter:url(#torn2) drop-shadow(0 0 7px rgba(232,147,58,.3))}
+    .headline{font-family:'Spartacus';font-size:clamp(2.3rem,5.5vw,4rem);letter-spacing:.03em;color:var(--gold);line-height:1.04;text-shadow:0 0 16px rgba(232,147,58,.42);text-decoration:none;display:block;margin-top:6px}
+    .headline:hover{color:var(--ember)}
+    .lead-ex{font-size:1.34rem;line-height:1.5;margin-top:14px;color:var(--bone)}
+    .readmore{display:inline-block;margin-top:16px;color:var(--ember);text-decoration:none}
+    .readmore:hover{text-shadow:0 0 10px rgba(232,147,58,.6)}
+    .lead-art{display:block}
+    .lead-art img{display:block;width:100%;height:auto;border:1px solid var(--line);padding:5px;background:#000}
+    .secondary{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+    .story{position:relative;isolation:isolate;padding:22px 26px 26px}
+    .story::before{content:'';position:absolute;inset:-2px;z-index:-1;background:linear-gradient(180deg,rgba(232,147,58,.055),rgba(14,15,18,.16));border:1.6px solid rgba(232,147,58,.48);filter:url(#torn1) drop-shadow(0 0 5px rgba(232,147,58,.28))}
+    .story:nth-child(2n)::before{filter:url(#torn3) drop-shadow(0 0 5px rgba(232,147,58,.28))}
+    .story:nth-child(3n)::before{filter:url(#torn2) drop-shadow(0 0 5px rgba(232,147,58,.28))}
+    .story .title{font-size:1.3rem}
+    .story .excerpt{font-size:1.08rem;margin-top:6px}
+    @media (max-width:720px){.lead{grid-template-columns:1fr;gap:18px}.lead-art{order:-1}}
     .post{position:relative;isolation:isolate;border:none;padding:38px 42px 46px;margin:16px 0 26px;background:none}
     .post::before{content:'';position:absolute;inset:-2px;z-index:-1;background:linear-gradient(180deg,rgba(232,147,58,.05),rgba(11,9,8,.14));border:1.6px solid rgba(232,147,58,.5);filter:url(#torn2) drop-shadow(0 0 6px rgba(232,147,58,.28))}
     .post h1{font-family:'Spartacus';font-size:clamp(1.8rem,6vw,2.8rem);letter-spacing:.05em;color:var(--gold);line-height:1.16;text-shadow:0 0 12px rgba(232,147,58,.35);margin:.35em 0 .1em}
@@ -74,6 +96,7 @@
       .frame{padding:0 16px}
       nav{gap:22px;padding:18px 0 22px}.colglyph{font-size:2.5rem}
       .entry{padding:18px 18px 20px}.post{padding:26px 20px 32px}
+      .lead{padding:24px 18px 24px}.story{padding:18px 18px 20px}.lead-ex{font-size:1.2rem}
       .post-body{font-size:1.18rem}
     }
     @media (prefers-reduced-motion:reduce){.meander,.wordmark,.decal,.dot{animation:none}}
