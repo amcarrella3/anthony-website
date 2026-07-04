@@ -134,8 +134,8 @@
         "source": ""
       },
       "place": {
-        "leftPct": 45.27565175248494,
-        "topPct": 58.24776425118418,
+        "leftPct": 87.44375672943258,
+        "topPct": 92.24092082894765,
         "widthPct": 34,
         "heightPct": 12,
         "rotationDeg": 0
@@ -205,8 +205,8 @@
         "source": "data/thymer/natural-observations.json"
       },
       "place": {
-        "leftPct": 50,
-        "topPct": 45,
+        "leftPct": 69.38664932813177,
+        "topPct": 52.07755659615271,
         "widthPct": 34,
         "heightPct": 30,
         "rotationDeg": 0
@@ -222,7 +222,8 @@
   ],
   "paperImage": null,
   "frame": {
-    "aspect": "as-composed"
+    "aspect": "as-composed",
+    "ground": "paper"
   },
   "export": {
     "duration": 16,

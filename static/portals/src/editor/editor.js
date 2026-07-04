@@ -105,6 +105,7 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
       <option value="4:5">4:5</option>
       <option value="3:2">3:2</option>
     </select></label>
+    <button data-act="ground" title="present ground — black / paper (b)">ground:&nbsp;<span class="ground-val">black</span></button>
     <button data-act="export-open" title="export a still / loop">⤓&nbsp;export</button>
     <span class="editor-hud__sel" hidden>
       <span class="editor-hud__id"></span>
@@ -428,6 +429,12 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
   const frameSel = q('[data-frame]');
   frameSel.value = present.getAspect();
   frameSel.addEventListener('change', () => present.setAspect(frameSel.value));
+  const groundBtn = q('[data-act="ground"]');
+  const groundVal = groundBtn.querySelector('.ground-val');
+  const updateGround = () => { groundVal.textContent = present.getGround(); };
+  groundBtn.addEventListener('click', () => present.toggleGround());
+  window.addEventListener('cosmos:ground', updateGround);
+  updateGround();
 
   // ── export: headless render of the live piece → file ───────────────
   manifest.export = manifest.export || {};
