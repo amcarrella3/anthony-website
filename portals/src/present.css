@@ -8,8 +8,24 @@
 /* GROUND: what sits behind the composition in present mode. Default = the museum
    void (surround). 'ground-paper' shows the portal's paper colour; 'ground-image'
    shows its uploaded background. Toggled per portal (frame.ground). */
-body.is-presenting { --ground-color: var(--surround); }
+body.is-presenting {
+  --ground-color: var(--surround);
+  /* interface palette — PROVISIONAL (Anthony's "prehistory meets future": bone,
+     cream, oatmeal, charcoal, black). Glow held as an R,G,B triplet so it can be
+     tuned per portal later. */
+  --glow: 233, 221, 194;     /* warm bone / oatmeal */
+  --void: 18, 15, 11;        /* warm charcoal-black */
+}
 body.is-presenting.ground-paper { --ground-color: var(--paper); }
+
+/* a soft vignette over the whole presentation — atmosphere that holds the piece */
+body.is-presenting #field::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 55;
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(var(--void), 0.55) 100%);
+}
 
 /* the letterbox window — hidden until presenting */
 .present-frame { display: none; }
@@ -76,18 +92,18 @@ body.export-capture .portal-return { display: none; }   /* never bake the nav in
 .portal-return__core {
   width: 100%; height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.95), rgba(150, 200, 255, 0.55) 52%, rgba(80, 140, 255, 0.06) 74%);
-  animation: portal-breathe 4.2s ease-in-out infinite;
+  background: radial-gradient(circle at 50% 42%, rgba(246, 240, 227, 0.9), rgba(var(--glow), 0.48) 52%, rgba(var(--glow), 0.05) 74%);
+  animation: portal-breathe 5s ease-in-out infinite;
 }
 @keyframes portal-breathe {
-  0%, 100% { transform: scale(0.88); opacity: 0.72;
-    box-shadow: 0 0 14px 3px rgba(130, 185, 255, 0.45), 0 0 32px 9px rgba(130, 185, 255, 0.18); }
-  50% { transform: scale(1.08); opacity: 1;
-    box-shadow: 0 0 28px 7px rgba(140, 195, 255, 0.72), 0 0 60px 18px rgba(140, 195, 255, 0.34); }
+  0%, 100% { transform: scale(0.88); opacity: 0.62;
+    box-shadow: 0 0 16px 3px rgba(var(--glow), 0.38), 0 0 34px 9px rgba(var(--glow), 0.14); }
+  50% { transform: scale(1.06); opacity: 0.95;
+    box-shadow: 0 0 30px 7px rgba(var(--glow), 0.58), 0 0 64px 18px rgba(var(--glow), 0.26); }
 }
-.portal-return:hover .portal-return__core { animation-duration: 2.1s; }
+.portal-return:hover .portal-return__core { animation-duration: 2.4s; }
 @media (prefers-reduced-motion: reduce) {
-  .portal-return__core { animation: none; box-shadow: 0 0 22px 5px rgba(140, 195, 255, 0.5); }
+  .portal-return__core { animation: none; box-shadow: 0 0 22px 5px rgba(var(--glow), 0.45); }
 }
 
 /* ── portal entry THRESHOLD (published rooms only) ──────────────────────────
@@ -96,32 +112,41 @@ body.export-capture .portal-return { display: none; }   /* never bake the nav in
 .portal-threshold {
   position: fixed; inset: 0; z-index: 200;
   display: grid; place-items: center;
-  background: radial-gradient(circle at 50% 48%, #0c1712 0%, #060807 72%);
+  background: radial-gradient(circle at 50% 46%, rgb(27, 23, 16) 0%, rgb(9, 8, 6) 70%);
   cursor: pointer;
-  animation: threshold-in 0.6s ease both;
+  animation: threshold-in 0.8s ease both;
 }
 body.export-capture .portal-threshold { display: none; }   /* never bake the gate into a file */
 .portal-threshold__gate {
   position: relative;
-  width: 42vmin; height: 42vmin; max-width: 340px; max-height: 340px;
+  width: 44vmin; height: 44vmin; max-width: 360px; max-height: 360px;
   appearance: none; border: 0; background: none; cursor: pointer;
   display: grid; place-items: center;
 }
+/* dashboard-like concentric "instrument" rings — faint, breathing at their own rates.
+   The MAIN ring is provisional; Anthony's drawn shape can replace it (steampunk). */
+.portal-threshold__gate::before,
+.portal-threshold__gate::after {
+  content: ''; position: absolute; border-radius: 50%; pointer-events: none;
+  border: 1px solid rgba(var(--glow), 0.1);
+}
+.portal-threshold__gate::before { inset: -13%; animation: threshold-breathe 7s ease-in-out infinite reverse; }
+.portal-threshold__gate::after { inset: -27%; border-color: rgba(var(--glow), 0.055); animation: threshold-breathe 9.5s ease-in-out infinite; }
 .portal-threshold__ring {
   position: absolute; inset: 0; border-radius: 50%;
-  border: 1.5px solid rgba(120, 240, 175, 0.55);
-  box-shadow: 0 0 44px 8px rgba(120, 240, 175, 0.22), inset 0 0 64px 12px rgba(120, 240, 175, 0.1);
-  animation: threshold-breathe 4.4s ease-in-out infinite;
+  border: 1px solid rgba(var(--glow), 0.36);
+  box-shadow: 0 0 72px 14px rgba(var(--glow), 0.12), inset 0 0 92px 22px rgba(var(--glow), 0.05);
+  animation: threshold-breathe 5.6s ease-in-out infinite;
 }
 .portal-threshold__label {
-  font: 500 clamp(0.85rem, 3.4vmin, 1.35rem)/1 ui-monospace, Menlo, monospace;
-  letter-spacing: 0.42em; text-transform: uppercase; text-indent: 0.42em;
-  color: rgba(200, 255, 225, 0.92);
-  text-shadow: 0 0 20px rgba(120, 240, 175, 0.6);
+  font: 400 clamp(0.8rem, 3.2vmin, 1.25rem)/1 ui-monospace, Menlo, monospace;
+  letter-spacing: 0.46em; text-transform: uppercase; text-indent: 0.46em;
+  color: rgba(238, 230, 214, 0.8);
+  text-shadow: 0 0 26px rgba(var(--glow), 0.5);
 }
-.portal-threshold__gate:hover .portal-threshold__ring { animation-duration: 2.2s; border-color: rgba(150, 255, 200, 0.85); }
+.portal-threshold__gate:hover .portal-threshold__ring { animation-duration: 2.8s; border-color: rgba(var(--glow), 0.58); }
 @keyframes threshold-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes threshold-breathe { 0%, 100% { transform: scale(0.9); opacity: 0.72; } 50% { transform: scale(1.06); opacity: 1; } }
+@keyframes threshold-breathe { 0%, 100% { transform: scale(0.9); opacity: 0.58; } 50% { transform: scale(1.05); opacity: 1; } }
 /* crossing: the gate rushes toward you and dissolves — "thrust into the piece" */
 .portal-threshold.is-crossing { animation: threshold-cross 1.4s cubic-bezier(0.6, 0, 0.3, 1) forwards; pointer-events: none; }
 @keyframes threshold-cross { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
