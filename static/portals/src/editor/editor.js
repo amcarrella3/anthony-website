@@ -67,16 +67,23 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
   hud.hidden = true;
   hud.innerHTML = `
     <span class="editor-hud__tag">EDIT</span>
-    <button data-act="proj-open" class="editor-hud__proj" title="projects — new / open / save"><span class="proj-name">portal</span> ▾</button>
-    <button data-act="add-open">＋ Add ▾</button>
-    <button data-act="add-media">＋ media</button>
-    <button data-act="add-shape">＋ shape</button>
-    <button data-act="draw">✏ draw</button>
-    <button data-act="shape-rect" title="rectangle">▭</button>
-    <button data-act="shape-ellipse" title="ellipse">◯</button>
-    <button data-act="shape-free" title="freeform shape">∿</button>
-    <button data-act="add-text">＋ text</button>
-    <button data-act="add-thymer">＋ thymer</button>
+    <span class="hud-group">
+      <span class="hud-group__row">
+        <button data-act="proj-open" class="editor-hud__proj" title="projects — new / open / save"><span class="proj-name">portal</span> ▾</button>
+        <button data-act="add-open">＋ Add ▾</button>
+      </span>
+      <span class="hud-group__label">portal</span>
+    </span>
+    <span class="editor-hud__legacy" hidden>
+      <button data-act="add-media">＋ media</button>
+      <button data-act="add-shape">＋ shape</button>
+      <button data-act="draw">✏ draw</button>
+      <button data-act="shape-rect" title="rectangle">▭</button>
+      <button data-act="shape-ellipse" title="ellipse">◯</button>
+      <button data-act="shape-free" title="freeform shape">∿</button>
+      <button data-act="add-text">＋ text</button>
+      <button data-act="add-thymer">＋ thymer</button>
+    </span>
     <span class="editor-hud__brush" hidden>
       <label class="editor-hud__col">brush<input type="color" data-brush="color"></label>
       <select class="editor-hud__bsize">
@@ -92,22 +99,37 @@ export function initEditor({ stage, manifest, applyPlace, applyMedia, applyShado
       <button data-act="undo-stroke">undo</button>
       <button data-act="draw-done">done</button>
     </span>
-    <label class="editor-hud__col">paper<input type="color" data-pal="paper"></label>
-    <button data-act="paper-img" title="upload a background image">bg&nbsp;img</button>
-    <label class="editor-hud__col">ink<input type="color" data-pal="ink"></label>
-    <span class="editor-hud__zoom"><button data-act="zoom-out">−</button><span class="zoom-pct">100%</span><button data-act="zoom-in">＋</button><button data-act="zoom-reset" title="reset zoom (0)">⊡</button></span>
-    <button data-act="present" title="present · museum mode (p)">▶&nbsp;present</button>
-    <label class="editor-hud__col">frame<select data-frame>
-      <option value="as-composed">as-composed</option>
-      <option value="16:9">16:9</option>
-      <option value="9:16">9:16</option>
-      <option value="1:1">1:1</option>
-      <option value="4:5">4:5</option>
-      <option value="3:2">3:2</option>
-    </select></label>
-    <button data-act="ground" title="present ground — black / paper (b)">ground:&nbsp;<span class="ground-val">black</span></button>
-    <button data-act="export-open" title="export a still / loop">⤓&nbsp;export</button>
-    <button data-act="publish" title="publish your portals to anthonymichael.work">⬆&nbsp;publish</button>
+    <span class="hud-group">
+      <span class="hud-group__row">
+        <label class="editor-hud__col">paper<input type="color" data-pal="paper"></label>
+        <button data-act="paper-img" title="upload a background image">bg&nbsp;img</button>
+        <label class="editor-hud__col">ink<input type="color" data-pal="ink"></label>
+      </span>
+      <span class="hud-group__label">paper</span>
+    </span>
+    <span class="hud-group">
+      <span class="hud-group__row">
+        <span class="editor-hud__zoom"><button data-act="zoom-out">−</button><span class="zoom-pct">100%</span><button data-act="zoom-in">＋</button><button data-act="zoom-reset" title="reset zoom (0)">⊡</button></span>
+        <button data-act="present" title="present · museum mode (p)">▶&nbsp;present</button>
+        <label class="editor-hud__col">frame<select data-frame>
+          <option value="as-composed">as-composed</option>
+          <option value="16:9">16:9</option>
+          <option value="9:16">9:16</option>
+          <option value="1:1">1:1</option>
+          <option value="4:5">4:5</option>
+          <option value="3:2">3:2</option>
+        </select></label>
+        <button data-act="ground" title="present ground — black / paper (b)">ground:&nbsp;<span class="ground-val">black</span></button>
+      </span>
+      <span class="hud-group__label">view</span>
+    </span>
+    <span class="hud-group">
+      <span class="hud-group__row">
+        <button data-act="export-open" title="export a still / loop">⤓&nbsp;export</button>
+        <button data-act="publish" title="publish your portals to anthonymichael.work">⬆&nbsp;publish</button>
+      </span>
+      <span class="hud-group__label">output</span>
+    </span>
     <span class="editor-hud__sel" hidden>
       <span class="editor-hud__id"></span>
       <select class="editor-hud__feed">

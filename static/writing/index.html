@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Anthony Carrella — Writing</title>
+  <style>
+    /* PROVISIONAL — Anthony authors the real design, like the portal's paper. */
+    :root { --paper: #f3f0ea; --ink: #1c1710; --soft: #6b6152; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--paper); color: var(--ink); min-height: 100dvh;
+           font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif; line-height: 1.62;
+           -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 9vh 6vw 14vh; }
+    a { color: inherit; }
+    .top { font: 600 0.72rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.22em; text-transform: uppercase;
+           color: var(--soft); text-decoration: none; display: inline-block; margin-bottom: 4.5em; }
+    .top:hover { color: var(--ink); }
+    h1 { font-weight: 600; font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 0.15em; }
+    .date { font: 0.72rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); }
+    article { margin-top: 2.4em; font-size: 1.12rem; }
+    article > * + * { margin-top: 1.15em; }
+    article h2 { font-size: 1.3rem; margin-top: 1.6em; }
+    blockquote { border-left: 2px solid var(--soft); padding-left: 1rem; color: var(--soft); font-style: italic; }
+    pre { background: rgba(0,0,0,0.05); padding: 1rem; overflow-x: auto; font-size: 0.9rem; }
+    hr { border: 0; border-top: 1px solid rgba(0,0,0,0.14); margin: 2.4em auto; width: 40%; }
+    .posts { list-style: none; margin-top: 1em; }
+    .posts li { padding: 1.5em 0; border-top: 1px solid rgba(0,0,0,0.12); }
+    .posts a.title { text-decoration: none; font-weight: 600; font-size: 1.4rem; display: block; }
+    .posts a.title:hover { color: var(--soft); }
+    .posts .ex { color: var(--soft); margin-top: 0.3em; }
+    .prov { margin-top: 5em; opacity: 0.34; font: 0.68rem/1.4 ui-monospace, Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="top" href="/">Anthony Carrella</a>
+    <h1>Writing</h1>
+    <ul class="posts">
+        <li>
+          <a class="title" href="./your-first-post/">Your first post</a>
+          <div class="date">Sat Jul 4</div>
+          <div class="ex">This is a sample post — edit it, or delete it.</div>
+        </li>
+    </ul>
+    <p class="prov">provisional — design to be authored · written in Thymer</p>
+  </main>
+</body>
+</html>
