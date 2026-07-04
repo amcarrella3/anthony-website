@@ -2,70 +2,104 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Anthony Carrella — Writing</title>
+  <meta name="theme-color" content="#0b0908"/>
+  <title>Writing — Anthony Carrella</title>
   <style>
-    /* PROVISIONAL — Anthony authors the real design, like the portal's paper. */
-    :root { --paper: #f3f0ea; --ink: #1c1710; --soft: #6b6152; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--paper); color: var(--ink); min-height: 100dvh;
-           font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif; line-height: 1.62;
-           -webkit-font-smoothing: antialiased; }
-    .wrap { max-width: 640px; margin: 0 auto; padding: 9vh 6vw 14vh; }
-    a { color: inherit; }
-    .top { font: 600 0.72rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.22em; text-transform: uppercase;
-           color: var(--soft); text-decoration: none; display: inline-block; margin-bottom: 4.5em; }
-    .top:hover { color: var(--ink); }
-    h1 { font-weight: 600; font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 0.15em; }
-    .date { font: 0.72rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); }
-    article { margin-top: 2.4em; font-size: 1.12rem; }
-    article > * + * { margin-top: 1.15em; }
-    article h2 { font-size: 1.3rem; margin-top: 1.6em; }
-    blockquote { border-left: 2px solid var(--soft); padding-left: 1rem; color: var(--soft); font-style: italic; }
-    pre { background: rgba(0,0,0,0.05); padding: 1rem; overflow-x: auto; font-size: 0.9rem; }
-    hr { border: 0; border-top: 1px solid rgba(0,0,0,0.14); margin: 2.4em auto; width: 40%; }
-    figure { margin: 1.8em 0; } figure img { display: block; width: 100%; height: auto; }
-    /* breathing colour decals — Traditions & Themes, in Anthony's Thymer colours */
-    .decals { display: flex; gap: 1.5em; flex-wrap: wrap; align-items: flex-start; margin-bottom: 1.4em; }
-    .decals .chip { display: flex; flex-direction: column; align-items: center; gap: 0.6em; }
-    .decal { position: relative; width: 25px; height: 25px; animation: breathe 5.6s ease-in-out infinite; }
-    .decal::before { content: ''; position: absolute; inset: -46%; border-radius: 50%; background: radial-gradient(circle, var(--c) 0%, transparent 64%); opacity: 0.5; }
-    .decal::after { content: ''; position: absolute; inset: 20%; border-radius: 60% 40% 52% 48%; background: var(--c); box-shadow: 0 0 10px var(--c); }
-    .dlabel { font: 600 0.55rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.13em; text-transform: uppercase; color: var(--soft); }
-    @keyframes breathe { 0%, 100% { transform: scale(0.9); opacity: 0.72; } 50% { transform: scale(1.13); opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) { .decal { animation: none; } }
-    .posts { list-style: none; margin-top: 1em; }
-    .posts li { padding: 1.5em 0; border-top: 1px solid rgba(0,0,0,0.12); }
-    .posts a.title { text-decoration: none; font-weight: 600; font-size: 1.4rem; display: block; }
-    .posts a.title:hover { color: var(--soft); }
-    .posts .ex { color: var(--soft); margin-top: 0.3em; }
-    .prov { margin-top: 5em; opacity: 0.34; font: 0.68rem/1.4 ui-monospace, Menlo, monospace; }
+    @font-face{font-family:'Aegean';font-display:swap;src:url(fonts/Aegean.woff2) format('woff2');}
+    @font-face{font-family:'Spartacus';font-display:swap;src:url(fonts/Spartacus.woff2) format('woff2');}
+    @font-face{font-family:'Columns';font-display:swap;src:url(fonts/Columns.woff2) format('woff2');}
+    :root{--void:#0b0908;--ember:#e8933a;--gold:#d9b45c;--bone:#e9dcc0;--ichor:#c0392b;--dim:#8a7550;--line:rgba(232,147,58,.18)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--void);color:var(--bone);min-height:100dvh;font-family:'Aegean',Georgia,serif;
+      -webkit-font-smoothing:antialiased;padding-bottom:10px;
+      background-image:radial-gradient(120% 60% at 50% -8%,rgba(232,147,58,.07),transparent 58%),repeating-linear-gradient(0deg,transparent 0 3px,rgba(232,147,58,.015) 3px 4px)}
+    .frame{max-width:720px;margin:0 auto;padding:0 26px}
+    a{color:inherit}
+    .hud{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+    .meander{height:26px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26' viewBox='0 0 40 26'%3E%3Cg fill='none' stroke='%23e8933a' stroke-width='2.3' stroke-linecap='square'%3E%3Cpath d='M0,22 H40'/%3E%3Cpath d='M7,22 V6 H33 V17 H15 V12'/%3E%3C/g%3E%3C/svg%3E") repeat-x center;background-size:40px 26px;filter:drop-shadow(0 0 3px rgba(232,147,58,.55)) drop-shadow(0 0 9px rgba(232,147,58,.28))}
+    .meander.breathe{animation:lamp 7.5s ease-in-out infinite}
+    @keyframes lamp{0%,100%{filter:drop-shadow(0 0 2px rgba(232,147,58,.45)) drop-shadow(0 0 7px rgba(232,147,58,.2));opacity:.78}50%{filter:drop-shadow(0 0 5px rgba(232,147,58,.75)) drop-shadow(0 0 15px rgba(232,147,58,.42));opacity:1}}
+    nav{display:flex;justify-content:center;gap:38px;padding:24px 0 30px;flex-wrap:wrap}
+    .col{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none}
+    .colglyph{font-family:'Columns';font-size:3rem;line-height:1;color:var(--gold);text-shadow:0 0 10px rgba(232,147,58,.4);transition:.3s;opacity:.82}
+    .col:hover .colglyph,.col.active .colglyph{color:var(--ember);text-shadow:0 0 16px rgba(232,147,58,.8);opacity:1}
+    .lintel{text-align:center;padding:6px 0 24px}
+    .eyebrow{margin-bottom:16px}
+    .wordmark{font-family:'Spartacus';font-size:clamp(2.8rem,11vw,4.8rem);letter-spacing:.08em;color:var(--gold);line-height:1;text-shadow:0 0 12px rgba(232,147,58,.5),0 0 32px rgba(232,147,58,.25)}
+    .wordmark.breathe{animation:glow 7.5s ease-in-out infinite}
+    @keyframes glow{0%,100%{text-shadow:0 0 8px rgba(232,147,58,.4),0 0 22px rgba(232,147,58,.18)}50%{text-shadow:0 0 15px rgba(232,147,58,.7),0 0 42px rgba(232,147,58,.4)}}
+    .back{display:inline-block;text-decoration:none;margin:6px 0 4px}
+    .back:hover{color:var(--bone)}
+    .stream{display:flex;flex-direction:column;gap:20px;padding:24px 0 34px}
+    .entry{position:relative;padding:20px 26px 24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(232,147,58,.035),transparent 62%)}
+    .entry::before,.entry::after{content:'';position:absolute;width:9px;height:9px;border:1.5px solid var(--ember);opacity:.55}
+    .entry::before{top:-1px;left:-1px;border-right:0;border-bottom:0}.entry::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+    .entry-hud{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--ichor);box-shadow:0 0 9px var(--ichor);animation:pulse 2.7s ease-in-out infinite;flex:none}
+    @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+    .decals{display:flex;gap:1.5em;flex-wrap:wrap;margin:10px 0 4px}
+    .decals .chip{display:flex;flex-direction:column;align-items:center;gap:.5em}
+    .decal{position:relative;width:22px;height:22px;animation:breathe 5.6s ease-in-out infinite}
+    .decal::before{content:'';position:absolute;inset:-52%;border-radius:50%;background:radial-gradient(circle,var(--c) 0%,transparent 62%);opacity:.6}
+    .decal::after{content:'';position:absolute;inset:20%;border-radius:60% 40% 52% 48%;background:var(--c);box-shadow:0 0 12px var(--c)}
+    .dlabel{font-family:ui-monospace,Menlo,monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+    @keyframes breathe{0%,100%{transform:scale(.86);opacity:.68}50%{transform:scale(1.12);opacity:1}}
+    a.title{font-family:'Spartacus';font-size:1.6rem;letter-spacing:.05em;color:var(--gold);line-height:1.16;text-shadow:0 0 10px rgba(217,180,92,.28);text-decoration:none;display:inline-block;margin-top:6px}
+    a.title:hover{color:var(--ember);text-shadow:0 0 15px rgba(232,147,58,.6)}
+    .excerpt{margin-top:8px;font-size:1.22rem;line-height:1.5;color:var(--bone);opacity:.9}
+    .post{position:relative;border:1px solid var(--line);padding:34px 40px 42px;margin:16px 0 26px;background:linear-gradient(180deg,rgba(232,147,58,.035),transparent 42%)}
+    .post h1{font-family:'Spartacus';font-size:clamp(1.8rem,6vw,2.8rem);letter-spacing:.05em;color:var(--gold);line-height:1.16;text-shadow:0 0 12px rgba(232,147,58,.35);margin:.35em 0 .1em}
+    .post-body{font-size:1.28rem;line-height:1.66;color:var(--bone);margin-top:1.2em}
+    .post-body>*+*{margin-top:1em}
+    .post-body>p:first-of-type::first-letter{font-family:'Spartacus';font-size:3em;float:left;line-height:.78;padding:.05em .14em 0 0;color:var(--ember);text-shadow:0 0 15px rgba(232,147,58,.6)}
+    .post-body h2{font-family:'Spartacus';font-size:1.35rem;letter-spacing:.04em;color:var(--gold);margin-top:1.5em}
+    .post-body blockquote{border-left:2px solid var(--ember);padding-left:1rem;color:var(--gold);font-style:italic;opacity:.9}
+    .post-body a{color:var(--ember);text-decoration:none;border-bottom:1px solid rgba(232,147,58,.4)}
+    .post-body pre{background:rgba(0,0,0,.4);border:1px solid var(--line);padding:1rem;overflow-x:auto;font-size:.9rem;font-family:ui-monospace,Menlo,monospace;color:var(--bone)}
+    .post-body ul,.post-body ol{padding-left:1.4em}
+    hr{border:0;height:20px;margin:1.6em auto;width:60%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26' viewBox='0 0 40 26'%3E%3Cg fill='none' stroke='%23e8933a' stroke-width='2.3' stroke-linecap='square'%3E%3Cpath d='M0,22 H40'/%3E%3Cpath d='M7,22 V6 H33 V17 H15 V12'/%3E%3C/g%3E%3C/svg%3E") repeat-x center;background-size:40px 26px;filter:drop-shadow(0 0 3px rgba(232,147,58,.5));opacity:.7}
+    figure{margin:1.5em 0;border:1px solid var(--line);padding:6px;background:#000}
+    figure img{display:block;width:100%;height:auto}
+    .footer{padding-top:8px;padding-bottom:40px}
+    .colophon{text-align:center;margin-top:20px;opacity:.55}
+    @media (max-width:600px){
+      .frame{padding:0 16px}
+      nav{gap:22px;padding:18px 0 22px}.colglyph{font-size:2.5rem}
+      .entry{padding:18px 18px 20px}.post{padding:26px 20px 32px}
+      .post-body{font-size:1.18rem}
+    }
+    @media (prefers-reduced-motion:reduce){.meander,.wordmark,.decal,.dot{animation:none}}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <a class="top" href="/">Anthony Carrella</a>
-    <h1>Writing</h1>
-    <ul class="posts">
-        <li>
-          
-          <a class="title" href="./your-first-post/">Your first post</a>
-          <div class="date">Sat Jul 4</div>
-          <div class="ex">This is a sample post — edit it, or delete it.</div>
-        </li>
-        <li>
-          <div class="decals"><span class="chip"><span class="decal" style="--c:#b3702f;animation-delay:-0.0s"></span><span class="dlabel">Cinema</span></span><span class="chip"><span class="decal" style="--c:#9c4a3c;animation-delay:-1.3s"></span><span class="dlabel">Collage</span></span></div>
-          <a class="title" href="./moving-pictures/">Moving Pictures</a>
-          <div class="date">Sat, Jul 4</div>
-          <div class="ex">It&#39;s collage. It&#39;s cinema. It&#39;s phtoography. It&#39;s knowledge stored and encountered. </div>
-        </li>
-        <li>
-          
-          <a class="title" href="./thinking-today/">thinking today</a>
-          <div class="date">Sat, Jul 4</div>
-          <div class="ex">Here we go. It is Sat Jul 4 16:46 and I am in Thymer, while also, writing my first blog post. To my website. </div>
-        </li>
-    </ul>
-    <p class="prov">provisional — design to be authored · written in Thymer</p>
+  <div class="meander breathe" aria-hidden="true"></div>
+  <nav><a class="col" href="/"><span class="colglyph">A</span><span class="hud">Home</span></a><a class="col" href="/portals/"><span class="colglyph">B</span><span class="hud">Portals</span></a><a class="col active" href="/writing/"><span class="colglyph">C</span><span class="hud">Writing</span></a></nav>
+  <div class="lintel"><div class="hud eyebrow">Anthony Carrella  ·  a lamplit forum</div><h1 class="wordmark breathe">Writing</h1></div>
+  <main class="frame">
+    <section class="stream">
+      <article class="entry">
+        <div class="entry-hud"><span class="dot"></span><span class="hud">Sat Jul 4 · Published</span></div>
+        
+        <a class="title" href="./your-first-post/">Your first post</a>
+        <p class="excerpt">This is a sample post — edit it, or delete it.</p>
+      </article>
+      <article class="entry">
+        <div class="entry-hud"><span class="hud">Sat, Jul 4 · Published</span></div>
+        <div class="decals"><span class="chip"><span class="decal" style="--c:#e0942f;animation-delay:-0.0s"></span><span class="dlabel">Cinema</span></span><span class="chip"><span class="decal" style="--c:#c85242;animation-delay:-1.3s"></span><span class="dlabel">Collage</span></span></div>
+        <a class="title" href="./moving-pictures/">Moving Pictures</a>
+        <p class="excerpt">It&#39;s collage. It&#39;s cinema. It&#39;s phtoography. It&#39;s knowledge stored and encountered. </p>
+      </article>
+      <article class="entry">
+        <div class="entry-hud"><span class="hud">Sat, Jul 4 · Published</span></div>
+        
+        <a class="title" href="./thinking-today/">thinking today</a>
+        <p class="excerpt">Here we go. It is Sat Jul 4 16:46 and I am in Thymer, while also, writing my first blog post. To my website. </p>
+      </article>
+    </section>
   </main>
+  <footer class="frame footer">
+    <div class="meander breathe" aria-hidden="true"></div>
+    <p class="hud colophon">Written in Thymer</p>
+  </footer>
 
 </body></html>
