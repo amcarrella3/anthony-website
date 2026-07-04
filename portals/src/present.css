@@ -1,0 +1,47 @@
+/* present.css — presentation / installation mode.
+   The museum wall: fullscreen, tool-chrome gone, the art letterboxed to its
+   frame on a surround. Paints NOTHING unless body.is-presenting. The surround
+   color is provisional (his to author, like paper/ink). */
+
+:root { --surround: #0b0b0b; }   /* provisional museum black — Anthony's to set */
+
+/* the letterbox window — hidden until presenting */
+.present-frame { display: none; }
+body.is-presenting .present-frame {
+  position: fixed;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  pointer-events: none;                       /* never intercept the art */
+  box-shadow: 0 0 0 100vmax var(--surround);  /* masks any composition overflow to surround */
+}
+
+body.is-presenting {
+  background: var(--surround);
+  cursor: default;
+}
+/* fill the viewport edge-to-edge; the frame overlay defines what reads as "in shot" */
+body.is-presenting #field {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: var(--surround);
+  z-index: 5;
+}
+
+/* hard-hide every tool surface, even if presenting straight from edit mode */
+body.is-presenting .editor-hud,
+body.is-presenting .layers,
+body.is-presenting .ctx-menu,
+body.is-presenting .add-menu,
+body.is-presenting .editor-toast,
+body.is-presenting .draw-surface { display: none !important; }
+
+/* the piece runs itself — hide the pointer once the hand goes still */
+body.is-presenting.cursor-idle,
+body.is-presenting.cursor-idle * { cursor: none !important; }
+
+/* headless export capture: let the stage fill the framed viewport (no 92dvh/94vw
+   margin) so the shot is edge-to-edge. Only ever set by the export renderer. */
+body.export-capture .stage { height: 100dvh; max-width: none; }
