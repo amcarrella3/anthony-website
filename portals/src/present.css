@@ -89,3 +89,45 @@ body.export-capture .portal-return { display: none; }   /* never bake the nav in
 @media (prefers-reduced-motion: reduce) {
   .portal-return__core { animation: none; box-shadow: 0 0 22px 5px rgba(140, 195, 255, 0.5); }
 }
+
+/* ── portal entry THRESHOLD (published rooms only) ──────────────────────────
+   Covers the load/buffer; crossing it (a click) force-plays every video and
+   dissolves you into the piece. PROVISIONAL look — Anthony's to author. */
+.portal-threshold {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 48%, #0c1712 0%, #060807 72%);
+  cursor: pointer;
+  animation: threshold-in 0.6s ease both;
+}
+body.export-capture .portal-threshold { display: none; }   /* never bake the gate into a file */
+.portal-threshold__gate {
+  position: relative;
+  width: 42vmin; height: 42vmin; max-width: 340px; max-height: 340px;
+  appearance: none; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center;
+}
+.portal-threshold__ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1.5px solid rgba(120, 240, 175, 0.55);
+  box-shadow: 0 0 44px 8px rgba(120, 240, 175, 0.22), inset 0 0 64px 12px rgba(120, 240, 175, 0.1);
+  animation: threshold-breathe 4.4s ease-in-out infinite;
+}
+.portal-threshold__label {
+  font: 500 clamp(0.85rem, 3.4vmin, 1.35rem)/1 ui-monospace, Menlo, monospace;
+  letter-spacing: 0.42em; text-transform: uppercase; text-indent: 0.42em;
+  color: rgba(200, 255, 225, 0.92);
+  text-shadow: 0 0 20px rgba(120, 240, 175, 0.6);
+}
+.portal-threshold__gate:hover .portal-threshold__ring { animation-duration: 2.2s; border-color: rgba(150, 255, 200, 0.85); }
+@keyframes threshold-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes threshold-breathe { 0%, 100% { transform: scale(0.9); opacity: 0.72; } 50% { transform: scale(1.06); opacity: 1; } }
+/* crossing: the gate rushes toward you and dissolves — "thrust into the piece" */
+.portal-threshold.is-crossing { animation: threshold-cross 1.4s cubic-bezier(0.6, 0, 0.3, 1) forwards; pointer-events: none; }
+@keyframes threshold-cross { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+.portal-threshold.is-crossing .portal-threshold__ring { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .portal-threshold__ring { animation: none; }
+  .portal-threshold.is-crossing { animation: threshold-fade 0.5s forwards; }
+}
+@keyframes threshold-fade { to { opacity: 0; } }

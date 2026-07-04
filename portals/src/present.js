@@ -35,6 +35,7 @@ export function initPresent({ field, manifest, save }) {
   let on = false;
   let idleTimer = null;
   let decal = null;
+  let threshold = null;
 
   const notTyping = (t) => !(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable));
 
@@ -76,6 +77,32 @@ export function initPresent({ field, manifest, save }) {
   }
   function hideDecal() { if (decal) { decal.remove(); decal = null; } }
 
+  // the entry THRESHOLD (published rooms only): a gate shown while the portal
+  // loads/buffers behind it. Crossing it (a click — a real user gesture) FORCES
+  // every video to play, so nothing waits on autoplay policy, then dissolves you
+  // into the piece. Provisional look; Anthony's to author.
+  function showThreshold() {
+    if (threshold || !document.body.classList.contains('is-shared')) return;
+    threshold = document.createElement('div');
+    threshold.className = 'portal-threshold';
+    threshold.innerHTML =
+      '<button class="portal-threshold__gate" type="button" aria-label="enter the portal">'
+      + '<span class="portal-threshold__ring"></span>'
+      + '<span class="portal-threshold__label">enter</span>'
+      + '</button>';
+    field.appendChild(threshold);
+    const cross = () => {
+      if (!threshold) return;
+      field.querySelectorAll('video').forEach((v) => { try { v.muted = true; v.play().catch(() => {}); } catch (_) {} });
+      window.dispatchEvent(new CustomEvent('cosmos:entered'));   // gesture — let audio unlock too
+      const t = threshold; threshold = null;
+      t.classList.add('is-crossing');
+      setTimeout(() => t.remove(), 1400);
+    };
+    threshold.querySelector('.portal-threshold__gate').addEventListener('click', cross);
+  }
+  function hideThreshold() { if (threshold) { threshold.remove(); threshold = null; } }
+
   function onMove() {
     document.body.classList.remove('cursor-idle');
     clearTimeout(idleTimer);
@@ -91,6 +118,7 @@ export function initPresent({ field, manifest, save }) {
     applyGround();
     sizeFrame();
     showDecal();
+    showThreshold();
     window.addEventListener('resize', sizeFrame);
     window.addEventListener('mousemove', onMove);
     onMove();
@@ -102,6 +130,7 @@ export function initPresent({ field, manifest, save }) {
     if (!on) return;
     on = false;
     hideDecal();
+    hideThreshold();
     document.body.classList.remove('is-presenting', 'cursor-idle', 'ground-paper', 'ground-image');
     window.removeEventListener('resize', sizeFrame);
     window.removeEventListener('mousemove', onMove);

@@ -24,12 +24,16 @@ body {
   place-items: center;
 }
 
-/* The stage: locked to the membrane's aspect so slots stay aligned to his line. */
+/* The stage: locked to the membrane's aspect so slots stay aligned to his line.
+   container-type:size makes it a sizing context, so ALL text/marks inside size
+   to the STAGE (cqw units) — the whole piece scales as one fixed unit, and text
+   never reflows independently when the viewer resizes or zooms the browser. */
 .stage {
   position: relative;
   height: 92dvh;
   aspect-ratio: 1024 / 1536;     /* the portal.svg viewBox */
   max-width: 94vw;
+  container-type: size;
 }
 
 /* The portal membrane — Anthony's hand-drawn line, vectorized. */
@@ -66,7 +70,7 @@ body.is-editing .slot--wireframe {
   text-wrap: balance;
   font-family: inherit;                              /* inherits the piece's typography */
   font-weight: 400;
-  font-size: calc(clamp(1rem, 2vw, 1.75rem) * var(--text-scale, 1));
+  font-size: calc(4.3cqw * var(--text-scale, 1));   /* sizes to the stage, not the viewport */
   line-height: 1.45;
   color: var(--ink);
   opacity: 0;
@@ -85,7 +89,7 @@ body.is-editing .slot--wireframe {
   overflow-y: auto;
   overflow-x: hidden;
   font-family: inherit;                                /* inherits the piece's typography */
-  font-size: calc(0.74rem * var(--text-scale, 1));
+  font-size: calc(2.1cqw * var(--text-scale, 1));
   line-height: 1.45;
   color: var(--ink);
   scrollbar-width: none;                 /* quiet — no dashboard scrollbar */
@@ -158,7 +162,7 @@ body.is-editing .slot--wireframe {
   width: 100%;
   min-height: 1em;
   padding: 0.15rem 0.3rem;
-  font-size: calc(1.1rem * var(--text-scale, 1));
+  font-size: calc(3.1cqw * var(--text-scale, 1));
   line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
@@ -172,7 +176,7 @@ body.is-editing .text-block[contenteditable="true"] { outline: 1px dashed rgba(0
 .audio-chip {
   appearance: none; border: 0; background: none; color: var(--ink);
   width: 100%; height: 100%; cursor: pointer; line-height: 1;
-  font-size: calc(1.3rem * var(--text-scale, 1));
+  font-size: calc(3.7cqw * var(--text-scale, 1));
 }
 .audio-piece.is-playing .audio-chip { opacity: 0.55; }
 body.is-editing .audio-chip { outline: 1px dotted rgba(0, 0, 0, 0.3); }
