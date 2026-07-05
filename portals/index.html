@@ -2,40 +2,38 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Anthony Carrella</title>
+  <link rel="icon" href="/theme/icon.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="/theme/apple-touch-icon.png"/>
+  <script>try{var _t=localStorage.getItem('cosmos-theme');if(_t&&_t!=='dark')document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+  <link rel="stylesheet" href="/theme/theme.css"/>
+  <title>Portals — Anthony Carrella</title>
   <style>
-    /* PROVISIONAL scaffolding — appearance is Anthony's to author (his hand). */
-    :root { --paper: #f3f0ea; --ink: #171310; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { min-height: 100dvh; background: var(--paper); color: var(--ink);
-           font-family: ui-monospace, Menlo, monospace; display: grid; place-items: center;
-           opacity: 0; animation: gallery-in 0.8s ease 0.05s forwards; }
-    @keyframes gallery-in { to { opacity: 1; } }
+    main { max-width: 640px; margin: 0 auto; padding: 15vh 8vw; text-align: center; }
+    .eyebrow { font-family: ui-monospace, Menlo, monospace; font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--dim); margin-bottom: 22px; }
+    h1 { font-size: clamp(2.8rem, 11vw, 5rem); margin-bottom: .18em; }
+    .sub { font-family: ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); margin-bottom: 3.2em; }
+    ul { list-style: none; display: flex; flex-direction: column; gap: 1.15em; }
+    li a { font-family: 'Spartacus', serif; font-size: 1.6rem; letter-spacing: .04em; color: var(--gold); text-decoration: none; text-shadow: 0 0 12px rgba(232,147,58,.32); transition: .25s; display: inline-block; }
+    li a:hover { color: var(--ember); text-shadow: 0 0 18px rgba(232,147,58,.7); }
     /* dissolve to charcoal when entering a portal — seamless into the room's boot veil */
-    #nav-veil { position: fixed; inset: 0; z-index: 50; opacity: 0; pointer-events: none;
+    #nav-veil { position: fixed; inset: 0; z-index: 90; opacity: 0; pointer-events: none;
                 background: radial-gradient(circle at 50% 46%, rgb(27,23,16) 0%, rgb(9,8,6) 70%);
                 transition: opacity 0.55s ease; }
     #nav-veil.show { opacity: 1; pointer-events: auto; }
-    main { padding: 8vh 6vw; width: 100%; max-width: 640px; }
-    h1 { font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.15em; font-size: 1.5rem; }
-    .sub { opacity: 0.45; margin-bottom: 2.6em; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; }
-    ul { list-style: none; display: flex; flex-direction: column; gap: 0.7em; }
-    a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.18); padding-bottom: 3px; font-size: 1.05rem; }
-    a:hover { opacity: 0.55; }
-    .prov { margin-top: 3.5em; opacity: 0.28; font-size: 0.7rem; }
   </style>
 </head>
 <body>
   <div id="nav-veil"></div>
   <main>
-    <h1>Anthony Carrella</h1>
-    <div class="sub">portals</div>
+    <div class="eyebrow">Anthony Carrella</div>
+    <h1>Portals</h1>
+    <div class="sub">enter a room</div>
     <ul>
         <li><a href="./portal.html?project=cosmology&amp;share=1&amp;frame=as-composed">The Cosmology</a></li>
         <li><a href="./portal.html?project=listening-b45a37&amp;share=1&amp;frame=as-composed">listening </a></li>
     </ul>
-    <p class="prov">provisional index — design to be authored</p>
   </main>
+  <script src="/theme/theme.js" defer=""></script>
   <script>
     document.querySelectorAll('main a').forEach(function (a) {
       a.addEventListener('click', function (e) {
