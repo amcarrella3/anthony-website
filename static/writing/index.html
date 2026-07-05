@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#0e0f12" />
   <title>Writing — Anthony Carrella</title>
+  <script>try{if(localStorage.getItem('cosmos-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
   <style>
     @font-face{font-family:'Aegean';font-display:swap;src:url(fonts/Aegean.woff2) format('woff2');}
     @font-face{font-family:'Spartacus';font-display:swap;src:url(fonts/Spartacus.woff2) format('woff2');}
@@ -99,7 +100,60 @@
       .lead{padding:24px 18px 24px}.story{padding:18px 18px 20px}.lead-ex{font-size:1.2rem}
       .post-body{font-size:1.18rem}
     }
-    @media (prefers-reduced-motion:reduce){.meander,.wordmark,.decal,.dot{animation:none}}
+    @media (prefers-reduced-motion:reduce){.meander,.wordmark,.decal,.dot,.ornament{animation:none}}
+    /* ══ polish + light mode + cursor + buttons (2026-07-04) ══ */
+    :root{--btn:#33d4c0;--btn-soft:rgba(51,212,192,.14)}
+    nav{padding:42px 0 20px;gap:42px}
+    .col{gap:16px}
+    .masthead{padding:22px 0 12px}
+    .edition{margin-top:18px}
+    .wordmark{font-size:clamp(3.6rem,14vw,6.2rem)}
+    .headline{font-size:clamp(2.8rem,6.8vw,5rem);text-align:center;margin-top:2px}
+    a.title{font-size:1.9rem;text-align:center;display:block}
+    .story .title{font-size:1.55rem}
+    .post h1{font-size:clamp(2.3rem,7.5vw,3.6rem);text-align:center}
+    .lead-head{text-align:center}
+    .story{text-align:center}
+    .lead-head .entry-hud,.lead-head .decals,.story .entry-hud,.story .decals,.post .entry-hud,.post .decals{justify-content:center}
+    .excerpt{font-size:1.12rem;text-align:justify;hyphens:auto}
+    .story .excerpt{font-size:1.05rem}
+    .lead-ex{font-size:1.24rem;text-align:justify;hyphens:auto}
+    .post-body{font-size:1.22rem;text-align:justify;hyphens:auto}
+    .post-body blockquote,.post-body pre,.post-body ul,.post-body ol{text-align:left}
+    /* buttons — patina glow, a cool intelligent contrast to the gold */
+    .readmore,.back{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:.72em 1.25em;color:var(--btn);border:1px solid var(--btn);border-radius:2px;background:var(--btn-soft);box-shadow:0 0 7px rgba(51,212,192,.28),inset 0 0 9px rgba(51,212,192,.08);text-shadow:0 0 8px rgba(51,212,192,.45);transition:.25s}
+    .readmore{margin-top:20px}.back{margin:8px 0 8px}
+    .readmore:hover,.back:hover{color:#8ff0e2;box-shadow:0 0 16px rgba(51,212,192,.55),inset 0 0 13px rgba(51,212,192,.16)}
+    .post-body a{color:var(--btn);border-bottom-color:var(--btn)}
+    .toggle{position:fixed;top:16px;right:16px;z-index:70;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--btn);border:1px solid var(--btn);background:var(--btn-soft);box-shadow:0 0 9px rgba(51,212,192,.32);transition:.25s}
+    .toggle:hover{box-shadow:0 0 18px rgba(51,212,192,.6)}
+    .toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+    /* footer — the tall column stands on the lowered bottom meander, glowing */
+    .footer{padding-top:54px;padding-bottom:46px}
+    .ornament{font-size:4.6rem;margin:0 auto -16px;position:relative;z-index:2;text-shadow:0 0 16px rgba(232,147,58,.55),0 0 34px rgba(232,147,58,.28);animation:glow 6s ease-in-out infinite}
+    /* meanders flicker sporadically — a few natural glitches */
+    .meander.breathe{animation:lamp 7.5s ease-in-out infinite,flicker 11s linear infinite}
+    .footer .meander.breathe{animation:lamp 8s ease-in-out infinite,flicker 13.5s linear infinite}
+    @keyframes flicker{0%,36%,38.5%,71%,73%,85%,87%,100%{opacity:1}37.5%{opacity:.48}72%{opacity:.3}86%{opacity:.62}}
+    /* custom cursor — a lamp in the dark, a soft shadow in the light */
+    .has-cursor,.has-cursor a,.has-cursor button{cursor:none}
+    .cursor{position:fixed;left:0;top:0;z-index:80;pointer-events:none;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(circle,#f3b26a 0%,rgba(232,147,58,.6) 42%,transparent 72%);box-shadow:0 0 14px 5px rgba(232,147,58,.5);mix-blend-mode:screen}
+    .cursor-halo{position:fixed;left:0;top:0;z-index:1;pointer-events:none;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;background:radial-gradient(circle,rgba(232,147,58,.1) 0%,transparent 60%);mix-blend-mode:screen}
+    @media (hover:none){.cursor,.cursor-halo{display:none}}
+    /* ── LIGHT MODE: carved papyrus / stone — ink on parchment, engraved not glowing ── */
+    body{transition:background .4s ease,color .4s ease}
+    [data-theme="light"]{--void:#e7e0cd;--ember:#9a5a24;--gold:#7c4f1c;--bone:#2c2416;--ichor:#a2402f;--dim:#8a7a5c;--line:rgba(120,86,40,.34);--btn:#1f7c70;--btn-soft:rgba(31,124,112,.12)}
+    [data-theme="light"] body{background-image:radial-gradient(130% 60% at 50% -12%,rgba(154,90,36,.05),transparent 52%),repeating-linear-gradient(0deg,transparent 0 3px,rgba(90,60,20,.02) 3px 4px)}
+    [data-theme="light"] .meander{filter:none;opacity:.85}
+    [data-theme="light"] .wordmark,[data-theme="light"] .headline,[data-theme="light"] .post h1,[data-theme="light"] a.title,[data-theme="light"] .ornament{text-shadow:0 1px 0 rgba(255,251,240,.5)!important;animation:none}
+    [data-theme="light"] .post-body>p:first-of-type::first-letter{text-shadow:none}
+    [data-theme="light"] .lead::before,[data-theme="light"] .story::before,[data-theme="light"] .post::before,[data-theme="light"] .entry::before{background:linear-gradient(180deg,rgba(120,86,40,.07),rgba(120,86,40,.02))}
+    [data-theme="light"] figure,[data-theme="light"] .lead-art img{background:#d8cdb0}
+    [data-theme="light"] .readmore,[data-theme="light"] .back,[data-theme="light"] .toggle{box-shadow:inset 0 0 0 1px rgba(31,124,112,.25);text-shadow:none}
+    [data-theme="light"] .decal::after{box-shadow:none}
+    [data-theme="light"] .cursor{background:radial-gradient(circle,#3a2f1c 0%,transparent 70%);box-shadow:0 0 6px 2px rgba(60,45,25,.35);mix-blend-mode:multiply}
+    [data-theme="light"] .cursor-halo{background:radial-gradient(circle,rgba(60,45,25,.06) 0%,transparent 55%);mix-blend-mode:multiply}
+    @media (max-width:600px){nav{padding:30px 0 16px;gap:26px}.col{gap:12px}.ornament{font-size:3.8rem}.toggle{top:12px;right:12px;width:40px;height:40px}.edition{font-size:.58rem;letter-spacing:.13em}}
   </style>
 </head>
 <body>
@@ -111,11 +165,9 @@
   <div class="meander breathe" aria-hidden="true"></div>
   <nav><a class="col" href="/"><span class="colglyph">A</span><span class="hud">Home</span></a><a class="col" href="/portals/"><span class="colglyph">B</span><span class="hud">Portals</span></a><a class="col active" href="/writing/"><span class="colglyph">C</span><span class="hud">Writing</span></a></nav>
   <header class="masthead">
-    <div class="hud eyebrow">Anthony Carrella &nbsp;·&nbsp; a lamplit forum</div>
     <h1 class="wordmark breathe">Writing</h1>
     <div class="edition hud">Vol.&nbsp;I &nbsp;·&nbsp; Sat, Jul 4 &nbsp;·&nbsp; written in Thymer</div>
   </header>
-  <div class="meander divider breathe" aria-hidden="true"></div>
   <main class="frame frontpage">
     <article class="lead">
       <div class="lead-head">
@@ -147,5 +199,23 @@
     <div class="meander breathe" aria-hidden="true"></div>
     <p class="hud colophon">Written in Thymer</p>
   </footer>
+  <button class="toggle" type="button" aria-label="Toggle light and dark"></button>
+  <script>
+  (function(){var d=document,r=d.documentElement;
+  var SUN='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.4"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M19.4 4.6l-2.1 2.1M6.7 17.3l-2.1 2.1"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24"><path d="M20.5 14.8A8.2 8.2 0 1 1 9.2 3.5a7.3 7.3 0 0 0 11.3 11.3z"/></svg>';
+  function icon(){var b=d.querySelector('.toggle');if(b)b.innerHTML=r.getAttribute('data-theme')==='light'?MOON:SUN;}
+  d.addEventListener('click',function(e){if(!e.target.closest('.toggle'))return;var light=r.getAttribute('data-theme')==='light';if(light){r.removeAttribute('data-theme');}else{r.setAttribute('data-theme','light');}try{localStorage.setItem('cosmos-theme',light?'dark':'light');}catch(_){}icon();});
+  icon();
+  if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var cur=d.createElement('div');cur.className='cursor';var halo=d.createElement('div');halo.className='cursor-halo';
+    d.body.appendChild(halo);d.body.appendChild(cur);d.body.classList.add('has-cursor');
+    var x=innerWidth/2,y=innerHeight/2,hx=x,hy=y;
+    d.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;cur.style.transform='translate('+x+'px,'+y+'px)';},{passive:true});
+    (function loop(){hx+=(x-hx)*.15;hy+=(y-hy)*.15;halo.style.transform='translate('+hx+'px,'+hy+'px)';requestAnimationFrame(loop);})();
+    addEventListener('mouseout',function(e){if(!e.relatedTarget){cur.style.opacity=0;halo.style.opacity=0;}});
+    addEventListener('mouseover',function(){cur.style.opacity=1;halo.style.opacity=1;});
+  }})();
+  </script>
 </body>
 </html>
