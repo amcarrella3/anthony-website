@@ -128,7 +128,7 @@
     .toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
     /* footer — the tall column stands on the lowered bottom meander, glowing */
     .footer{padding-top:104px;padding-bottom:50px}
-    .ornament{font-size:5.4rem;margin:0 auto 70px;position:relative;z-index:2;text-shadow:0 0 12px rgba(255,205,130,.8),0 0 26px rgba(232,147,58,.7),0 0 54px rgba(232,147,58,.5),0 0 92px rgba(232,147,58,.3);animation:ornglow 5s ease-in-out infinite}
+    .ornament{font-size:5.4rem;margin:0 auto 28px;position:relative;z-index:2;text-shadow:0 0 12px rgba(255,205,130,.8),0 0 26px rgba(232,147,58,.7),0 0 54px rgba(232,147,58,.5),0 0 92px rgba(232,147,58,.3);animation:ornglow 5s ease-in-out infinite}
     /* meanders flicker sporadically — a few natural glitches */
     .meander.breathe{animation:lamp 7.5s ease-in-out infinite,flicker 11s linear infinite}
     .footer .meander.breathe{animation:lamp 8s ease-in-out infinite,flicker 13.5s linear infinite}
@@ -231,6 +231,8 @@
     .pageframe i{position:absolute;display:block;filter:drop-shadow(0 0 3px rgba(232,147,58,.6)) drop-shadow(0 0 10px rgba(232,147,58,.32));animation:flicker 12s linear infinite}
     .frame-t,.frame-b{left:0;right:0;height:24px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26' viewBox='0 0 40 26'%3E%3Cg fill='none' stroke='%23e8933a' stroke-width='2.3' stroke-linecap='square'%3E%3Cpath d='M0,22 H40'/%3E%3Cpath d='M7,22 V6 H33 V17 H15 V12'/%3E%3C/g%3E%3C/svg%3E") repeat-x center;background-size:40px 24px}
     .frame-t{top:0}.frame-b{bottom:0}
+    .pageframe .frame-b{opacity:0;animation:none;transition:opacity .5s ease}    /* bottom border only at page end (not claustrophobic; beats the flicker keyframes) */
+    body.at-bottom .frame-b{opacity:1;animation:flicker 12s linear infinite}
     .frame-l,.frame-r{top:0;bottom:0;width:24px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='40' viewBox='0 0 26 40'%3E%3Cg fill='none' stroke='%23e8933a' stroke-width='2.3' stroke-linecap='square'%3E%3Cpath d='M22,0 V40'/%3E%3Cpath d='M22,7 H6 V33 H17 V16 H12'/%3E%3C/g%3E%3C/svg%3E") repeat-y center;background-size:24px 40px}
     .frame-l{left:0}.frame-r{right:0;transform:scaleX(-1)}
     [data-theme="light"] .pageframe i,[data-theme="etruscan"] .pageframe i{filter:none;opacity:.85}
@@ -262,7 +264,6 @@
   </main>
   <footer class="frame footer">
     <div class="ornament" aria-hidden="true">S</div>
-    <div class="meander breathe" aria-hidden="true"></div>
     <p class="hud colophon">Written in Thymer</p>
   </footer>
   <button class="toggle" type="button" aria-label="Switch theme"></button>
@@ -277,6 +278,8 @@
   d.body.classList.add('entering');
   var veil=d.createElement('div');veil.id='veil';d.body.appendChild(veil);
   d.addEventListener('click',function(e){var a=e.target.closest('a.headline,a.title,a.readmore');if(!a)return;var hf=a.getAttribute('href');if(!hf||hf.charAt(0)==='#')return;if(mq&&mq('(prefers-reduced-motion:reduce)').matches)return;e.preventDefault();var card=a.closest('.lead,.story'),box=(card||a).getBoundingClientRect();veil.style.setProperty('--vx',(box.left+box.width/2)+'px');veil.style.setProperty('--vy',(box.top+box.height/2)+'px');if(card)card.classList.add('crumbling');requestAnimationFrame(function(){veil.classList.add('on');});var dest=a.href;setTimeout(function(){location.href=dest;},560);});
+  function atBottom(){d.body.classList.toggle('at-bottom',(innerHeight+scrollY)>=(r.scrollHeight-40));}
+  addEventListener('scroll',atBottom,{passive:true});addEventListener('resize',atBottom);atBottom();
   if(mq&&mq('(hover:hover) and (pointer:fine)').matches){
     var cel=d.createElement('div');cel.className='cursor';var halo=d.createElement('div');halo.className='cursor-halo';
     d.body.appendChild(halo);d.body.appendChild(cel);d.body.classList.add('has-cursor');
