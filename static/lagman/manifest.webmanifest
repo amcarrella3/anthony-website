@@ -1,0 +1,14 @@
+{
+  "name": "Lagman Log",
+  "short_name": "Lagman Log",
+  "description": "A field scoring instrument and archive for ranking lagman across the tri-state area.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0e0f12",
+  "theme_color": "#0e0f12",
+  "icons": [
+    { "src": "./assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
