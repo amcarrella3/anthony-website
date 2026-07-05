@@ -3,8 +3,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
   <meta name="theme-color" content="#0e0f12"/>
+  <link rel="icon" href="../icon.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png"/>
   <title>Moving Pictures — Anthony Carrella</title>
-  <script>try{if(localStorage.getItem('cosmos-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+  <script>try{var _t=localStorage.getItem('cosmos-theme');if(_t&&_t!=='dark')document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
   <style>
     @font-face{font-family:'Aegean';font-display:swap;src:url(../fonts/Aegean.woff2) format('woff2');}
     @font-face{font-family:'Spartacus';font-display:swap;src:url(../fonts/Spartacus.woff2) format('woff2');}
@@ -102,7 +104,7 @@
     /* ══ polish + light mode + cursor + buttons (2026-07-04) ══ */
     :root{--btn:#33d4c0;--btn-soft:rgba(51,212,192,.14)}
     nav{padding:42px 0 20px;gap:42px}
-    .col{gap:16px}
+    .col{gap:28px}
     .masthead{padding:22px 0 12px}
     .edition{margin-top:18px}
     .wordmark{font-size:clamp(3.6rem,14vw,6.2rem)}
@@ -127,8 +129,8 @@
     .toggle:hover{box-shadow:0 0 18px rgba(51,212,192,.6)}
     .toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
     /* footer — the tall column stands on the lowered bottom meander, glowing */
-    .footer{padding-top:54px;padding-bottom:46px}
-    .ornament{font-size:4.6rem;margin:0 auto -16px;position:relative;z-index:2;text-shadow:0 0 16px rgba(232,147,58,.55),0 0 34px rgba(232,147,58,.28);animation:glow 6s ease-in-out infinite}
+    .footer{padding-top:104px;padding-bottom:50px}
+    .ornament{font-size:5.4rem;margin:0 auto -22px;position:relative;z-index:2;text-shadow:0 0 12px rgba(255,205,130,.8),0 0 26px rgba(232,147,58,.7),0 0 54px rgba(232,147,58,.5),0 0 92px rgba(232,147,58,.3);animation:ornglow 5s ease-in-out infinite}
     /* meanders flicker sporadically — a few natural glitches */
     .meander.breathe{animation:lamp 7.5s ease-in-out infinite,flicker 11s linear infinite}
     .footer .meander.breathe{animation:lamp 8s ease-in-out infinite,flicker 13.5s linear infinite}
@@ -151,7 +153,32 @@
     [data-theme="light"] .decal::after{box-shadow:none}
     [data-theme="light"] .cursor{background:radial-gradient(circle,#3a2f1c 0%,transparent 70%);box-shadow:0 0 6px 2px rgba(60,45,25,.35);mix-blend-mode:multiply}
     [data-theme="light"] .cursor-halo{background:radial-gradient(circle,rgba(60,45,25,.06) 0%,transparent 55%);mix-blend-mode:multiply}
-    @media (max-width:600px){nav{padding:30px 0 16px;gap:26px}.col{gap:12px}.ornament{font-size:3.8rem}.toggle{top:12px;right:12px;width:40px;height:40px}.edition{font-size:.58rem;letter-spacing:.13em}}
+    @media (max-width:600px){nav{padding:30px 0 16px;gap:26px}.col{gap:18px}.ornament{font-size:4.4rem}.toggle{top:12px;right:12px;width:40px;height:40px}.edition{font-size:.58rem;letter-spacing:.13em}}
+    /* ══ kinetic + Etruscan + icon (2026-07-04b) ══ */
+    @keyframes ornglow{0%,100%{text-shadow:0 0 8px rgba(255,205,130,.6),0 0 22px rgba(232,147,58,.5),0 0 44px rgba(232,147,58,.3)}50%{text-shadow:0 0 18px rgba(255,215,150,.95),0 0 40px rgba(232,147,58,.8),0 0 78px rgba(232,147,58,.55),0 0 120px rgba(232,147,58,.32)}}
+    /* the papyrus scrolls sway gently in a breeze */
+    @keyframes sway{0%{transform:rotate(-.35deg) translateY(0)}50%{transform:rotate(.4deg) translateY(-3px)}100%{transform:rotate(-.35deg) translateY(0)}}
+    .lead,.story,.entry{animation:sway 9s ease-in-out infinite;transform-origin:center top}
+    .lead{animation-duration:11s}
+    .story:nth-child(2n){animation-duration:10.5s;animation-delay:-2.4s}
+    .story:nth-child(3n){animation-duration:8s;animation-delay:-4.1s}
+    @media (hover:hover){.lead:hover,.story:hover,.entry:hover{animation-play-state:paused}.story:hover .title,.lead:hover .headline{color:var(--ember)}}
+    /* ambient kinetic layer — drifting embers + sporadic lightning */
+    #ambient{position:fixed;inset:0;z-index:0;pointer-events:none}
+    .meander,nav,header,main,footer{position:relative;z-index:1}
+    /* ── ETRUSCAN MODE: black-figure on terracotta (from the amphora refs) ── */
+    [data-theme="etruscan"]{--void:#c0542a;--ember:#1c1206;--gold:#1c1206;--bone:#2a1a0b;--ichor:#7a1e12;--dim:#7c4626;--line:rgba(28,18,6,.55);--btn:#2c7a6d;--btn-soft:rgba(44,122,109,.14)}
+    [data-theme="etruscan"] body{background-image:radial-gradient(130% 60% at 50% -12%,rgba(28,18,6,.05),transparent 55%),repeating-linear-gradient(0deg,transparent 0 3px,rgba(28,18,6,.02) 3px 4px)}
+    [data-theme="etruscan"] .meander{filter:none;opacity:.95}
+    [data-theme="etruscan"] .wordmark,[data-theme="etruscan"] .headline,[data-theme="etruscan"] .post h1,[data-theme="etruscan"] a.title,[data-theme="etruscan"] .ornament{text-shadow:none!important;animation:none}
+    [data-theme="etruscan"] .post-body>p:first-of-type::first-letter{text-shadow:none;color:#1c1206}
+    [data-theme="etruscan"] .lead::before,[data-theme="etruscan"] .story::before,[data-theme="etruscan"] .post::before,[data-theme="etruscan"] .entry::before{background:linear-gradient(180deg,rgba(28,18,6,.05),rgba(28,18,6,.01));border-color:rgba(28,18,6,.5)}
+    [data-theme="etruscan"] figure,[data-theme="etruscan"] .lead-art img{background:#a8451d}
+    [data-theme="etruscan"] .readmore,[data-theme="etruscan"] .back,[data-theme="etruscan"] .toggle{box-shadow:inset 0 0 0 1px rgba(44,122,109,.3);text-shadow:none}
+    [data-theme="etruscan"] .decal::after{box-shadow:none}
+    [data-theme="etruscan"] .cursor{background:radial-gradient(circle,#1c1206 0%,transparent 70%);box-shadow:0 0 6px 2px rgba(28,18,6,.4);mix-blend-mode:multiply}
+    [data-theme="etruscan"] .cursor-halo{background:radial-gradient(circle,rgba(28,18,6,.06) 0%,transparent 55%);mix-blend-mode:multiply}
+    @media (prefers-reduced-motion:reduce){.lead,.story,.post,.entry{animation:none}#ambient{display:none}}
   </style>
 </head>
 <body>
@@ -180,23 +207,56 @@
     <div class="meander breathe" aria-hidden="true"></div>
     <p class="hud colophon">Written in Thymer</p>
   </footer>
-  <button class="toggle" type="button" aria-label="Toggle light and dark"></button>
+  <button class="toggle" type="button" aria-label="Switch theme"></button>
   <script>
-  (function(){var d=document,r=d.documentElement;
-  var SUN='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.4"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M19.4 4.6l-2.1 2.1M6.7 17.3l-2.1 2.1"/></svg>';
-  var MOON='<svg viewBox="0 0 24 24"><path d="M20.5 14.8A8.2 8.2 0 1 1 9.2 3.5a7.3 7.3 0 0 0 11.3 11.3z"/></svg>';
-  function icon(){var b=d.querySelector('.toggle');if(b)b.innerHTML=r.getAttribute('data-theme')==='light'?MOON:SUN;}
-  d.addEventListener('click',function(e){if(!e.target.closest('.toggle'))return;var light=r.getAttribute('data-theme')==='light';if(light){r.removeAttribute('data-theme');}else{r.setAttribute('data-theme','light');}try{localStorage.setItem('cosmos-theme',light?'dark':'light');}catch(_){}icon();});
-  icon();
-  if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches){
-    var cur=d.createElement('div');cur.className='cursor';var halo=d.createElement('div');halo.className='cursor-halo';
-    d.body.appendChild(halo);d.body.appendChild(cur);d.body.classList.add('has-cursor');
+  (function(){var d=document,r=d.documentElement,mq=window.matchMedia,R=Math.random;
+  var ICON={dark:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.4"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M19.4 4.6l-2.1 2.1M6.7 17.3l-2.1 2.1"/></svg>',light:'<svg viewBox="0 0 24 24"><path d="M20.5 14.8A8.2 8.2 0 1 1 9.2 3.5a7.3 7.3 0 0 0 11.3 11.3z"/></svg>',etruscan:'<svg viewBox="0 0 24 24"><path d="M9 3h6M10 3c0 2-2 2.6-2 5s2 3 2 7c0 2-1 3-2 4h8c-1-1-2-2-2-4 0-4 2-4.6 2-7s-2-3-2-5"/></svg>'};
+  var ORDER=['dark','light','etruscan'];
+  function cur(){return r.getAttribute('data-theme')||'dark';}
+  function apply(t){if(t==='dark')r.removeAttribute('data-theme');else r.setAttribute('data-theme',t);var b=d.querySelector('.toggle');if(b)b.innerHTML=ICON[t]||ICON.dark;}
+  d.addEventListener('click',function(e){if(!e.target.closest('.toggle'))return;var t=ORDER[(ORDER.indexOf(cur())+1)%ORDER.length];apply(t);try{localStorage.setItem('cosmos-theme',t);}catch(_){}});
+  apply(cur());
+  if(mq&&mq('(hover:hover) and (pointer:fine)').matches){
+    var cel=d.createElement('div');cel.className='cursor';var halo=d.createElement('div');halo.className='cursor-halo';
+    d.body.appendChild(halo);d.body.appendChild(cel);d.body.classList.add('has-cursor');
     var x=innerWidth/2,y=innerHeight/2,hx=x,hy=y;
-    d.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;cur.style.transform='translate('+x+'px,'+y+'px)';},{passive:true});
+    d.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;cel.style.transform='translate('+x+'px,'+y+'px)';},{passive:true});
     (function loop(){hx+=(x-hx)*.15;hy+=(y-hy)*.15;halo.style.transform='translate('+hx+'px,'+hy+'px)';requestAnimationFrame(loop);})();
-    addEventListener('mouseout',function(e){if(!e.relatedTarget){cur.style.opacity=0;halo.style.opacity=0;}});
-    addEventListener('mouseover',function(){cur.style.opacity=1;halo.style.opacity=1;});
-  }})();
+    addEventListener('mouseout',function(e){if(!e.relatedTarget){cel.style.opacity=0;halo.style.opacity=0;}});
+    addEventListener('mouseover',function(){cel.style.opacity=1;halo.style.opacity=1;});
+  }
+  if(!(mq&&mq('(prefers-reduced-motion:reduce)').matches)){
+    var cv=d.createElement('canvas');cv.id='ambient';d.body.insertBefore(cv,d.body.firstChild);
+    var g=cv.getContext('2d'),W,H,DPR=Math.min(devicePixelRatio||1,2);
+    function sz(){W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
+    sz();addEventListener('resize',sz);
+    var em=[];for(var i=0;i<30;i++)em.push({x:R()*W,y:R()*H,r:(1+R()*2)*DPR,v:(.15+R()*.5)*DPR,a:.14+R()*.5,ph:R()*6});
+    function eco(){var t=cur();return t==='light'?'70,52,28':t==='etruscan'?'28,18,6':'232,150,66';}
+    var bolt=null,bt=0,nx=200+R()*300;
+    function mk(){var bx=W*(.2+R()*.6),by=0,p=[{x:bx,y:by}];while(by<H){by+=H/13*(.6+R()*.8);bx+=(R()-.5)*90*DPR;p.push({x:bx,y:by});}return p;}
+    function fr(){g.clearRect(0,0,W,H);var c=eco();
+      for(var i=0;i<em.length;i++){var e=em[i];e.y-=e.v;e.x+=Math.sin(e.y*.01+e.ph)*.3*DPR;if(e.y<-10){e.x=R()*W;e.y=H+10;}
+        g.beginPath();g.arc(e.x,e.y,e.r,0,7);g.fillStyle='rgba('+c+','+e.a+')';g.shadowBlur=8*DPR;g.shadowColor='rgba('+c+',.8)';g.fill();}
+      g.shadowBlur=0;
+      if(--nx<=0&&!bolt){bolt=mk();bt=1;nx=320+R()*460;}
+      if(bolt){g.fillStyle='rgba(255,244,214,'+(bt*.05)+')';g.fillRect(0,0,W,H);
+        g.strokeStyle='rgba(255,240,205,'+bt+')';g.lineWidth=2*DPR;g.shadowBlur=18*DPR;g.shadowColor='rgba(232,190,120,'+bt+')';
+        g.beginPath();g.moveTo(bolt[0].x,bolt[0].y);for(var j=1;j<bolt.length;j++)g.lineTo(bolt[j].x,bolt[j].y);g.stroke();g.shadowBlur=0;
+        bt-=.055;if(bt<=0)bolt=null;}
+      requestAnimationFrame(fr);}
+    fr();
+  }
+  (function(){var fc=d.createElement('canvas');fc.width=fc.height=64;var f=fc.getContext('2d');
+    var lk=d.querySelector('link[rel~=icon]');if(!lk){lk=d.createElement('link');lk.rel='icon';d.head.appendChild(lk);}
+    var i=0;function draw(){i+=.09;var p=(Math.sin(i)+1)/2;
+      f.clearRect(0,0,64,64);f.fillStyle='#0e0f12';f.fillRect(0,0,64,64);
+      f.beginPath();f.moveTo(40,7);f.lineTo(19,36);f.lineTo(30,36);f.lineTo(25,58);f.lineTo(48,26);f.lineTo(35,26);f.closePath();
+      f.shadowBlur=5+p*13;f.shadowColor='rgba(232,150,66,'+(.5+p*.5)+')';
+      f.fillStyle='rgb(238,'+(150+Math.round(p*45))+','+(70+Math.round(p*45))+')';f.fill();f.shadowBlur=0;
+      try{lk.type='image/png';lk.href=fc.toDataURL('image/png');}catch(_){}}
+    draw();setInterval(draw,160);
+  })();
+  })();
   </script>
 
 </body></html>
