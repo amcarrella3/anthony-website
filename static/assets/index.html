@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/theme/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/theme/apple-touch-icon.png" />
+  <script>try{var _t=localStorage.getItem('cosmos-theme');if(_t&&_t!=='dark')document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+  <link rel="stylesheet" href="/theme/theme.css" />
+  <title>Assets — Anthony Carrella</title>
+  <style>
+    /* the colonnade menu — identical to Palimpsest + Portals, so it persists across all three */
+    nav { display: flex; justify-content: center; gap: 42px; padding: 42px 0 8px; flex-wrap: wrap; }
+    .col { display: flex; flex-direction: column; align-items: center; gap: 50px; text-decoration: none; }
+    .colglyph { font-family: 'Columns'; font-size: 3rem; line-height: 1; color: var(--gold); text-shadow: 0 0 10px rgba(232,147,58,.4); transition: .3s; opacity: .82; }
+    .col:hover .colglyph, .col.active .colglyph { color: var(--ember); text-shadow: 0 0 16px rgba(232,147,58,.8); opacity: 1; }
+    .col .hud { font-family: ui-monospace, Menlo, monospace; font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+
+    main { max-width: 720px; margin: 0 auto; padding: 5vh 8vw 15vh; text-align: center; }
+    h1 { font-size: clamp(2.8rem, 11vw, 5rem); margin-bottom: .18em; }
+    .sub { font-family: ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .26em; text-transform: uppercase; color: var(--dim); margin-bottom: 3.4em; }
+
+    ul { list-style: none; display: flex; flex-direction: column; gap: 2.2em; text-align: left; }
+
+    /* an instrument entry — a thin gold hairline panel that rhymes with the site's
+       own neon frame; on hover the glow blooms ember, like the portal room links. */
+    .instrument {
+      display: block; position: relative; text-decoration: none;
+      padding: 1.9em 2em 2.1em;
+      border: 1px solid rgba(217,180,92,.20);
+      background: linear-gradient(180deg, rgba(255,255,255,.020), rgba(255,255,255,.006));
+      box-shadow: inset 0 0 40px rgba(232,147,58,.05), 0 0 0 rgba(232,147,58,0);
+      transition: border-color .45s ease, box-shadow .45s ease, transform .45s ease;
+    }
+    .instrument:hover {
+      border-color: rgba(232,147,58,.55);
+      box-shadow: inset 0 0 46px rgba(232,147,58,.10), 0 0 34px rgba(232,147,58,.16);
+      transform: translateY(-2px);
+    }
+    .inst-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1em; flex-wrap: wrap; }
+    .inst-title {
+      font-family: 'Spartacus', serif; font-size: clamp(1.7rem, 5.5vw, 2.4rem); letter-spacing: .03em;
+      color: var(--gold); text-shadow: 0 0 12px rgba(232,147,58,.32); transition: color .35s ease, text-shadow .35s ease;
+    }
+    .instrument:hover .inst-title { color: var(--ember); text-shadow: 0 0 20px rgba(232,147,58,.7); }
+    .inst-enter {
+      font-family: ui-monospace, Menlo, monospace; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--dim); transition: color .35s ease; white-space: nowrap;
+    }
+    .instrument:hover .inst-enter { color: var(--ember); }
+
+    /* the molecular signature — a mono HUD line that trails off the right edge
+       ("it keeps going"), so the instrument reads as deeper than the doorway shows. */
+    .inst-sig {
+      display: block; margin: 1.05em 0 1.15em; white-space: nowrap; overflow: hidden;
+      font-size: .82rem; letter-spacing: .04em; color: rgba(217,180,92,.62);
+      -webkit-mask-image: linear-gradient(90deg, #000 74%, transparent 100%);
+              mask-image: linear-gradient(90deg, #000 74%, transparent 100%);
+      transition: color .35s ease;
+    }
+    .instrument:hover .inst-sig { color: rgba(232,147,58,.85); }
+    .inst-sig sub, .inst-sig { font-variant-numeric: tabular-nums; }
+
+    .inst-desc {
+      display: block; font-family: 'Aegean', Georgia, serif; font-size: 1.02rem; line-height: 1.62;
+      color: var(--dim); max-width: 60ch;
+    }
+
+    /* dissolve to charcoal when opening an instrument — seamless into its boot */
+    #nav-veil { position: fixed; inset: 0; z-index: 90; opacity: 0; pointer-events: none;
+                background: radial-gradient(circle at 50% 46%, rgb(27,23,16) 0%, rgb(9,8,6) 70%);
+                transition: opacity 0.55s ease; }
+    #nav-veil.show { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 640px) {
+      nav { gap: 22px; padding: 18px 0 8px; }
+      .colglyph { font-size: 2.5rem; }
+      .instrument { padding: 1.5em 1.4em 1.7em; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-veil"></div>
+  <nav>
+    <a class="col" href="/"><span class="colglyph">A</span><span class="hud">Palimpsest</span></a>
+    <a class="col" href="/portals/"><span class="colglyph">B</span><span class="hud">Portals</span></a>
+    <a class="col active" href="/assets/"><span class="colglyph">C</span><span class="hud">Assets</span></a>
+  </nav>
+  <main>
+    <h1>Assets</h1>
+    <div class="sub">working instruments</div>
+    <ul>
+        <li>
+          <a class="instrument" href="/lagman/">
+            <span class="inst-head">
+              <span class="inst-title">Lagman Log</span>
+              <span class="inst-enter">open the instrument →</span>
+            </span>
+            <span class="inst-sig mono">Lg₁₀(Or₉₅-Sp₈.₅-Cu₉·SA₄·BP₃-Ft₂-Cl₂-Br₈-Tm₇-Mt:lam-MQ₈·MR₃-NP₉·QQ₉·W:std·Fr₉-Vg₇·Cp₉·VR₆-H₉)</span>
+            <span class="inst-desc">A field scoring instrument and archive — documenting and ranking lagman, the Central Asian hand-pulled noodle, across Philadelphia, Bensalem &amp; New York. Every bowl earns a molecular signature drawn from its own measurements; the name comes from the numbers, never the other way around.</span>
+          </a>
+        </li>
+    </ul>
+  </main>
+  <script src="/theme/theme.js" defer></script>
+  <script>
+    document.querySelectorAll('a.instrument').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var href = a.href;
+        document.getElementById('nav-veil').classList.add('show');
+        setTimeout(function () { location.href = href; }, 520);   // dissolve, then open
+      });
+    });
+  </script>
+</body>
+</html>
