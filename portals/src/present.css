@@ -5,6 +5,9 @@
 
 :root { --surround: #0b0b0b; }   /* provisional museum black — Anthony's to set */
 
+/* the site's display face, for the ENTER threshold (resolves both locally and at /portals/) */
+@font-face { font-family: 'Spartacus'; font-display: swap; src: url(../assets/fonts/Spartacus.ttf) format('truetype'); }
+
 /* GROUND: what sits behind the composition in present mode. Default = the museum
    void (surround). 'ground-paper' shows the portal's paper colour; 'ground-image'
    shows its uploaded background. Toggled per portal (frame.ground). */
@@ -13,8 +16,8 @@ body.is-presenting {
   /* interface palette — PROVISIONAL (Anthony's "prehistory meets future": bone,
      cream, oatmeal, charcoal, black). Glow held as an R,G,B triplet so it can be
      tuned per portal later. */
-  --glow: 233, 221, 194;     /* warm bone / oatmeal */
-  --void: 18, 15, 11;        /* warm charcoal-black */
+  --glow: 232, 150, 66;      /* ember gold — the ancient-Greek-digital glow */
+  --void: 14, 15, 18;        /* charcoal (matches the site theme --void) */
 }
 body.is-presenting.ground-paper { --ground-color: var(--paper); }
 
@@ -150,10 +153,20 @@ body.export-capture .portal-threshold { display: none; }   /* never bake the gat
   animation: threshold-breathe 5.6s ease-in-out infinite;
 }
 .portal-threshold__label {
-  font: 400 clamp(0.8rem, 3.2vmin, 1.25rem)/1 ui-monospace, Menlo, monospace;
-  letter-spacing: 0.46em; text-transform: uppercase; text-indent: 0.46em;
-  color: rgba(238, 230, 214, 0.8);
-  text-shadow: 0 0 26px rgba(var(--glow), 0.5);
+  font-family: 'Spartacus', ui-monospace, Menlo, monospace;
+  font-size: clamp(1.3rem, 5vmin, 2.3rem);
+  letter-spacing: 0.24em; text-transform: uppercase; text-indent: 0.24em;
+  color: rgba(var(--glow), 0.95);
+  text-shadow: 0 0 22px rgba(var(--glow), 0.6), 0 0 46px rgba(var(--glow), 0.28);
+}
+/* a glowing Greek-key meander beneath the ring — the ancient-digital signature */
+.portal-threshold::after {
+  content: ''; position: absolute; left: 50%; bottom: 20vh; transform: translateX(-50%);
+  width: min(300px, 62vw); height: 20px; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26' viewBox='0 0 40 26'%3E%3Cg fill='none' stroke='%23e8933a' stroke-width='2.3' stroke-linecap='square'%3E%3Cpath d='M0,22 H40'/%3E%3Cpath d='M7,22 V6 H33 V17 H15 V12'/%3E%3C/g%3E%3C/svg%3E") repeat-x center;
+  background-size: 34px 20px;
+  filter: drop-shadow(0 0 4px rgba(232,147,58,0.6)) drop-shadow(0 0 10px rgba(232,147,58,0.3));
+  opacity: 0.75; animation: threshold-breathe 6s ease-in-out infinite;
 }
 .portal-threshold__gate:hover .portal-threshold__ring { animation-duration: 2.8s; border-color: rgba(var(--glow), 0.58); }
 @keyframes threshold-in { from { opacity: 0; } to { opacity: 1; } }
