@@ -2,6 +2,8 @@ DefaultContentLanguage: "en"
 baseurl: "https://anthonymichael.work"
 title: "Anthony M. Carrella"
 theme: "sweetb-hugo"
+# Home retired 2026-07-04 — the writing ("Palimpsest") is the site root, served from static/index.html.
+disableKinds: ["home", "taxonomy", "term", "RSS", "sitemap"]
 pygmentsCodeFences: true
 pygmentsCodefencesGuessSyntax: true
 pygmentsStyle: "trac"
