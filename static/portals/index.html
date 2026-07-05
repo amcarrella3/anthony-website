@@ -10,7 +10,13 @@
   <link rel="stylesheet" href="/theme/theme.css" />
   <title>Portals — Anthony Carrella</title>
   <style>
-    main { max-width: 640px; margin: 0 auto; padding: 15vh 8vw; text-align: center; }
+    /* the colonnade menu — same as Palimpsest, so it persists across both pages */
+    nav { display: flex; justify-content: center; gap: 42px; padding: 42px 0 8px; flex-wrap: wrap; }
+    .col { display: flex; flex-direction: column; align-items: center; gap: 50px; text-decoration: none; }
+    .colglyph { font-family: 'Columns'; font-size: 3rem; line-height: 1; color: var(--gold); text-shadow: 0 0 10px rgba(232,147,58,.4); transition: .3s; opacity: .82; }
+    .col:hover .colglyph, .col.active .colglyph { color: var(--ember); text-shadow: 0 0 16px rgba(232,147,58,.8); opacity: 1; }
+    .col .hud { font-family: ui-monospace, Menlo, monospace; font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+    main { max-width: 640px; margin: 0 auto; padding: 5vh 8vw 15vh; text-align: center; }
     .eyebrow { font-family: ui-monospace, Menlo, monospace; font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--dim); margin-bottom: 22px; }
     h1 { font-size: clamp(2.8rem, 11vw, 5rem); margin-bottom: .18em; }
     .sub { font-family: ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); margin-bottom: 3.2em; }
@@ -26,8 +32,11 @@
 </head>
 <body>
   <div id="nav-veil"></div>
+  <nav>
+    <a class="col" href="/"><span class="colglyph">A</span><span class="hud">Palimpsest</span></a>
+    <a class="col active" href="/portals/"><span class="colglyph">B</span><span class="hud">Portals</span></a>
+  </nav>
   <main>
-    <div class="eyebrow">Anthony Carrella</div>
     <h1>Portals</h1>
     <div class="sub">enter a room</div>
     <ul>
