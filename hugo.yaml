@@ -44,13 +44,10 @@ menu:
     - name: "Writing"
       url: "/writing/"
       weight: 2
-    # About retired 2026-07-04 — old bio archived in studio repo (archive/about-2023-*.md); new one TBD
-    - name: "About"
-      url: "/#about"
-      weight: 3
+    # About page fully retired 2026-07-04 (removed from menu; old bio archived in studio repo)
     - name: "Contact"
       url: "/#lets-partner-together"
-      weight: 4
+      weight: 3
     # - identifier: "samples"
     #   name: "Samples"
     #   weight: 2

@@ -5,8 +5,6 @@
 
 {{< carousel source="images" items="1" height="650" unit="px" duration="7000" cropVerticalCenter="top" >}}
 
-{{< anchor "about" >}}
-
 ## Let's Partner Together
 
 {{< includeMarkdown "contact.md" >}}
