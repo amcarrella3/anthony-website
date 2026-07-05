@@ -1,171 +1,24 @@
 <!-- keep this site unlisted: ask search engines not to index it -->
 <meta name="robots" content="noindex, nofollow" />
 
-<!--
-If you want to include any custom html just before </head>, put it in this file.
-Or you can delete these file if you don't need it.
--->
-<!-- for example, you could insert this custom css, which makes the bigimg not stretch:
+<!-- ═══ ancient-Greek-digital theme — shared bundle at /theme/ (built by pipeline/build-theme.mjs) ═══ -->
+<link rel="icon" href="/theme/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/theme/apple-touch-icon.png" />
+<script>try{var _t=localStorage.getItem('cosmos-theme');if(_t&&_t!=='dark')document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<link rel="stylesheet" href="/theme/theme.css" />
 <style>
-.intro-header.big-img, .intro-header.big-img  .big-img-transition {
-  -webkit-background-size: contain !important;
-  -moz-background-size: contain !important;
-  background-size: contain !important;
-  -o-background-size: contain !important;
-  background-color: lightgrey;
-}
+  /* neutralize the old cream sweetb-hugo skin so the dark theme shows through */
+  html{background:var(--void)!important}
+  body{background:transparent!important;color:var(--bone)!important;height:auto!important;min-height:100vh;font-size:19px}
+  .container,.container-fluid,.intro-header,footer{background:transparent!important;color:var(--bone)!important}
+  .container{text-align:left!important}
+  nav,.navbar-custom,.navbar-brand,nav a,nav .container-fluid{background:transparent!important}
+  nav a,.navbar-custom{color:var(--btn)!important;font-family:'Aegean',Georgia,serif!important;text-transform:uppercase;letter-spacing:.12em}
+  .navbar-brand{color:var(--gold)!important;font-family:'Spartacus',serif!important}
+  a{color:var(--btn)!important}
+  h3{font-size:1.3rem!important}
+  /* keep the carousel, hide its prev/next chrome */
+  .carousel{margin-bottom:35px}
+  body .carousel .prev,body .carousel .next{display:none!important;visibility:hidden}
 </style>
--->
-<!-- or you could include some additional css libraries:
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.css" integrity="sha256-I1UoFd33KHIydu88R9owFaQWzwkiZV4hXXug5aYaM28=" crossorigin="anonymous" />
--->
-
-<!-- Mostra Nuova -->
-<link rel="stylesheet" href="https://use.typekit.net/rhm8bdb.css" />
-
-<!-- Adjusting carousel styling -->
-<style>
-  .carousel {
-    margin-bottom: 35px;
-  }
-  .elegant-separator {
-    margin-top: 40px;
-  }
-</style>
-
-<!-- Override font of navbar -->
-<style>
-  ul {
-    padding-left: 0px;
-  }
-  li {
-    padding-top: 10px;
-    list-style-type: none;
-  }
-
-  .navbar-brand {
-    font-size: 1.7em;
-  }
-  .navbar-custom {
-    font-family: "Space Grotesk"; /*"Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif*/
-  }
-
-  @media only screen and (max-width: 767px) {
-    .navbar-custom {
-      font-family: "Space Grotesk"; /*"Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif*/
-    }
-  }
-  body .carousel .prev,
-  body .carousel .next {
-    display: none;
-    visibility: hidden;
-  }
-
-  .container {
-    text-align: justify;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-  }
-</style>
-
-<style>
-  .navbar-custom {
-    font-family: "mostra-nuova"; /*"Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif*/
-  }
-
-  @media only screen and (max-width: 767px) {
-    .navbar-custom {
-      font-family: "mostra-nuova"; /*"Optima", 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif*/
-    }
-  }
-
-  body {
-    font-family: "neuzeit-grotesk", sans-serif; /*'Lora', 'Times New Roman', serif;*/
-    font-size: 25px;
-    color: #000;
-    position: relative;
-    background: /*#fff*/ #f6f4ef;
-    display: flex;
-    flex-flow: column;
-    height: 100vh;
-  }
-
-  .intro-header .page-heading .page-subheading,
-  .intro-header .post-heading .post-subheading {
-    font-size: 32px;
-    line-height: 1.1;
-    display: block;
-    font-family: "mostra-nuova", sans-serif; /*'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
-    font-weight: 300;
-    margin: 10px 0 0;
-  }
-
-  .intro-header.big-img .img-desc {
-    background: rgba(30, 30, 30, 0.6);
-    position: absolute;
-    padding: 5px 10px;
-    font-size: 11px;
-    color: #eee;
-    font-family: "mostra-nuova", sans-serif; /*'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
-    right: 0;
-    bottom: 0;
-    display: none;
-  }
-
-  .container {
-    color: #999;
-    background-color: #f6f4ef;
-  }
-  nav,
-  .navbar-brand,
-  .navbar-custom,
-  nav a {
-    background: #f6f4ef !important;
-  }
-  footer {
-    background: #f6f4ef;
-  }
-  .navbar-brand {
-    color: #000 !important;
-  }
-  body {
-    color: #1c1c1c;
-  }
-
-  h3 {
-    font-size: 1em !important;
-    color: #000;
-  }
-</style>
-<!-- Fix to the navbar in mobile -->
-<style>
-  @media only screen and (max-width: 767px) {
-    .navbar-custom {
-      display: flex !important;
-      left: 10px !important;
-      right: 10px !important;
-    }
-    .container {
-      padding-top: 2em !important;
-    }
-
-    nav .container-fluid,
-    .container {
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-    }
-    .navbar-brand {
-      font-size: 1em;
-    }
-    h3 {
-      font-size: 0.55em !important;
-      text-align: center;
-      color: #000000;
-    }
-
-    .container {
-      font-size: 0.8em;
-    }
-  }
-</style>
+<script src="/theme/theme.js" defer></script>
