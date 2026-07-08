@@ -8,17 +8,23 @@ import * as store from '../store.js';
 import { el, clear, fmtNum, todayLocal, timeLocal, makeId, nowISO } from '../util.js';
 import { STARTER_RESTAURANTS } from '../../data/restaurants.js';
 import { searchPlaces, googleMapsSearchUrl } from '../places.js';
+import { hasKey } from '../panel.js';
+import { parseDescription } from '../aifill.js';
+import { dictationSupported, createDictation } from '../dictate.js';
 import { navigate } from '../app.js';
 
 let saveTimer = null;
+let handoff = null; // AI-filled bowl handed to the next render (survives re-render in edit mode too)
 
 export async function renderForm(root, params = {}) {
   const editingId = params.id || null;
   const draftKey = editingId || 'new';
 
-  // Load: existing bowl, or an auto-saved draft, or a fresh blank.
+  // Load: an AI-filled handoff, an existing bowl, an auto-saved draft, or a fresh blank.
   let bowl;
-  if (editingId) {
+  if (handoff) {
+    bowl = handoff; handoff = null;
+  } else if (editingId) {
     bowl = (await store.getBowl(editingId)) || blankBowl();
   } else {
     const draft = await store.getDraft('new');
@@ -85,6 +91,12 @@ export async function renderForm(root, params = {}) {
   ]);
 
   root.appendChild(header);
+  root.appendChild(speakSection(bowl, onChange, (values, ids) => {
+    Object.assign(bowl, values);
+    bowl._suggested = ids;
+    bowl.updatedAt = nowISO();
+    store.saveDraft(draftKey, bowl).then(() => { handoff = bowl; renderForm(root, params); });
+  }));
   root.appendChild(body);
   root.appendChild(footer);
   refreshDerived();
@@ -98,6 +110,7 @@ export async function renderForm(root, params = {}) {
       return;
     }
     clearTimeout(saveTimer); // cancel any pending autosave so it can't resurrect the draft
+    delete bowl._speech; delete bowl._suggested; // transient AI-fill state never persists
     const notation = buildNotation(bowl);
     bowl.notation = notation.plain;
     bowl.notationPlain = notation.plain;
@@ -118,9 +131,81 @@ export async function renderForm(root, params = {}) {
   }
 }
 
+// ---- Speak the bowl (voice / AI fill) ----------------------------------------
+function speakSection(bowl, onChange, applyFill) {
+  const sec = el('section', { class: 'form-section speak-section', id: 'sec-speak' }, [
+    el('h2', { class: 'section-title' }, [el('span', { class: 'swatch', style: 'background:var(--accent)' }), 'Speak the bowl']),
+  ]);
+
+  const ta = el('textarea', {
+    class: 'input speak-ta', rows: 3,
+    placeholder: 'Talk it out — the noodles, the broth, the spice, the meat, the room, the price… then fill the sheet.',
+  });
+  ta.value = bowl._speech || '';
+  ta.addEventListener('input', () => onChange('_speech', ta.value));
+
+  const status = el('div', { class: 'draft-note speak-status' }, '');
+
+  // Voice capture — free, in-browser. Falls back to typing (or the keyboard mic).
+  let mic = null;
+  if (dictationSupported()) {
+    mic = el('button', { type: 'button', class: 'mic-btn', title: 'Dictate', 'aria-label': 'Start or stop dictation' },
+      [el('span', { class: 'mic-glyph', html: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>' })]);
+    const dict = createDictation({
+      onText: (finalText, interim) => {
+        ta.value = finalText + interim;
+        onChange('_speech', finalText);
+      },
+      onState: (listening, error) => {
+        mic.classList.toggle('on', listening);
+        if (error) status.textContent = 'Microphone unavailable — type it instead (or use the keyboard mic key).';
+        else status.textContent = listening ? 'Listening… tap the mic again when you’re done.' : '';
+      },
+    });
+    mic.addEventListener('click', () => { if (dict.isActive()) dict.stop(); else dict.start(ta.value); });
+  }
+
+  const fill = el('button', { type: 'button', class: 'btn-solid' }, '✦ Fill the sheet');
+  fill.addEventListener('click', async () => {
+    const text = (ta.value || '').trim();
+    if (!text) { status.textContent = 'Say or type something about the bowl first.'; return; }
+    if (!hasKey()) {
+      clear(status);
+      status.append('The AI fill needs your Anthropic key — add it in ', el('a', { href: '#/settings' }, '⚙ Settings'), ' first.');
+      return;
+    }
+    fill.disabled = true; fill.textContent = 'Reading…';
+    try {
+      const values = await parseDescription(text);
+      const ids = Object.keys(values);
+      if (!ids.length) { status.textContent = 'Nothing I could map onto the sheet — say a little more about the bowl itself.'; }
+      else { values._speech = text; applyFill(values, ids.filter((k) => k !== '_speech')); return; }
+    } catch (e) {
+      status.textContent = 'The fill failed — ' + e.message;
+    }
+    fill.disabled = false; fill.textContent = '✦ Fill the sheet';
+  });
+
+  const row = el('div', { class: 'speak-row' }, [mic, ta]);
+  sec.append(row, el('div', { class: 'btn-row', style: 'margin-top:10px' }, [fill]), status);
+  if (Array.isArray(bowl._suggested) && bowl._suggested.length) {
+    sec.appendChild(el('div', { class: 'speak-sugg-note' }, [
+      el('span', { class: 'dot' }),
+      `Filled ${bowl._suggested.length} field${bowl._suggested.length === 1 ? '' : 's'} from your description — marked below. Adjust anything, then save.`,
+    ]));
+  }
+  if (!dictationSupported()) {
+    sec.appendChild(el('div', { class: 'field-hint' }, 'No in-app dictation in this browser — the microphone key on your keyboard dictates into the box just as well.'));
+  }
+  return sec;
+}
+
 // ---- Field renderers --------------------------------------------------------
 function renderField(field, bowl, onChange, nameTouched) {
   const wrap = el('div', { class: `field field-${field.type}` });
+  if (Array.isArray(bowl._suggested) && bowl._suggested.some((k) => k === field.id || k === field.id + 'Other')) {
+    wrap.classList.add('suggested');
+  }
   if (field.type !== 'slider') {
     wrap.appendChild(el('label', { class: 'field-label', for: `f-${field.id}` }, field.label));
   }
