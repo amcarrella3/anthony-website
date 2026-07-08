@@ -158,8 +158,16 @@ function speakSection(bowl, onChange, applyFill) {
       },
       onState: (listening, error) => {
         mic.classList.toggle('on', listening);
-        if (error) status.textContent = 'Microphone unavailable — type it instead (or use the keyboard mic key).';
-        else status.textContent = listening ? 'Listening… tap the mic again when you’re done.' : '';
+        if (error) {
+          mic.style.display = 'none';
+          const fixes = {
+            'not-allowed': 'The browser has the microphone blocked for this site — in Safari tap ᴀA in the address bar → Website Settings → Microphone → Allow, then reload. Meanwhile: tap into the box and use the mic key on your keyboard — it dictates just as well.',
+            'service-not-allowed': 'Dictation is switched off on this device (Settings → General → Keyboard → Enable Dictation). Meanwhile: the mic key on your keyboard dictates straight into the box.',
+            'audio-capture': 'No microphone was found here — tap into the box and use the mic key on your keyboard instead.',
+            'network': 'The speech service couldn’t be reached — tap into the box and use the mic key on your keyboard instead.',
+          };
+          status.textContent = fixes[error] || 'In-app dictation isn’t available here — the mic key on your keyboard dictates straight into the box.';
+        } else status.textContent = listening ? 'Listening… tap the mic again when you’re done.' : '';
       },
     });
     mic.addEventListener('click', () => { if (dict.isActive()) dict.stop(); else dict.start(ta.value); });

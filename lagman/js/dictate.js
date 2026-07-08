@@ -34,7 +34,7 @@ export function createDictation({ onText, onState }) {
     else onState(false);
   };
   rec.onerror = (e) => {
-    if (e.error === 'not-allowed' || e.error === 'service-not-allowed' || e.error === 'audio-capture') {
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed' || e.error === 'audio-capture' || e.error === 'network') {
       active = false; onState(false, e.error);
     }
   };
