@@ -36,6 +36,7 @@ async function route() {
     if (match) await match.run(root, hash.match(match.re));
     else await renderArchive(root);
     setActiveNav(match?.nav || 'archive');
+    try { sessionStorage.removeItem('lagman-healed'); } catch (e) { /* private mode */ }
   } catch (err) {
     root.innerHTML = `<div class="empty"><p class="empty-title">Something went wrong.</p><p class="mono">${String(err && err.message || err)}</p></div>`;
     console.error(err);
