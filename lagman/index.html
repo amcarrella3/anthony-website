@@ -13,6 +13,25 @@
       } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
     })();
   </script>
+  <script>
+    /* Self-heal: if the app hasn't booted a few seconds after load (e.g. a
+       stale or mixed service-worker cache after a deploy), wipe the SW +
+       caches once and reload fresh. Guarded so it can never loop. */
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var view = document.getElementById('view');
+        if ((view && view.firstElementChild) || sessionStorage.getItem('lagman-healed')) return;
+        try { sessionStorage.setItem('lagman-healed', '1'); } catch (e) { return; }
+        Promise.resolve()
+          .then(function () { return ('serviceWorker' in navigator) ? navigator.serviceWorker.getRegistrations() : []; })
+          .then(function (regs) { return Promise.all(regs.map(function (r) { return r.unregister(); })); })
+          .then(function () { return window.caches ? caches.keys() : []; })
+          .then(function (keys) { return Promise.all(keys.map(function (k) { return caches.delete(k); })); })
+          .then(function () { location.reload(); })
+          .catch(function () { location.reload(); });
+      }, 4000);
+    });
+  </script>
   <title>Lagman Log — Anthony Carrella</title>
   <link rel="manifest" href="./manifest.webmanifest"/>
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml"/>

@@ -1,7 +1,12 @@
-// sw.js — offline app shell. Cache-first for our own files so the instrument
-// loads at a restaurant table with no signal. Data lives in IndexedDB, not here.
+// sw.js — offline app shell, versioned ATOMICALLY. The whole shell is fetched
+// fresh (bypassing the HTTP/CDN cache) at install, so the cache can never hold
+// a mix of old and new modules — the exact failure that bricks an ES-module
+// app. Pages are served ONLY from the versioned cache; nothing is added to it
+// at runtime. Data lives in IndexedDB, not here.
+//
+// NOTE: deploy.sh stamps CACHE with a fresh version on every publish.
 
-const CACHE = 'lagman-log-v6';
+const CACHE = 'lagman-log-20260708164227';
 const SHELL = [
   './',
   './index.html',
@@ -31,22 +36,40 @@ const SHELL = [
   './js/views/settings.js',
 ];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
+self.addEventListener('install', (event) => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    // cache:'reload' forces every file past the browser HTTP cache, so the
+    // snapshot is coherent. Any failure aborts the install (old SW stays live).
+    await Promise.all(SHELL.map(async (url) => {
+      const res = await fetch(new Request(url, { cache: 'reload' }));
+      if (!res.ok) throw new Error(`shell fetch failed: ${url} -> ${res.status}`);
+      await cache.put(url, res);
+    }));
+    await self.skipWaiting();
+  })());
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+self.addEventListener('activate', (event) => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
 
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
   if (req.method !== 'GET') return;
-  e.respondWith(
-    caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
-      return res;
-    }).catch(() => caches.match('./index.html')))
-  );
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return; // Anthropic / Photon go straight to network
+  event.respondWith((async () => {
+    const hit = await caches.match(req, { ignoreSearch: true });
+    if (hit) return hit;
+    try { return await fetch(req); }
+    catch (err) {
+      if (req.mode === 'navigate') { const shell = await caches.match('./index.html'); if (shell) return shell; }
+      throw err;
+    }
+  })());
 });
