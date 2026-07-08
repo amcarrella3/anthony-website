@@ -243,6 +243,23 @@ textarea.input { min-height: 74px; resize: vertical; line-height: 1.5; font-fami
 .slider-ends { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
 .field.suggested .slider-value { color: var(--accent); }
 .field.suggested .slider::-webkit-slider-thumb { border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+.field.suggested .field-label::after, .field.suggested .slider-name::after {
+  content: 'suggested'; margin-left: 9px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+
+/* ---- Speak the bowl (voice / AI fill) ---- */
+.speak-section { margin-top: 18px; }
+.speak-row { display: flex; gap: 10px; align-items: stretch; }
+.speak-ta { font-family: var(--serif); }
+.mic-btn { flex: none; width: 52px; border-radius: var(--radius); border: 1px solid var(--accent-dim); background: transparent;
+  color: var(--accent); cursor: pointer; display: grid; place-items: center; transition: background .35s, box-shadow .35s; align-self: stretch; }
+.mic-btn:hover { background: var(--accent-soft); }
+.mic-btn.on { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); animation: mic-breathe 2.2s ease-in-out infinite; }
+@keyframes mic-breathe { 0%, 100% { box-shadow: 0 0 0 3px var(--accent-soft); } 50% { box-shadow: 0 0 0 8px rgba(63,176,166,0.06); } }
+.speak-status { min-height: 16px; }
+.speak-status a { color: var(--accent); }
+.speak-sugg-note { display: flex; align-items: center; gap: 9px; margin-top: 12px; font-size: 12.5px; color: var(--accent); letter-spacing: 0.02em; }
+.speak-sugg-note .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex: none; animation: think 1.8s ease-in-out infinite; }
+@keyframes think { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
 
 /* ---- Chips / segmented ---- */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }

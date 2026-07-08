@@ -19,7 +19,7 @@ export function hasKey() { return !!getKey(); }
 const API = 'https://api.anthropic.com/v1/messages';
 const MODELS = { haiku: 'claude-haiku-4-5', sonnet: 'claude-sonnet-5', opus: 'claude-opus-4-8' };
 
-async function callStructured({ model, system, user, schema, max_tokens = 600 }) {
+export async function callStructured({ model, system, user, schema, max_tokens = 600 }) {
   const res = await fetch(API, {
     method: 'POST',
     headers: {
