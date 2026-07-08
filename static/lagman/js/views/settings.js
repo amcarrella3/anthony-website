@@ -34,4 +34,8 @@ export function renderSettings(root) {
     status,
   ]));
   root.appendChild(el('p', { class: 'prose', style: 'font-size:12.5px' }, 'Create a key at console.anthropic.com → API Keys. A full panel consultation is about eight short calls (Haiku for the bench, one Sonnet chair) — roughly a cent a bowl.'));
+
+  root.appendChild(el('div', { class: 'sec-head', style: 'margin-top:26px' }, [el('span', {}, 'App')]));
+  root.appendChild(el('p', { class: 'prose' }, 'If the app ever misbehaves after an update, reset it — this reloads the app completely fresh. Your scored bowls are never touched.'));
+  root.appendChild(el('a', { class: 'btn-ghost', href: './reset.html', style: 'text-decoration:none' }, 'Reset the app'));
 }

@@ -6,7 +6,7 @@
 //
 // NOTE: deploy.sh stamps CACHE with a fresh version on every publish.
 
-const CACHE = 'lagman-log-20260708164227';
+const CACHE = 'lagman-log-20260708170109';
 const SHELL = [
   './',
   './index.html',
