@@ -1,0 +1,197 @@
+/* The Daily Brief — a field instrument in the anthonymichael.work theme:
+   ember + gold on void, Spartacus display / Aegean serif, monospace HUD.
+   Kin to /lagman/ and /portals/ so it belongs to the same cosmos. */
+
+@font-face { font-family: 'Aegean';    font-display: swap; src: url('/fonts/Aegean.woff2') format('woff2'); }
+@font-face { font-family: 'Spartacus'; font-display: swap; src: url('/fonts/Spartacus.woff2') format('woff2'); }
+@font-face { font-family: 'Columns';   font-display: swap; src: url('/fonts/Columns.woff2') format('woff2'); }
+
+:root {
+  --bg: #0e0f12;            /* void */
+  --bg-2: #14151a;
+  --bg-3: #191b21;
+  --bg-raise: #23252d;
+  --line: rgba(232, 147, 58, 0.20);   /* ember-tinted */
+  --line-soft: rgba(232, 147, 58, 0.11);
+  --ink: #e9dcc0;           /* bone */
+  --ink-dim: #c2b090;
+  --ink-faint: #8a7550;     /* dim */
+  --ember: #e8933a;
+  --gold: #d9b45c;
+  --ichor: #c0392b;
+  --verdigris: #7fa8a0;
+  --bronze: #b6845c;
+  --accent: var(--ember);
+  --radius: 14px;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", system-ui, sans-serif;
+  --serif: 'Aegean', Georgia, 'Times New Roman', serif;
+  --display: 'Spartacus', 'Aegean', Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(130% 55% at 50% -10%, rgba(232, 147, 58, 0.05), transparent 52%),
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(210, 218, 235, 0.008) 3px 4px),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mono { font-family: var(--mono); font-variant-ligatures: none; }
+
+/* ---- Top bar ---- */
+.topbar {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 16px;
+  padding-top: calc(10px + env(safe-area-inset-top));
+  background: rgba(20, 15, 10, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--ink); }
+.brand-mark {
+  display: inline-grid; place-items: center; width: 30px; height: 30px;
+  background: linear-gradient(160deg, var(--ember), var(--gold)); color: #1a0f04;
+  border-radius: 8px; font-weight: 700; font-size: 14px;
+  box-shadow: 0 0 12px rgba(232, 147, 58, 0.45);
+}
+.brand-name { font-weight: 650; letter-spacing: 0.01em; font-family: var(--sans); }
+.topnav { display: flex; gap: 6px; align-items: center; }
+.daynav {
+  appearance: none; background: transparent; color: var(--ink-dim);
+  border: 1px solid var(--line-soft); border-radius: 9px;
+  min-width: 34px; height: 34px; padding: 0 8px; cursor: pointer; font-size: 15px;
+  font-family: var(--sans); transition: border-color .2s, color .2s, background .2s;
+}
+.daynav:hover { color: var(--ember); border-color: var(--line); background: rgba(232,147,58,.06); }
+.date-select {
+  appearance: none; background: var(--bg-2); color: var(--ink);
+  border: 1px solid var(--line-soft); border-radius: 9px; height: 34px; padding: 0 10px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .04em; cursor: pointer; max-width: 44vw;
+}
+.nav-site { margin-left: 4px; color: var(--ink-faint); text-decoration: none; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; align-self: center; }
+.nav-site:hover { color: var(--ember); }
+
+/* ---- Layout ---- */
+.view { max-width: 760px; margin: 0 auto; padding: 26px 22px 60px; }
+
+/* ---- Masthead ---- */
+.masthead { text-align: center; padding: 18px 0 8px; }
+.masthead .kicker { font-family: var(--mono); font-size: .66rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-faint); }
+.masthead h1 {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(2.4rem, 9vw, 3.8rem); line-height: 1.02; margin: .14em 0 .1em;
+  color: var(--ink); text-shadow: 0 0 22px rgba(232,147,58,.12);
+}
+.masthead .date-line { font-family: var(--mono); font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.masthead .readtime { font-family: var(--mono); font-size: .64rem; letter-spacing: .16em; color: var(--ink-faint); margin-top: 6px; }
+.meander {
+  height: 24px; margin: 16px auto 4px; max-width: 340px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26' viewBox='0 0 40 26'%3E%3Cg fill='none' stroke='%23e8933a' stroke-width='2.3' stroke-linecap='square'%3E%3Cpath d='M0,22 H40'/%3E%3Cpath d='M7,22 V6 H33 V17 H15 V12'/%3E%3C/g%3E%3C/svg%3E") repeat-x center;
+  background-size: 40px 26px;
+  filter: drop-shadow(0 0 3px rgba(232,147,58,.5)) drop-shadow(0 0 9px rgba(232,147,58,.26));
+}
+.meander.breathe { animation: lamp 7.5s ease-in-out infinite; }
+@keyframes lamp { 0%,100%{opacity:.75} 50%{opacity:1} }
+
+/* ---- Headline section ---- */
+.headline {
+  margin: 22px 0 8px; padding: 20px 22px;
+  border: 1px solid var(--line); border-left: 3px solid var(--ember);
+  background: linear-gradient(180deg, rgba(232,147,58,.05), rgba(232,147,58,.01));
+  border-radius: var(--radius);
+}
+.headline .sec-eyebrow { color: var(--ember); }
+.headline p { font-size: 1.28rem; line-height: 1.42; margin: 6px 0 0; }
+
+/* ---- Sections ---- */
+.section { margin: 30px 0 0; scroll-margin-top: 70px; }
+.sec-head { display: flex; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); margin-bottom: 14px; }
+.sec-eyebrow { font-family: var(--mono); font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-faint); }
+.sec-glyph { font-size: 1.05rem; opacity: .9; }
+.sec-title { font-family: var(--sans); font-weight: 640; font-size: 1.18rem; letter-spacing: -.01em; color: var(--ink); }
+.sec-title .glyph { margin-right: .4em; }
+.sec-summary { color: var(--ink-dim); font-style: italic; margin: -6px 0 14px; }
+
+/* accent variants keyed to module accent */
+.section[data-accent="ember"]    { --sec: var(--ember); }
+.section[data-accent="gold"]     { --sec: var(--gold); }
+.section[data-accent="verdigris"]{ --sec: var(--verdigris); }
+.section[data-accent="bronze"]   { --sec: var(--bronze); }
+.section[data-accent="ichor"]    { --sec: var(--ichor); }
+.section .sec-glyph, .section .sec-title .glyph { color: var(--sec, var(--ember)); }
+
+/* ---- Item cards ---- */
+.items { display: flex; flex-direction: column; gap: 14px; }
+.card {
+  padding: 15px 17px; border: 1px solid var(--line-soft); border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,.004));
+  transition: border-color .3s, box-shadow .3s;
+}
+.card:hover { border-color: var(--line); box-shadow: inset 0 0 30px rgba(232,147,58,.04); }
+.card .lens { font-family: var(--mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--sec, var(--ink-faint)); opacity: .9; }
+.card h3 { font-family: var(--sans); font-weight: 620; font-size: 1.06rem; line-height: 1.3; margin: 5px 0 6px; color: var(--ink); }
+.card .body { color: var(--ink-dim); font-size: .98rem; }
+.card .why { margin-top: 7px; font-size: .9rem; color: var(--ink-faint); font-style: italic; }
+.card .why::before { content: "↳ "; opacity: .7; }
+.card .src { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.card .src a, .card .src span.srcname { font-family: var(--mono); font-size: .66rem; letter-spacing: .04em; color: var(--ink-faint); text-decoration: none; border-bottom: 1px dotted var(--line); }
+.card .src a:hover { color: var(--ember); border-color: var(--ember); }
+.badge { font-family: var(--mono); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; padding: 2px 6px; border-radius: 5px; border: 1px solid var(--line-soft); color: var(--ink-faint); }
+.badge.reported { color: var(--gold); border-color: rgba(217,180,92,.35); }
+.badge.unconfirmed { color: var(--ichor); border-color: rgba(192,57,43,.4); }
+.card figure { margin: 10px 0 0; }
+.card figure img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line-soft); }
+.card figure figcaption { font-family: var(--mono); font-size: .6rem; color: var(--ink-faint); margin-top: 5px; letter-spacing: .04em; }
+
+/* ---- Agenda (private) ---- */
+.agenda .card { border-left: 3px solid var(--verdigris); }
+.agenda .agenda-row { display: flex; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line-soft); }
+.agenda .agenda-row:last-child { border-bottom: 0; }
+.agenda .when { font-family: var(--mono); font-size: .8rem; color: var(--gold); min-width: 78px; }
+.private-note { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* ---- Radar ---- */
+.radar .items { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.radar .card h3 { font-size: .98rem; }
+
+/* ---- On this day ---- */
+.on_this_day .card { border-left: 3px solid var(--bronze); }
+
+/* ---- Epigram / closing ---- */
+.epigram { text-align: center; margin: 42px auto 0; max-width: 560px; }
+.epigram blockquote { font-family: var(--display); font-weight: 500; font-size: 1.5rem; line-height: 1.4; color: var(--ink); margin: 0; }
+.epigram .attr { font-family: var(--mono); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); margin-top: 14px; }
+
+/* ---- States ---- */
+.empty { text-align: center; padding: 16vh 0; color: var(--ink-faint); }
+.empty .empty-title { font-family: var(--display); font-size: 1.6rem; color: var(--ink-dim); margin-bottom: 10px; }
+.loading { text-align: center; padding: 18vh 0; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .2em; text-transform: uppercase; font-size: .7rem; }
+.scaffold-banner {
+  margin: 16px 0 0; padding: 10px 14px; border: 1px dashed var(--line); border-radius: 10px;
+  background: rgba(217,180,92,.05); color: var(--ink-dim); font-size: .86rem; text-align: center;
+}
+.scaffold-banner b { color: var(--gold); }
+
+/* ---- Footer ---- */
+.brief-foot { max-width: 760px; margin: 0 auto; padding: 30px 22px 40px; text-align: center; }
+.foot-line { font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* ---- Print / PDF ---- */
+@media print {
+  .topbar, .nav-site, .brief-foot .meander, .scaffold-banner { display: none !important; }
+  body { background: #fff; color: #1a1208; font-size: 12pt; }
+  :root { --ink: #1a1208; --ink-dim: #3a2c18; --ink-faint: #6b5940; --line: rgba(0,0,0,.2); --line-soft: rgba(0,0,0,.12); }
+  .view { max-width: 100%; padding: 0; }
+  .card, .headline { break-inside: avoid; box-shadow: none; }
+  .masthead h1 { text-shadow: none; }
+  a { color: #6b4f1e; }
+}

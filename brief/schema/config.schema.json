@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://anthonymichael.work/brief/schema/config.schema.json",
+  "title": "Daily Brief config",
+  "description": "The control panel for the Daily Brief routine. See brief/README.md.",
+  "type": "object",
+  "required": ["owner", "schedule", "format", "modules", "layout", "delivery"],
+  "properties": {
+    "owner": {
+      "type": "object",
+      "required": ["name", "timezone"],
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "timezone": { "type": "string", "description": "IANA tz, e.g. America/New_York" },
+        "voice": { "type": "string", "description": "How the brief should sound." }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "required": ["cron"],
+      "properties": {
+        "cron": { "type": "string", "description": "5-field cron in owner.timezone" },
+        "humanTime": { "type": "string" },
+        "enabled": { "type": "boolean", "default": true }
+      }
+    },
+    "format": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "maxItemsPerModule": { "type": "integer", "minimum": 1 },
+        "totalReadMinutesTarget": { "type": "number" },
+        "includeSourceLinks": { "type": "boolean" },
+        "dedupeAcrossModules": { "type": "boolean" },
+        "recencyWindowHours": { "type": "number" }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "enabled", "queries", "sources", "lenses", "agentBrief"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "glyph": { "type": "string" },
+          "accent": { "type": "string", "enum": ["ember", "gold", "verdigris", "bronze", "ichor"] },
+          "enabled": { "type": "boolean" },
+          "cadence": { "type": "string", "enum": ["daily", "weekly"], "default": "daily" },
+          "queries": { "type": "array", "items": { "type": "string" } },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["kind"],
+              "properties": {
+                "kind": { "type": "string", "enum": ["web", "rss", "mcp"] },
+                "capability": { "type": "string", "description": "For kind=mcp: whitney|spotify|gmail|google_calendar|slack|…" },
+                "urls": { "type": "array", "items": { "type": "string" } },
+                "detail": { "type": "string" }
+              }
+            }
+          },
+          "lenses": { "type": "array", "items": { "type": "string" } },
+          "agentBrief": { "type": "string" }
+        }
+      }
+    },
+    "personalContext": {
+      "type": "object",
+      "description": "Private context from your own accounts; stripped from the public web artifact.",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "calendar": { "type": "object" },
+        "inbox": { "type": "object" }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "required": ["sections"],
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind"],
+            "properties": {
+              "kind": { "type": "string" },
+              "title": { "type": "string" },
+              "from": { "type": "string", "description": "module id (for kind=module) or 'personalContext'" },
+              "visibility": { "type": "string", "enum": ["public", "private"] }
+            }
+          }
+        }
+      }
+    },
+    "delivery": { "type": "object" },
+    "guardrails": { "type": "object" }
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "$schema": "./schema/config.schema.json",
+  "_readme": "THE CONTROL PANEL for your Daily Brief. Everything the morning routine does is driven by this file. Edit it freely — no code changes needed for the common cases. See brief/README.md for the full guide. Three things you'll touch most: (1) `modules` — the domains that get scanned and the exact `queries`/`sources`/`lenses` behind each; (2) `layout.sections` — what appears in the brief and in what order; (3) `delivery` — where the finished brief is sent.",
+
+  "owner": {
+    "name": "Anthony M. Carrella",
+    "email": "anthony@overbrookpresb.org",
+    "timezone": "America/New_York",
+    "voice": "Warm, literate, unhurried. A community leader with soul — faith, arts, civic life, and ideas held together. Prefers signal over noise, one good thing to sit with over ten to skim."
+  },
+
+  "schedule": {
+    "cron": "0 6 * * *",
+    "humanTime": "6:00 AM America/New_York",
+    "enabled": true,
+    "_note": "Cron is in the routine's timezone. This is the wake time for the generation session. To change the time, edit this AND update the routine (see README → Scheduling)."
+  },
+
+  "format": {
+    "title": "The Daily Brief",
+    "subtitle": "for Anthony — {longdate}",
+    "maxItemsPerModule": 5,
+    "totalReadMinutesTarget": 8,
+    "includeSourceLinks": true,
+    "dedupeAcrossModules": true,
+    "recencyWindowHours": 48,
+    "_note": "maxItemsPerModule caps how many items each scanner surfaces. recencyWindowHours defines 'news' — items older than this are only kept if evergreen (e.g. an exhibition still on view)."
+  },
+
+  "modules": [
+    {
+      "id": "faith",
+      "label": "Faith & Ministry",
+      "glyph": "✝",
+      "accent": "gold",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "Presbyterian Church USA news",
+        "PCUSA General Assembly OR polity OR statement",
+        "Overbrook Presbyterian Church Philadelphia",
+        "theology essays contemplative practice community",
+        "faith and community organizing city",
+        "Revised Common Lectionary readings this week"
+      ],
+      "sources": [
+        { "kind": "web", "detail": "general web + news search on the queries" },
+        { "kind": "rss", "detail": "Presbyterian Outlook, The Christian Century, PCUSA News, Faith & Leadership (Duke)", "urls": [
+          "https://pres-outlook.org/feed/",
+          "https://www.christiancentury.org/rss.xml",
+          "https://www.pcusa.org/news/rss/"
+        ] }
+      ],
+      "lenses": [
+        "One piece of denominational or church-world news worth knowing",
+        "One idea to sit with — a line of theology, a practice, a provocation",
+        "A lectionary / scripture note for the day or week, if relevant to preaching or reflection"
+      ],
+      "agentBrief": "You scan the faith & ministry world for Anthony, a Presbyterian community leader in Philadelphia. Favor thoughtful, substantive, non-sensational sources. Surface things that would enrich a sermon, a session meeting, a pastoral conversation, or his own spiritual life. Avoid culture-war bait and shallow hot takes. When you cite scripture or a lectionary reading, name the reference precisely."
+    },
+    {
+      "id": "arts",
+      "label": "Arts & Culture",
+      "glyph": "◈",
+      "accent": "ember",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "Whitney Museum new exhibition contemporary American art",
+        "Philadelphia Museum of Art OR Barnes Foundation new exhibition",
+        "notable poetry essay OR poem published this week",
+        "film criticism new release worth seeing",
+        "contemporary art review New York Philadelphia"
+      ],
+      "sources": [
+        { "kind": "mcp", "capability": "whitney", "detail": "Whitney Museum open-access: what's on view, exhibitions, artworks. Preserve attribution + whitney.org links." },
+        { "kind": "mcp", "capability": "spotify", "detail": "Optional: one new/relevant release or a themed listen." },
+        { "kind": "web", "detail": "arts & culture press for exhibitions, film, letters" }
+      ],
+      "lenses": [
+        "What's on view / newly opened worth knowing about",
+        "One work or artist to contemplate today (with image + attribution when from Whitney)",
+        "One cultural piece — an essay, poem, review — worth reading in full"
+      ],
+      "agentBrief": "You are Anthony's arts & culture scout. He has a real connection to the Whitney and to American art, and a literary sensibility. Prefer depth: one work seen well beats five names dropped. Use the Whitney MCP for anything you can (always keep the artist attribution and the whitney.org link). Reach beyond the museum too — poetry, film, letters, music."
+    },
+    {
+      "id": "civic",
+      "label": "Community & Civic Leadership",
+      "glyph": "⬡",
+      "accent": "verdigris",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "Philadelphia civic news neighborhoods West Philadelphia Overbrook",
+        "nonprofit leadership OR community organizing best practices",
+        "social impact philanthropy city initiative",
+        "leadership essay management wisdom",
+        "Philadelphia city council OR mayor policy community"
+      ],
+      "sources": [
+        { "kind": "web", "detail": "local Philadelphia news (Inquirer, WHYY/Billy Penn), civic & nonprofit press, leadership writing" }
+      ],
+      "lenses": [
+        "One piece of local / civic news that actually matters to his community",
+        "One leadership or organizing idea worth carrying into the week",
+        "An opportunity, event, or convening on the horizon to put on the radar"
+      ],
+      "agentBrief": "You track community & civic life for Anthony, a Philadelphia community leader. Ground it locally — West Philadelphia, Overbrook, the city — but include leadership thinking that travels. Prefer the constructive and the actionable over the merely alarming. Flag concrete opportunities (grants, convenings, events) he might act on."
+    },
+    {
+      "id": "tech",
+      "label": "Tech, AI & Tools",
+      "glyph": "⌘",
+      "accent": "bronze",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "AI agents tooling for knowledge work practical",
+        "Anthropic Claude new capability OR release",
+        "thoughtful technology criticism essay",
+        "productivity tool for writers and community leaders",
+        "AI in ministry OR nonprofits OR the arts"
+      ],
+      "sources": [
+        { "kind": "web", "detail": "tech & AI press, but filtered hard for signal — releases that matter, ideas worth thinking about, tools worth trying" }
+      ],
+      "lenses": [
+        "One development in AI / tech that's genuinely signal, not hype",
+        "One tool or capability worth trying this week",
+        "One idea about technology and human life worth adding to the radar"
+      ],
+      "agentBrief": "You filter tech & AI for Anthony, who is thoughtful but not a full-time technologist. He wants signal, not noise: what actually changed, what's worth trying, what idea is worth holding. Explain plainly, no jargon dumps. Especially flag anything that could serve ministry, the arts, community work, or his own writing."
+    },
+    {
+      "id": "serendipity",
+      "label": "Serendipity",
+      "glyph": "✧",
+      "accent": "ichor",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "surprising idea from history OR science OR philosophy",
+        "wonder curiosity beautiful thing in the world",
+        "obscure fascinating fact well-sourced"
+      ],
+      "sources": [
+        { "kind": "web", "detail": "anything genuinely expansive and well-sourced — the point is to widen the horizon, not to inform on a beat" }
+      ],
+      "lenses": [
+        "One delightful, unexpected thing to widen the day — an idea, a fact, a piece of the world he wasn't looking for"
+      ],
+      "agentBrief": "Your job is wonder. Bring Anthony one thing he would never have gone looking for — from any field — that makes the world feel larger. It must be true and traceable to a real source. Delight over utility here."
+    }
+  ],
+
+  "personalContext": {
+    "enabled": true,
+    "_note": "Pulls from Anthony's own connected accounts to open the brief with 'your actual day'. Requires the relevant connectors to be authorized. Each is optional and degrades gracefully if a connector is offline.",
+    "calendar": {
+      "enabled": true,
+      "capability": "google_calendar",
+      "detail": "Today's events (and anything notable tomorrow). Summarize as a clean agenda, not a raw dump."
+    },
+    "inbox": {
+      "enabled": true,
+      "capability": "gmail",
+      "detail": "Only surface threads that genuinely need attention today — unanswered asks, time-sensitive items. Never quote sensitive content in the published web artifact; keep specifics to the private delivery channels (email/Slack).",
+      "maxItems": 3,
+      "privacy": "personal-only"
+    }
+  },
+
+  "layout": {
+    "_note": "The brief is assembled from these sections IN THIS ORDER. Each entry names a section `kind` the web renderer understands (see static/brief/js/app.js → RENDERERS) and, for module sections, which module feeds it. Reorder, remove, or add entries to change the brief's shape. To invent a brand-new kind of section, add a renderer with the same key.",
+    "sections": [
+      { "kind": "masthead" },
+      { "kind": "headline", "title": "Today, in one line" },
+      { "kind": "agenda", "title": "Your Day", "from": "personalContext", "visibility": "private" },
+      { "kind": "module", "title": "Faith & Ministry", "from": "faith" },
+      { "kind": "module", "title": "Arts & Culture", "from": "arts" },
+      { "kind": "module", "title": "Community & Civic", "from": "civic" },
+      { "kind": "module", "title": "Tech, AI & Tools", "from": "tech" },
+      { "kind": "serendipity", "title": "One Wide Thing", "from": "serendipity" },
+      { "kind": "radar", "title": "For the Radar", "_note": "Slower-horizon items the scanners flagged as worth watching but not acting on today." },
+      { "kind": "on_this_day", "title": "On This Day" },
+      { "kind": "epigram", "title": "" }
+    ]
+  },
+
+  "delivery": {
+    "_note": "The web artifact is the canonical output and is always produced. The other channels are layered on top and each can be toggled independently. `visibility: private` sections (like your inbox/agenda) are included in email/Slack but stripped from the public web artifact.",
+    "web": {
+      "enabled": true,
+      "publishDir": "static/brief/data",
+      "liveUrl": "https://anthonymichael.work/brief/",
+      "commitAndPush": true,
+      "_note": "Writes latest.json + a dated archive file + updates index.json, then commits to main so GitHub Pages redeploys. This is what makes it a live web artifact."
+    },
+    "email": {
+      "enabled": false,
+      "capability": "gmail",
+      "mode": "draft",
+      "to": "anthony@overbrookpresb.org",
+      "_note": "mode 'draft' creates a Gmail draft you review before it sends; switch to 'send' once you trust it. Renders the full brief (including private sections) as HTML with a link to the live version. Requires the Gmail connector to be authorized."
+    },
+    "slack": {
+      "enabled": false,
+      "capability": "slack",
+      "target": "self-dm",
+      "_note": "Posts the headline + section highlights + link to the live brief as a DM to yourself. Requires the Slack connector."
+    },
+    "pdf": {
+      "enabled": false,
+      "mode": "print-css",
+      "_note": "The web artifact carries a print stylesheet, so 'Save as PDF' from the browser already works. For automated PDF, a future exporter can drive headless Chromium (pre-installed here) against the live URL. See brief/exporters/README.md."
+    },
+    "screenshots": {
+      "enabled": false,
+      "_note": "Planned: headless-Chromium capture of each section as an image (for sharing). See brief/exporters/README.md."
+    },
+    "thymer": {
+      "enabled": false,
+      "_note": "Planned: export the brief as a Thymer note. No Thymer connector is present yet; the exporter stub documents the two paths (API when available, or Markdown drop-in). See brief/exporters/README.md."
+    }
+  },
+
+  "guardrails": {
+    "sourcesPolicy": "Reputable, mainstream, or clearly-credentialed sources only. No sketchy aggregators, no engagement-bait, no unverified rumor. When a claim matters, it must trace to a nameable source with a link.",
+    "verification": "Cross-check anything surprising or consequential against a second source before it goes in the brief. Mark uncertainty honestly ('reported', 'unconfirmed') rather than laundering it into fact.",
+    "privacy": "Personal context (inbox, calendar) never appears in the public web artifact — only in the private delivery channels. Never publish anyone's private information.",
+    "tone": "No doom-scrolling. Constructive, curious, humane. The brief should leave him more oriented and a little more alive to the world, not more anxious."
+  }
+}

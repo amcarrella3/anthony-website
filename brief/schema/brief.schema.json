@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://anthonymichael.work/brief/schema/brief.schema.json",
+  "title": "Daily Brief document",
+  "description": "The canonical shape of one day's brief. The generation routine emits this; the web artifact (static/brief/js/app.js) renders it; every exporter (email, pdf, slack, thymer) consumes it. Keep generator + renderer + exporters agreeing with this file.",
+  "type": "object",
+  "required": ["date", "generatedAt", "sections"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "default": 1 },
+    "date": { "type": "string", "description": "ISO date this brief covers, e.g. 2026-07-08" },
+    "generatedAt": { "type": "string", "description": "ISO-8601 timestamp of generation" },
+    "title": { "type": "string" },
+    "subtitle": { "type": "string" },
+    "readMinutes": { "type": "number", "description": "Estimated read time" },
+    "meta": {
+      "type": "object",
+      "description": "Provenance for transparency.",
+      "properties": {
+        "generator": { "type": "string" },
+        "modulesRun": { "type": "array", "items": { "type": "string" } },
+        "sourcesConsulted": { "type": "integer" },
+        "notes": { "type": "string" }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "description": "Ordered sections, matching layout.sections in config.json. The renderer dispatches on `kind`.",
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["masthead", "headline", "agenda", "module", "serendipity", "radar", "on_this_day", "epigram"],
+            "description": "Which renderer handles this section. Adding a new value requires adding a renderer of the same name in app.js."
+          },
+          "id": { "type": "string", "description": "For module sections, the module id (faith/arts/civic/tech/serendipity)." },
+          "title": { "type": "string" },
+          "glyph": { "type": "string", "description": "Optional display glyph for the section header." },
+          "accent": { "type": "string", "enum": ["ember", "gold", "verdigris", "bronze", "ichor"], "description": "Section accent color, mapped to the site palette." },
+          "visibility": {
+            "type": "string",
+            "enum": ["public", "private"],
+            "default": "public",
+            "description": "private sections are stripped from the published web artifact and only appear in email/Slack delivery."
+          },
+          "summary": { "type": "string", "description": "Optional 1-line framing for the section." },
+          "text": { "type": "string", "description": "For simple sections (headline, epigram): the body." },
+          "attribution": { "type": "string", "description": "For epigram/quote sections." },
+          "items": {
+            "type": "array",
+            "description": "The cards within a section.",
+            "items": {
+              "type": "object",
+              "required": ["headline"],
+              "properties": {
+                "lens": { "type": "string", "description": "Which lens this item answers (from the module's config lenses)." },
+                "headline": { "type": "string" },
+                "body": { "type": "string", "description": "1-3 sentences. Plain, substantive, no filler." },
+                "why": { "type": "string", "description": "Optional: why it matters to Anthony specifically." },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "url": { "type": "string" },
+                    "date": { "type": "string" },
+                    "confidence": { "type": "string", "enum": ["confirmed", "reported", "unconfirmed"], "default": "confirmed" }
+                  }
+                },
+                "image": {
+                  "type": "object",
+                  "description": "Optional image (e.g. a Whitney artwork). Preserve attribution.",
+                  "properties": {
+                    "url": { "type": "string" },
+                    "alt": { "type": "string" },
+                    "credit": { "type": "string" }
+                  }
+                },
+                "tags": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

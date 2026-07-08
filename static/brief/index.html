@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e0f12" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>The Daily Brief — Anthony Carrella</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="./css/brief.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" data-nav="today">
+      <span class="brand-mark mono">Br</span>
+      <span class="brand-name">The Daily Brief</span>
+    </a>
+    <nav class="topnav">
+      <button id="prev-day" class="daynav" title="Previous brief" aria-label="Previous brief">‹</button>
+      <select id="date-select" class="date-select" aria-label="Choose a brief"></select>
+      <button id="next-day" class="daynav" title="Next brief" aria-label="Next brief">›</button>
+      <button id="print-btn" class="daynav print" title="Print / Save as PDF" aria-label="Print or save as PDF">⎙</button>
+      <a href="/instruments/" class="nav-site" title="Back to Instruments">↖&#xFE0E; Instruments</a>
+    </nav>
+  </header>
+
+  <main id="view" class="view"><!-- the brief renders here --></main>
+
+  <footer class="brief-foot">
+    <div class="meander breathe" aria-hidden="true"></div>
+    <p class="mono foot-line">assembled by the morning routine · <span id="foot-meta"></span></p>
+  </footer>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
