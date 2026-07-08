@@ -49,6 +49,7 @@
           "accent": { "type": "string", "enum": ["ember", "gold", "verdigris", "bronze", "ichor"] },
           "enabled": { "type": "boolean" },
           "cadence": { "type": "string", "enum": ["daily", "weekly"], "default": "daily" },
+          "weekday": { "type": "string", "description": "For weekly modules: the weekday it appears (e.g. 'Saturday')." },
           "queries": { "type": "array", "items": { "type": "string" } },
           "sources": {
             "type": "array",
@@ -96,7 +97,26 @@
         }
       }
     },
-    "delivery": { "type": "object" },
-    "guardrails": { "type": "object" }
+    "summer": {
+      "type": "object",
+      "description": "This season's deep-dive discovery arcs; surfaced in the brief's radar. Prose in brief/summer-2026.md.",
+      "properties": {
+        "season": { "type": "string" },
+        "surfaceInRadar": { "type": "boolean" },
+        "deepDives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "why": { "type": "string" },
+              "arc": { "type": "string" },
+              "firstMoves": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "delivery": { "type": "object" }
   }
 }

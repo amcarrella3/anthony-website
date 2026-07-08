@@ -18,19 +18,24 @@ to *do* with it.
    - `modules[]` — each has `queries`, `sources`, `lenses`, `agentBrief`.
    - `personalContext` — calendar + inbox (private).
    - `layout.sections[]` — the exact order + kinds of the output.
+   - `summer.deepDives[]` — this season's exploration arcs (see step 3).
    - `delivery` — which channels are on.
-   - `guardrails` — non-negotiable.
-2. Compute today's date in `owner.timezone` (format `YYYY-MM-DD`). Call it `DATE`.
+2. Compute today's date in `owner.timezone` (format `YYYY-MM-DD`). Call it `DATE`,
+   and note its weekday.
 3. Skip any module or section with `enabled: false`.
+4. **Cadence** (`format.cadenceRule`): run every `daily` module. Run a `weekly`
+   module only when today's weekday matches its `weekday`. This keeps the daily
+   read short — one slower field at a time.
 
-## 1. Scan — one agent per enabled module (fan out)
+## 1. Scan — one agent per module that runs today (fan out)
 
-For each enabled module, spawn a scanner agent (use the `Agent` tool, or a
-`Workflow` with one stage per module — see "Scaling" below). Give the scanner:
+For each module that runs today (per cadence above), spawn a scanner agent (use
+the `Agent` tool, or a `Workflow` with one stage per module — see "Scaling"
+below). Give the scanner:
 
 - The module's `agentBrief`, `queries`, `lenses`, and `sources`.
-- The `guardrails` (sources policy, verification, tone).
-- `format.maxItemsPerModule`, `format.recencyWindowHours`.
+- The `owner.voice` (write in it) and `format.maxItemsPerModule` /
+  `format.recencyWindowHours`.
 
 Each scanner must:
 
@@ -40,8 +45,8 @@ Each scanner must:
    not by a hard-coded name). Capabilities used here: `whitney`, `spotify`,
    `gmail`, `google_calendar`, `slack`. `kind: "rss"` → `WebFetch` the feed URLs.
 2. **Search broadly, then narrow.** Run the queries, open the promising results,
-   read enough to summarize honestly. Prefer primary/reputable sources per the
-   guardrails. Respect the recency window (older items only if evergreen).
+   read enough to summarize honestly. Prefer primary/reputable, nameable sources
+   with links. Respect the recency window (older items only if evergreen).
 3. **Verify** anything surprising or consequential against a second source.
    Mark confidence (`confirmed` / `reported` / `unconfirmed`).
 4. **Return** up to `maxItemsPerModule` items as JSON matching the `items`
@@ -77,7 +82,10 @@ Build one JSON document conforming to `brief/schema/brief.schema.json`:
 - **`headline`**: after scanning, write the single most important or most alive
   thing across everything today, in one or two sentences. This is the through-line.
 - **`serendipity`**: the one wide, wonderful thing.
-- **`radar`**: merge the scanners' radar candidates (dedupe).
+- **`radar`**: merge the scanners' radar candidates (dedupe). If
+  `summer.surfaceInRadar`, also add one item = the **current deep-dive track's
+  next move** (from `summer.deepDives`; see `brief/summer-2026.md`), so the brief
+  is an arc, not only a feed.
 - **`on_this_day`**: one well-sourced historical note for `DATE`.
 - **`epigram`**: a short closing quote/line fitting the voice (attributed).
 - If `format.dedupeAcrossModules`, drop duplicate stories across modules (keep
@@ -112,14 +120,15 @@ Into `delivery.web.publishDir` (`static/brief/data/`):
 Deliver only what's enabled. Report a one-line summary of what was published and
 sent (and anything skipped) at the end.
 
-## 6. Guardrails (always)
+## 6. The feel (write in `owner.voice`)
 
-- Sources must be reputable and nameable, with links. No sketchy aggregators, no
-  engagement bait, no unverified rumor laundered into fact.
+- Reputable, nameable sources with links; verify the surprising; label what's
+  uncertain rather than laundering it into fact. (You already know this — it's not
+  a rulebook, just the register.)
 - Personal context never appears in the public web artifact.
-- Tone: constructive, curious, humane. No doom-scroll. Leave him more oriented
-  and a little more alive to the world.
-- If you can't verify something, say so or leave it out.
+- Depth over volume: one thing seen well and worth sitting with beats ten skimmed.
+  Contemplative, unhurried, anti-ironic — total sincerity. No doom-scroll, no hype,
+  no preset boxes.
 
 ---
 

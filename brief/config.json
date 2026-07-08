@@ -1,234 +1,465 @@
 {
   "$schema": "./schema/config.schema.json",
-  "_readme": "THE CONTROL PANEL for your Daily Brief. Everything the morning routine does is driven by this file. Edit it freely — no code changes needed for the common cases. See brief/README.md for the full guide. Three things you'll touch most: (1) `modules` — the domains that get scanned and the exact `queries`/`sources`/`lenses` behind each; (2) `layout.sections` — what appears in the brief and in what order; (3) `delivery` — where the finished brief is sent.",
-
+  "_readme": "THE CONTROL PANEL for your Daily Brief. Everything the morning routine does is driven by this file. The `modules` below were rebuilt from evidence in your own signals (writing, Spotify, reading, calendar, Drive) to reflect your ACTUAL interests rather than your job. Edit freely: (1) `modules` — the domains scanned, and the exact `queries`/`sources`/`lenses` behind each; (2) `layout.sections` — what appears and in what order; (3) `summer.deepDives` — this season's exploration arcs; (4) `delivery` — where the finished brief is sent. See brief/README.md and brief/summer-2026.md.",
   "owner": {
     "name": "Anthony M. Carrella",
     "email": "anthony@overbrookpresb.org",
     "timezone": "America/New_York",
-    "voice": "Warm, literate, unhurried. A community leader with soul — faith, arts, civic life, and ideas held together. Prefers signal over noise, one good thing to sit with over ten to skim."
+    "voice": "Literate, contemplative, unhurried, anti-ironic — total sincerity in forms that usually invite irony. A maker who builds small purpose-built instruments to pay a specific quality of attention; 'attention itself is the instrument' (Westminster Choir College, conductor). Lives on the seams between traditions — the drawn and the computed, Uyghur and Soviet, Presbyterian and Orthodox and Jungian, the classical-antique surface over the Central-Asian subject. Keeps records as an inheritance. Resists the preset box: naming should fall out of measurement, never the reverse. Prefers one thing seen well and sat with over ten skimmed."
   },
-
   "schedule": {
     "cron": "0 6 * * *",
     "humanTime": "6:00 AM America/New_York",
     "enabled": true,
     "_note": "Cron is in the routine's timezone. This is the wake time for the generation session. To change the time, edit this AND update the routine (see README → Scheduling)."
   },
-
   "format": {
     "title": "The Daily Brief",
     "subtitle": "for Anthony — {longdate}",
-    "maxItemsPerModule": 5,
+    "maxItemsPerModule": 3,
     "totalReadMinutesTarget": 8,
     "includeSourceLinks": true,
     "dedupeAcrossModules": true,
     "recencyWindowHours": 48,
-    "_note": "maxItemsPerModule caps how many items each scanner surfaces. recencyWindowHours defines 'news' — items older than this are only kept if evergreen (e.g. an exhibition still on view)."
+    "cadenceRule": "Run every `daily` module each morning. Run a `weekly` module only on its `weekday`, so the daily read stays short — one slower field at a time.",
+    "_note": "maxItemsPerModule caps items per module (kept low on purpose — depth over volume). recencyWindowHours defines 'news'; older items are kept only if evergreen."
   },
-
   "modules": [
     {
-      "id": "faith",
-      "label": "Faith & Ministry",
-      "glyph": "✝",
-      "accent": "gold",
-      "enabled": true,
-      "cadence": "daily",
-      "queries": [
-        "Presbyterian Church USA news",
-        "PCUSA General Assembly OR polity OR statement",
-        "Overbrook Presbyterian Church Philadelphia",
-        "theology essays contemplative practice community",
-        "faith and community organizing city",
-        "Revised Common Lectionary readings this week"
-      ],
-      "sources": [
-        { "kind": "web", "detail": "general web + news search on the queries" },
-        { "kind": "rss", "detail": "Presbyterian Outlook, The Christian Century, PCUSA News, Faith & Leadership (Duke)", "urls": [
-          "https://pres-outlook.org/feed/",
-          "https://www.christiancentury.org/rss.xml",
-          "https://www.pcusa.org/news/rss/"
-        ] }
-      ],
-      "lenses": [
-        "One piece of denominational or church-world news worth knowing",
-        "One idea to sit with — a line of theology, a practice, a provocation",
-        "A lectionary / scripture note for the day or week, if relevant to preaching or reflection"
-      ],
-      "agentBrief": "You scan the faith & ministry world for Anthony, a Presbyterian community leader in Philadelphia. Favor thoughtful, substantive, non-sensational sources. Surface things that would enrich a sermon, a session meeting, a pastoral conversation, or his own spiritual life. Avoid culture-war bait and shallow hot takes. When you cite scripture or a lectionary reading, name the reference precisely."
-    },
-    {
-      "id": "arts",
-      "label": "Arts & Culture",
-      "glyph": "◈",
-      "accent": "ember",
-      "enabled": true,
-      "cadence": "daily",
-      "queries": [
-        "Whitney Museum new exhibition contemporary American art",
-        "Philadelphia Museum of Art OR Barnes Foundation new exhibition",
-        "notable poetry essay OR poem published this week",
-        "film criticism new release worth seeing",
-        "contemporary art review New York Philadelphia"
-      ],
-      "sources": [
-        { "kind": "mcp", "capability": "whitney", "detail": "Whitney Museum open-access: what's on view, exhibitions, artworks. Preserve attribution + whitney.org links." },
-        { "kind": "mcp", "capability": "spotify", "detail": "Optional: one new/relevant release or a themed listen." },
-        { "kind": "web", "detail": "arts & culture press for exhibitions, film, letters" }
-      ],
-      "lenses": [
-        "What's on view / newly opened worth knowing about",
-        "One work or artist to contemplate today (with image + attribution when from Whitney)",
-        "One cultural piece — an essay, poem, review — worth reading in full"
-      ],
-      "agentBrief": "You are Anthony's arts & culture scout. He has a real connection to the Whitney and to American art, and a literary sensibility. Prefer depth: one work seen well beats five names dropped. Use the Whitney MCP for anything you can (always keep the artist attribution and the whitney.org link). Reach beyond the museum too — poetry, film, letters, music."
-    },
-    {
-      "id": "civic",
-      "label": "Community & Civic Leadership",
-      "glyph": "⬡",
-      "accent": "verdigris",
-      "enabled": true,
-      "cadence": "daily",
-      "queries": [
-        "Philadelphia civic news neighborhoods West Philadelphia Overbrook",
-        "nonprofit leadership OR community organizing best practices",
-        "social impact philanthropy city initiative",
-        "leadership essay management wisdom",
-        "Philadelphia city council OR mayor policy community"
-      ],
-      "sources": [
-        { "kind": "web", "detail": "local Philadelphia news (Inquirer, WHYY/Billy Penn), civic & nonprofit press, leadership writing" }
-      ],
-      "lenses": [
-        "One piece of local / civic news that actually matters to his community",
-        "One leadership or organizing idea worth carrying into the week",
-        "An opportunity, event, or convening on the horizon to put on the radar"
-      ],
-      "agentBrief": "You track community & civic life for Anthony, a Philadelphia community leader. Ground it locally — West Philadelphia, Overbrook, the city — but include leadership thinking that travels. Prefer the constructive and the actionable over the merely alarming. Flag concrete opportunities (grants, convenings, events) he might act on."
-    },
-    {
-      "id": "tech",
-      "label": "Tech, AI & Tools",
-      "glyph": "⌘",
+      "id": "instruments",
+      "label": "Instruments of Attention",
+      "glyph": "⌬",
       "accent": "bronze",
       "enabled": true,
       "cadence": "daily",
       "queries": [
-        "AI agents tooling for knowledge work practical",
-        "Anthropic Claude new capability OR release",
-        "thoughtful technology criticism essay",
-        "productivity tool for writers and community leaders",
-        "AI in ministry OR nonprofits OR the arts"
+        "small purpose-built software tools for thinking, tools for thought",
+        "Claude artifacts and Claude Code personal projects, building without writing code",
+        "parametric and generative design, custom notation systems, homemade measuring instruments",
+        "indie web personal site craft, digital gardens, hand-built microsites",
+        "AI as collaborator not optimizer, human-in-the-loop making, conductor metaphor for AI",
+        "local-first software, single-purpose apps, the joy of building your own tools"
       ],
       "sources": [
-        { "kind": "web", "detail": "tech & AI press, but filtered hard for signal — releases that matter, ideas worth thinking about, tools worth trying" }
+        {
+          "kind": "web",
+          "detail": "tools-for-thought and indie-maker writing — filtered hard for craft and idea, not product launches or hype"
+        },
+        {
+          "kind": "rss",
+          "detail": "maker/tools-for-thought essayists and the indie web",
+          "urls": [
+            "https://maggieappleton.com/rss.xml",
+            "https://simonwillison.net/atom/everything/",
+            "https://www.robinsloan.com/feed.xml"
+          ]
+        }
       ],
       "lenses": [
-        "One development in AI / tech that's genuinely signal, not hype",
-        "One tool or capability worth trying this week",
-        "One idea about technology and human life worth adding to the radar"
+        "One small, hand-built tool or artifact someone made to pay a specific kind of attention",
+        "One idea about making — the drawn vs. the computed, the score vs. the sounding, the instrument as the real medium",
+        "One thing worth trying in Claude Code or on his own site this week"
       ],
-      "agentBrief": "You filter tech & AI for Anthony, who is thoughtful but not a full-time technologist. He wants signal, not noise: what actually changed, what's worth trying, what idea is worth holding. Explain plainly, no jargon dumps. Especially flag anything that could serve ministry, the arts, community work, or his own writing."
+      "agentBrief": "You scout the world of small, purpose-built instruments for Anthony, who builds tools the way a conductor holds a score — he keeps the intent, the machine does the sounding, and he does not write the code by hand. He dates his own history to his first Claude artifact; every one of his interests routes through a machine he made for it (a soup scorer, a naturalist's log, this brief). Bring him people making tiny single-purpose tools with total sincerity: custom notation, spectra over scores, hand-built microsites, generative design. He has a standing moral objection to AI-as-optimizer (the 'cybernetic podium') and to the reductive single number — favor makers who resist the preset box. No startup churn, no productivity-porn. Craft and idea only."
     },
     {
-      "id": "serendipity",
-      "label": "Serendipity",
-      "glyph": "✧",
+      "id": "silk-road",
+      "label": "The Silk Road Table",
+      "glyph": "🜲",
+      "accent": "ember",
+      "enabled": true,
+      "cadence": "weekly",
+      "queries": [
+        "lagman noodle history, Uyghur laghman, Central Asian hand-pulled noodles",
+        "Bukharian Jewish cuisine Rego Park Forest Hills Queens, Regoistan",
+        "Uyghur diaspora food and migration, Silk Road culinary anthropology",
+        "Soviet-era Central Asian foodways, Dungan and Uzbek cooking",
+        "Central Asian restaurants Northeast Philadelphia Bustleton Avenue, Uzbek Philly",
+        "food as anthropology, diaspora homesickness and cooking, one dish many histories"
+      ],
+      "sources": [
+        {
+          "kind": "web",
+          "detail": "food anthropology, diaspora and migration writing, regional restaurant reportage in the Uyghur/Bukharian/Central Asian corridors"
+        },
+        {
+          "kind": "rss",
+          "detail": "long-form food-and-culture writing",
+          "urls": [
+            "https://www.seriouseats.com/rss",
+            "https://vittles.substack.com/feed"
+          ]
+        }
+      ],
+      "lenses": [
+        "One thread on lagman or its cousins — a word wearing three histories (Uyghur, Bukharian, Soviet-Russian)",
+        "One doorway into diaspora, migration, or homesickness through a table",
+        "One place, corridor, or archive worth driving to when winter returns"
+      ],
+      "agentBrief": "You keep the archive of the Silk Road table for Anthony, who spent a winter driving a noodle corridor alone at night and built a scoring instrument for lagman before realizing he'd found not a soup but an axis — one word wearing at least three histories. He knows the food is winter food and a doorway into migration and homesickness, not a foodie ranking; he abandoned the ranking premise mid-project and let it dissolve into metaphysics. Feed the anthropology, not the listicle: the Uyghur/Bukharian/Soviet seam, the real corridors (Bustleton Ave, Rego Park's 'Regoistan'), the histories that ride inside a single dish. This is summer, so lean toward reading and mapping — the eating resumes in the cold months.",
+      "weekday": "Saturday"
+    },
+    {
+      "id": "contemplative",
+      "label": "The Contemplative Hours",
+      "glyph": "🕯",
+      "accent": "gold",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "Richard Rohr daily meditation Center for Action and Contemplation",
+        "centering prayer and Christian contemplative practice, Contemplative Outreach Shalem",
+        "Abbey of the Arts monk manifesto, contemplative retreat and silence",
+        "Orthodox spirituality and the Psalms, St Vladimir's Seminary",
+        "Karl Barth theology, Barth Center, Andrew Root ministry in a secular age",
+        "Jungian depth psychology and spirituality, gratitude as practice"
+      ],
+      "sources": [
+        {
+          "kind": "web",
+          "detail": "contemplative-Christian, ecumenical, and depth-psychology writing across traditions"
+        },
+        {
+          "kind": "rss",
+          "detail": "his actual daily contemplative feeds",
+          "urls": [
+            "https://cac.org/category/daily-meditations/feed/",
+            "https://abbeyofthearts.com/feed/",
+            "https://churchlifejournal.nd.edu/feed/"
+          ]
+        }
+      ],
+      "lenses": [
+        "One meditation or line to sit with in the morning silence",
+        "One provocation from beyond the Reformed home — Catholic-contemplative, Orthodox, or Jungian",
+        "One practice, retreat, or feast-day worth marking this week"
+      ],
+      "agentBrief": "You tend Anthony's own contemplative life — not his church job, but the interior discipline he keeps unbidden: daily Rohr meditations, Wednesday centering prayer, silent retreats, a 205-entry gratitude journal that names God 'the Idea Giver, the Critical Pedagogue.' He is ecumenically restless — Reformed at home but reading Orthodox Psalms, Barth, Abbey of the Arts, Jungian depth work, tracking Jewish and Episcopal calendars alongside his own. Bring him one thing to sit with, always substantive and anti-sentimental. He wants depth and silence, never devotional pablum or culture-war religion. When you cite scripture or a feast, name it precisely."
+    },
+    {
+      "id": "deep-listening",
+      "label": "Deep Listening & the Choral Ear",
+      "glyph": "𝄞",
+      "accent": "verdigris",
+      "enabled": true,
+      "cadence": "daily",
+      "queries": [
+        "Bremer/McCoy Danish ambient jazz duo new release",
+        "acoustic piano trio jazz e.s.t. GoGo Penguin, Dave Brubeck deep cuts",
+        "Steve Reich minimalism and process music, American minimalist composers",
+        "Yunchan Lim classical piano, contemporary pianists",
+        "Sufjan Stevens Adrianne Lenker literary confessional folk",
+        "Princeton University Chapel organ recital, sacred choral music, Berlin Philharmonic Digital Concert Hall"
+      ],
+      "sources": [
+        {
+          "kind": "mcp",
+          "capability": "spotify",
+          "detail": "New releases and themed listens on his continuum — Bremer/McCoy, piano trio, Reich, Yunchan Lim, Sufjan, Lenker. Pair classical and jazz as one field the way he does."
+        },
+        {
+          "kind": "web",
+          "detail": "sacred-music and recital calendars (Princeton Chapel Thursday organ recitals), ambient/jazz and new-classical press"
+        }
+      ],
+      "lenses": [
+        "One release or recording on his continuum — piano at the center, jazz trio to minimalism to sacred folk",
+        "One live sacred-music occasion — a Thursday organ recital, a choral evensong, a Digital Concert Hall stream",
+        "One note on the ear itself — conducting, deep listening, attention as the instrument"
+      ],
+      "agentBrief": "You curate one coherent contemplative sound-field for Anthony, a Westminster Choir College-trained conductor (his lineage: Helen Kemp, James Jordan) for whom 'attention itself became the instrument.' His #1 all-time artist is the niche Danish ambient-jazz duo Bremer/McCoy — a deep-listener's tell, not a chart profile. Hold classical and jazz on one continuum (the engine natively pairs 'Yunchan Lim & Bremer/McCoy'): acoustic piano trio, Brubeck deep cuts like 'Strange Meadow Lark,' Steve Reich's process music as the structural cousin, Sufjan and Adrianne Lenker as the literary lyric voice. He keeps a live sacred-music habit — Thursday organ recitals at Princeton Chapel nearly year-round, Berlin Phil membership, OPC singing. One recording heard well beats ten names dropped."
+    },
+    {
+      "id": "reading-room",
+      "label": "The Reading Room",
+      "glyph": "❦",
       "accent": "ichor",
       "enabled": true,
       "cadence": "daily",
       "queries": [
-        "surprising idea from history OR science OR philosophy",
-        "wonder curiosity beautiful thing in the world",
-        "obscure fascinating fact well-sourced"
+        "ballet criticism Marina Harss, ABT NYCB Balanchine Baryshnikov new reviews",
+        "Jungian depth psychology This Jungian Life, ARAS archetypal symbolism",
+        "integral and developmental philosophy Steve McIntosh, transhumanism and the human person",
+        "AI and spirituality Sean Tobin The Inner Exodus, technology and the soul",
+        "New York Times Book Review notable essays, literary criticism this week",
+        "documenting as stewardship, archives and record-keeping as inheritance"
       ],
       "sources": [
-        { "kind": "web", "detail": "anything genuinely expansive and well-sourced — the point is to widen the horizon, not to inform on a beat" }
+        {
+          "kind": "web",
+          "detail": "dance criticism, depth-psychology, theology, and literary essays — the systematically-organized reading life he routes into plus-aliases (+jung, +wine, +incense)"
+        },
+        {
+          "kind": "rss",
+          "detail": "his reading beats",
+          "urls": [
+            "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/books/rss.xml",
+            "https://thisjungianlife.com/feed/"
+          ]
+        }
       ],
       "lenses": [
-        "One delightful, unexpected thing to widen the day — an idea, a fact, a piece of the world he wasn't looking for"
+        "One essay or piece of criticism worth reading in full — theology, depth psychology, or the literary",
+        "One dispatch from the dance world (Marina Harss on ABT, NYCB, Balanchine)",
+        "One idea about archive, record-keeping, or the human person to keep and highlight"
       ],
-      "agentBrief": "Your job is wonder. Bring Anthony one thing he would never have gone looking for — from any field — that makes the world feel larger. It must be true and traceable to a real source. Delight over utility here."
+      "agentBrief": "You feed Anthony's reading life, which he runs as a system — voracious, cross-domain, routed into purpose-built inbox aliases (+jung, +wine, +incense) and kept in Readwise because 'documenting is stewardship, and a record kept is an inheritance made.' His beats: serious Barth/academic theology, Jungian depth psychology (ARAS, This Jungian Life), a genuine ballet-criticism habit (Marina Harss), integral/developmental philosophy (McIntosh), psychology-meets-AI (Sean Tobin), the NYT Book Review. His mind makes wide, fast, cross-domain sweeps it can't hold; you are part of the net that catches them. Bring him one thing worth reading in full and keeping — not summaries of summaries. Total sincerity, no irony."
+    },
+    {
+      "id": "antiquity",
+      "label": "The Antiquity Cosmos",
+      "glyph": "𓊽",
+      "accent": "ember",
+      "enabled": true,
+      "cadence": "weekly",
+      "queries": [
+        "Greek black-figure vase painting, amphorae and Attic pottery, terracotta",
+        "Aegean and Greek key meander ornament, ancient Mediterranean design",
+        "display typeface and letterform design, bespoke fonts and type specimens",
+        "invented notation systems and constructed scripts, taxonomy as world-building",
+        "Etruscan art and material culture, Greco-Aegean visual world",
+        "metallic gold and copper leaf, papyrus and antique surface texture in design"
+      ],
+      "sources": [
+        {
+          "kind": "mcp",
+          "capability": "whitney",
+          "detail": "American art that touches antiquity, letterform, and taxonomy — works and artists to contemplate. Preserve artist attribution and the whitney.org link."
+        },
+        {
+          "kind": "web",
+          "detail": "classical archaeology, type-design, and ornament/notation writing"
+        }
+      ],
+      "lenses": [
+        "One object from the antique Mediterranean world — a vase, a meander, an amphora — seen closely",
+        "One piece of letterform or notation craft — a display face, a specimen, an invented grammar",
+        "One idea about taxonomy or world-building — naming that falls out of measurement, never the reverse"
+      ],
+      "agentBrief": "You feed Anthony's fully-realized Greco-Aegean visual world — not decoration but a cosmos: four hand-labeled modes (Dark/Light/Etruscan/Aegean), four bespoke display faces (Aegean, Spartacus, Xiphos, Columns), meanders, black-figure terracotta, torn papyrus, gold-with-copper-and-green metallic sheen. He delights in inventing rigorous-looking notation for its own sake (mock molecular sigils like Lg₁₀ and Br₀₆) — taxonomy and letterform as world-building, executed with total sincerity. Bring him ancient objects to look at closely, type and notation craft, and anything where naming falls out of measurement rather than the reverse. Use the Whitney MCP where American art touches these themes, always keeping attribution and the link.",
+      "weekday": "Sunday"
+    },
+    {
+      "id": "field-and-ritual",
+      "label": "Field Notes & the Ritual of the Senses",
+      "glyph": "🪶",
+      "accent": "verdigris",
+      "enabled": true,
+      "cadence": "weekly",
+      "queries": [
+        "backyard birding and phenology, catbird white-throated sparrow behavior, seasonal observation",
+        "faith and ecology, Waterspirit, contemplative naturalism, more-than-human world",
+        "New Jersey Pennington-area natural history, whitetail deer and native plants",
+        "third-wave coffee roaster Char and Stave Ardmore, single-origin coffee ritual",
+        "Japanese incense Kikoh, ceremonial matcha Ooika, De Soi non-alcoholic aperitif",
+        "Burgundy value wine picks, natural wine, small sensory ritual and attention"
+      ],
+      "sources": [
+        {
+          "kind": "web",
+          "detail": "contemplative natural-history and phenology writing, faith-and-ecology, and the curated sensory beats (specialty coffee, matcha, incense, non-alc, Burgundy)"
+        },
+        {
+          "kind": "rss",
+          "detail": "birding and seasonal natural history",
+          "urls": [
+            "https://www.allaboutbirds.org/news/feed/",
+            "https://emergencemagazine.org/feed/"
+          ]
+        }
+      ],
+      "lenses": [
+        "One field note worth carrying into the walk — a bird, a bloom, a turn of the season",
+        "One thread of faith-and-ecology or contemplative naturalism",
+        "One small sensory ritual — a coffee, an incense, a matcha, a bottle — chosen with care"
+      ],
+      "agentBrief": "You keep Anthony's devotional attention to the more-than-human world and his booze-optional ritual of the senses — of a piece with each other and with his prayer. He runs a 49-record Natural Observations journal piped live into his art, bows to whitetail deer, rehomes yellowjackets rather than killing them, notices catbird families and non-native grass rhizomes, and reads Waterspirit's faith-and-ecology. Alongside: a Sunday coffee pickup at Char and Stave treated as a fixed appointment, Kikoh Japanese incense, Ooika matcha, De Soi non-alc, SuperVinoBros Burgundy value picks — each curated with the same care as his spiritual reading. Bring seasonal field notes and one well-chosen sensory pleasure. Contemplative, unhurried, never gear-review noise.",
+      "weekday": "Wednesday"
     }
   ],
-
   "personalContext": {
     "enabled": true,
-    "_note": "Pulls from Anthony's own connected accounts to open the brief with 'your actual day'. Requires the relevant connectors to be authorized. Each is optional and degrades gracefully if a connector is offline.",
+    "_note": "Pulls from your own connected accounts to open the brief with 'your actual day'. Requires the relevant connectors; each is optional and degrades gracefully if offline.",
     "calendar": {
       "enabled": true,
       "capability": "google_calendar",
-      "detail": "Today's events (and anything notable tomorrow). Summarize as a clean agenda, not a raw dump."
+      "detail": "Today's events (and anything notable tomorrow) from your personal calendar. Summarize as a clean agenda. Note contemplative/retreat blocks and the Thursday Princeton organ recital when they fall."
     },
     "inbox": {
       "enabled": true,
       "capability": "gmail",
-      "detail": "Only surface threads that genuinely need attention today — unanswered asks, time-sensitive items. Never quote sensitive content in the published web artifact; keep specifics to the private delivery channels (email/Slack).",
+      "detail": "Only threads that genuinely need attention today. Never quote sensitive or private-relationship content in the published web artifact; keep specifics to the private delivery channels.",
       "maxItems": 3,
       "privacy": "personal-only"
     }
   },
-
   "layout": {
-    "_note": "The brief is assembled from these sections IN THIS ORDER. Each entry names a section `kind` the web renderer understands (see static/brief/js/app.js → RENDERERS) and, for module sections, which module feeds it. Reorder, remove, or add entries to change the brief's shape. To invent a brand-new kind of section, add a renderer with the same key.",
+    "_note": "The brief is assembled from these sections IN THIS ORDER. Each `kind` maps to a renderer in static/brief/js/app.js. `module` entries name a module via `from`. Weekly modules only appear on their `weekday`. Reorder/remove/add freely; to invent a new kind, add a renderer of the same name.",
     "sections": [
-      { "kind": "masthead" },
-      { "kind": "headline", "title": "Today, in one line" },
-      { "kind": "agenda", "title": "Your Day", "from": "personalContext", "visibility": "private" },
-      { "kind": "module", "title": "Faith & Ministry", "from": "faith" },
-      { "kind": "module", "title": "Arts & Culture", "from": "arts" },
-      { "kind": "module", "title": "Community & Civic", "from": "civic" },
-      { "kind": "module", "title": "Tech, AI & Tools", "from": "tech" },
-      { "kind": "serendipity", "title": "One Wide Thing", "from": "serendipity" },
-      { "kind": "radar", "title": "For the Radar", "_note": "Slower-horizon items the scanners flagged as worth watching but not acting on today." },
-      { "kind": "on_this_day", "title": "On This Day" },
-      { "kind": "epigram", "title": "" }
+      {
+        "kind": "masthead"
+      },
+      {
+        "kind": "headline",
+        "title": "Today, in one line"
+      },
+      {
+        "kind": "agenda",
+        "title": "Your Day",
+        "from": "personalContext",
+        "visibility": "private"
+      },
+      {
+        "kind": "module",
+        "title": "The Contemplative Hours",
+        "from": "contemplative"
+      },
+      {
+        "kind": "module",
+        "title": "Deep Listening & the Choral Ear",
+        "from": "deep-listening"
+      },
+      {
+        "kind": "module",
+        "title": "Instruments of Attention",
+        "from": "instruments"
+      },
+      {
+        "kind": "module",
+        "title": "The Reading Room",
+        "from": "reading-room"
+      },
+      {
+        "kind": "module",
+        "title": "The Silk Road Table",
+        "from": "silk-road"
+      },
+      {
+        "kind": "module",
+        "title": "The Antiquity Cosmos",
+        "from": "antiquity"
+      },
+      {
+        "kind": "module",
+        "title": "Field Notes & the Ritual of the Senses",
+        "from": "field-and-ritual"
+      },
+      {
+        "kind": "serendipity",
+        "title": "One Wide Thing",
+        "from": "serendipity"
+      },
+      {
+        "kind": "radar",
+        "title": "For the Radar",
+        "_note": "Slower-horizon items the scanners flagged as worth watching but not acting on today — including the summer deep-dive tracks."
+      },
+      {
+        "kind": "on_this_day",
+        "title": "On This Day"
+      },
+      {
+        "kind": "epigram",
+        "title": ""
+      }
     ]
   },
-
+  "summer": {
+    "_note": "You want to spend this summer DISCOVERING these interests, so the brief is also an arc, not just a feed. Each track is a 6-10 week exploration with concrete first moves. The routine surfaces the current track's next move in the brief's 'For the Radar' section. Full write-up: brief/summer-2026.md.",
+    "season": "Summer 2026",
+    "surfaceInRadar": true,
+    "deepDives": [
+      {
+        "title": "The Silk Road Table, read before it is eaten",
+        "why": "Lagman is winter food — his own tracking made its seasonality legible to him before he'd consciously registered it. So summer is not for eating the corridor but for reading it: turning the abandoned ranking project into real anthropology, so that when the cold returns he drives it with three histories in his mouth instead of a score sheet. This is the season to let the instrument finish dissolving into metaphysics.",
+        "arc": "Weeks 1-2: the Uyghur laghman lineage and the Turkic noodle family. Weeks 3-4: the Bukharian Jewish table and Rego Park's 'Regoistan' — how the same word crossed into a different diaspora. Weeks 5-6: the Soviet-Russian inheritance and Dungan/Uzbek variants — one word, three histories, fully mapped. Weeks 7-8: re-map the real corridors (Bustleton Ave, Forest Hills) and design the winter's eating as fieldwork, not ranking. Weeks 9-10: write the essay the Log was always reaching for — 'what my people ate at 2 AM and why' — and let the archive stand as an inheritance.",
+        "firstMoves": [
+          "Pull every histories-in-one-word thread and start a Thymer collection: 'lagman — three histories,' one card per tradition (Uyghur / Bukharian / Soviet-Russian)",
+          "Read one serious piece on Bukharian Jewish foodways in Queens and one on Uyghur diaspora cooking; highlight into Readwise",
+          "Re-drive nothing — instead map the Bustleton Ave and Rego Park corridors on paper, marking which restaurant belongs to which history",
+          "Write 500 words answering his own line: 'I hadn't discovered a soup. I'd discovered an axis.' What is the axis?"
+        ]
+      },
+      {
+        "title": "The whole continuum: from Bremer/McCoy outward",
+        "why": "His deepest listening lives on one field where classical and jazz are not separate genres but a single continuum — the engine already pairs 'Yunchan Lim & Bremer/McCoy.' A conductor who was trained ear-first has never mapped his own sound-world as a whole. This summer he draws the map, and lets the choral ear that formed him become audible in the ambient-jazz and minimalism he loves.",
+        "arc": "Weeks 1-2: sit inside Bremer/McCoy's full catalog and name what the ear is doing. Weeks 3-4: the acoustic piano trio lineage — e.s.t., GoGo Penguin, Brubeck deep cuts past 'Take Five.' Weeks 5-6: Steve Reich and American minimalism as the structural cousin — process as form. Weeks 7-8: Yunchan Lim and the classical piano end of the continuum, heard as one field with the jazz. Weeks 9-10: the literary lyric voice (Sufjan, Adrianne Lenker) and a built artifact — a sequenced playlist or a listening-portal that holds the whole continuum in order.",
+        "firstMoves": [
+          "Open the Spotify MCP and build a private playlist seed 'The Continuum,' starting with the Bremer/McCoy track that returns first for him",
+          "Attend or stream one Thursday 12:30 organ recital at Princeton Chapel and write three sentences on what the ear noticed",
+          "Listen through Brubeck's 'Strange Meadow Lark' and one full Reich piece back to back; note what they share",
+          "Draft the one-line thesis of the continuum — how Westminster's 'attention itself became the instrument' shows up in music he didn't make"
+        ]
+      },
+      {
+        "title": "A summer of the interior — Psalms, Barth, and the deeper silence",
+        "why": "His contemplative life is genuinely his own, but it runs on daily fragments — a Rohr meditation here, a Wednesday centering-prayer hour there. His calendar already clusters a retreat season into these months (Retreat Prep → Retreat → Silent Retreat at Overbrook). Summer is the season to give the ecumenical restlessness a spine: one sustained text, read slowly, across traditions, instead of a scattered feed.",
+        "arc": "Weeks 1-2: the Psalms as a whole, guided by the St Vladimir's Orthodox lens — pray one a day. Weeks 3-4: bring Barth and Andrew Root alongside — the Reformed home in conversation with the silence. Weeks 5-6: the Jungian read — the Psalms and gratitude practice as depth work, God as 'the Idea Giver, the Critical Pedagogue.' Weeks 7-8: the clustered retreat / silent-retreat window — carry the whole summer's reading into the actual silence. Weeks 9-10: integration — write the gratitude entries the season asks for and let the practice, not the feed, be the record.",
+        "firstMoves": [
+          "Choose the Psalter and a fixed morning time; pray Psalm 1 on day one",
+          "Re-open the St Vladimir's 'Exploring the Book of Psalms' material and set the reading order",
+          "Add the retreat-season blocks to the calendar now so the arc lands inside the silence, not before it",
+          "Resume the gratitude journal with one entry naming what this summer's reading is giving — in his own idiom for God"
+        ]
+      },
+      {
+        "title": "Build one new instrument — the naturalist's phenology machine",
+        "why": "Every interest he has routes through a small machine he made for it, and the Log was 'the first time I used one to make.' He has a 49-record Natural Observations journal but no instrument that pays attention to it the way the Lagman Log paid attention to soup. Summer — birds nesting, seasons turning legibly — is exactly when a phenology instrument would have the most to notice. This is the track where making, field naturalism, and the antiquity-letterform delight all meet.",
+        "arc": "Weeks 1-2: watch the existing Natural Observations feed and decide what axis it wants (not a score — a spectrum, seasonality, presence). Weeks 3-4: sketch the instrument in Claude Code — feeds, hand-drawn masks, the Portal grammar. Weeks 5-6: give it a face from the antiquity cosmos — a bespoke display type, a meander frame, spectra over numbers. Weeks 7-8: wire in live seasonal data and let it start noticing catbirds, sparrows, the turn toward autumn. Weeks 9-10: let it run daily and become, like the Log, 'a footnote to' the world's own log — a record kept as an inheritance.",
+        "firstMoves": [
+          "Re-read builders-mark.md and the 'bowl-rating widget' lineage passage to reconnect the making to its why",
+          "Open the Natural Observations Thymer collection and list the axes it is already implicitly tracking",
+          "Start a fresh Claude Code project and stub one Portal slot: a place, a hand-drawn mask, a live feed",
+          "Decide the one thing this instrument refuses to reduce to a single number — and name the spectrum instead"
+        ]
+      },
+      {
+        "title": "The four-mode cosmos, deepened at the source",
+        "why": "His Greco-Aegean world is fully realized as surface — four modes, four bespoke faces, meanders and metallic sheen — but built largely from amphora references rather than the deep well of classical material culture. He lives on the seam of 'the classical-antique surface over the Central-Asian subject.' A summer at the source would let the world-building rest on real vase-painting, real letterforms, real taxonomy — sincerity earning its rigor.",
+        "arc": "Weeks 1-2: Greek black-figure and Attic vase painting — the grammar behind Etruscan Mode. Weeks 3-4: the meander and Aegean ornament as a system, not a motif. Weeks 5-6: type and letterform history feeding his four faces (Aegean, Spartacus, Xiphos, Columns). Weeks 7-8: invented notation and constructed scripts — the tradition his molecular sigils belong to. Weeks 9-10: revise the four modes with what he's learned and design one new artifact — a specimen sheet or a notation grammar — that could only exist after this summer.",
+        "firstMoves": [
+          "Use the Whitney MCP to pull American works that touch antiquity, letterform, or taxonomy and start a reference board",
+          "Read one primer on Greek black-figure technique; note what his Etruscan Mode gets right and what it invents",
+          "Lay his four display faces beside real classical letterforms and mark the choices he'd now make differently",
+          "Sketch one new invented notation — in the spirit of Lg₁₀ and Br₀₆ — for something he's currently measuring"
+        ]
+      }
+    ]
+  },
   "delivery": {
-    "_note": "The web artifact is the canonical output and is always produced. The other channels are layered on top and each can be toggled independently. `visibility: private` sections (like your inbox/agenda) are included in email/Slack but stripped from the public web artifact.",
+    "_note": "The web artifact is the canonical output and always produced. Other channels layer on top and toggle independently. `visibility: private` sections (agenda/inbox) are included in email/Slack but stripped from the public web artifact.",
     "web": {
       "enabled": true,
       "publishDir": "static/brief/data",
       "liveUrl": "https://anthonymichael.work/brief/",
       "commitAndPush": true,
-      "_note": "Writes latest.json + a dated archive file + updates index.json, then commits to main so GitHub Pages redeploys. This is what makes it a live web artifact."
+      "_note": "Writes latest.json + a dated archive file + updates index.json, then commits to main so GitHub Pages redeploys."
     },
     "email": {
       "enabled": false,
       "capability": "gmail",
       "mode": "draft",
       "to": "anthony@overbrookpresb.org",
-      "_note": "mode 'draft' creates a Gmail draft you review before it sends; switch to 'send' once you trust it. Renders the full brief (including private sections) as HTML with a link to the live version. Requires the Gmail connector to be authorized."
+      "_note": "mode 'draft' creates a Gmail draft you review before sending; switch to 'send' once you trust it. Renders the full brief (incl. private sections) as HTML with a link to the live version."
     },
     "slack": {
       "enabled": false,
       "capability": "slack",
       "target": "self-dm",
-      "_note": "Posts the headline + section highlights + link to the live brief as a DM to yourself. Requires the Slack connector."
+      "_note": "Posts headline + section highlights + link as a self-DM."
     },
     "pdf": {
       "enabled": false,
       "mode": "print-css",
-      "_note": "The web artifact carries a print stylesheet, so 'Save as PDF' from the browser already works. For automated PDF, a future exporter can drive headless Chromium (pre-installed here) against the live URL. See brief/exporters/README.md."
+      "_note": "Print stylesheet makes 'Save as PDF' work today; automated PDF via headless Chromium documented in brief/exporters/README.md."
     },
     "screenshots": {
       "enabled": false,
-      "_note": "Planned: headless-Chromium capture of each section as an image (for sharing). See brief/exporters/README.md."
+      "_note": "Planned: headless-Chromium capture of each section. See brief/exporters/README.md."
     },
     "thymer": {
       "enabled": false,
-      "_note": "Planned: export the brief as a Thymer note. No Thymer connector is present yet; the exporter stub documents the two paths (API when available, or Markdown drop-in). See brief/exporters/README.md."
+      "_note": "Planned: export the brief as a Thymer note (you live in Thymer). Markdown drop-in now; API when a connector exists. See brief/exporters/README.md."
     }
-  },
-
-  "guardrails": {
-    "sourcesPolicy": "Reputable, mainstream, or clearly-credentialed sources only. No sketchy aggregators, no engagement-bait, no unverified rumor. When a claim matters, it must trace to a nameable source with a link.",
-    "verification": "Cross-check anything surprising or consequential against a second source before it goes in the brief. Mark uncertainty honestly ('reported', 'unconfirmed') rather than laundering it into fact.",
-    "privacy": "Personal context (inbox, calendar) never appears in the public web artifact — only in the private delivery channels. Never publish anyone's private information.",
-    "tone": "No doom-scrolling. Constructive, curious, humane. The brief should leave him more oriented and a little more alive to the world, not more anxious."
   }
 }
