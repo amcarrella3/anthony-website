@@ -1,15 +1,14 @@
 // sw.js — offline app shell. Cache-first for our own files so the instrument
 // loads at a restaurant table with no signal. Data lives in IndexedDB, not here.
 
-const CACHE = 'lagman-log-v3';
+const CACHE = 'lagman-log-v6';
 const SHELL = [
   './',
   './index.html',
   './css/styles.css',
   './manifest.webmanifest',
   './assets/icon.svg',
-  './assets/fonts/Aegean.woff2',
-  './assets/fonts/Spartacus.woff2',
+  './assets/fonts/Fraunces.woff2',
   './js/app.js',
   './js/schema.js',
   './js/store.js',
@@ -17,6 +16,8 @@ const SHELL = [
   './js/notation.js',
   './js/naming.js',
   './js/charts.js',
+  './js/motion.js',
+  './js/panel.js',
   './js/formatters.js',
   './js/places.js',
   './js/sample.js',
@@ -27,6 +28,7 @@ const SHELL = [
   './js/views/compare.js',
   './js/views/legend.js',
   './js/views/exporter.js',
+  './js/views/settings.js',
 ];
 
 self.addEventListener('install', (e) => {

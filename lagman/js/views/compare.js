@@ -35,7 +35,7 @@ export async function renderCompare(root) {
   // Legend.
   root.appendChild(el('div', { class: 'compare-legend' }, series.map(({ bowl, color }) =>
     el('div', { class: 'legend-item', onclick: () => navigate(`#/bowl/${bowl.id}`) }, [
-      el('span', { class: 'swatch', style: `background:${color}` }),
+      el('span', { class: 'swatch-sq', style: `background:${color}` }),
       el('span', { class: 'mono' }, `#${fmtNum(bowl.bowlNumber)}`),
       el('span', {}, bowl.poeticName || bowl.descriptiveName || bowl.restaurantName || ''),
     ]))));

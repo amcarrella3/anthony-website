@@ -7,6 +7,7 @@ import * as store from '../store.js';
 import { el, clear, fmtNum, esc } from '../util.js';
 import { spectrumBar, radarSVG, SERIES_COLORS } from '../charts.js';
 import { fullText, shareText } from '../formatters.js';
+import { mountConsultation } from '../panel.js';
 import { navigate } from '../app.js';
 
 export async function renderDetail(root, { id }) {
@@ -22,7 +23,7 @@ export async function renderDetail(root, { id }) {
   root.appendChild(el('div', { class: 'detail-head' }, [
     el('div', { class: 'form-header-row' }, [
       el('button', { class: 'btn-ghost', onclick: () => navigate('#/archive') }, '‹ Archive'),
-      el('div', { class: 'card-no mono' }, `#${fmtNum(bowl.bowlNumber)}`),
+      el('div', { class: 'entry-no' }, `No. ${fmtNum(bowl.bowlNumber)}`),
       el('div', { class: 'detail-actions' }, [
         el('button', { class: 'btn-ghost', onclick: () => navigate(`#/edit/${bowl.id}`) }, 'Edit'),
         el('button', { class: 'btn-ghost', onclick: () => navigate('#/legend') }, 'Legend'),
@@ -30,7 +31,7 @@ export async function renderDetail(root, { id }) {
     ]),
     el('h1', { class: 'detail-poetic' }, bowl.poeticName || bowl.descriptiveName || 'Untitled bowl'),
     bowl.descriptiveName ? el('div', { class: 'detail-descriptive' }, bowl.descriptiveName) : null,
-    el('div', { class: 'notation-hero mono', html }),
+    el('div', { class: 'notation-hero' }, [el('div', { class: 'notation mono', html })]),
     (() => {
       const b = el('button', { class: 'btn-ghost btn-copy' }, 'Copy notation');
       b.addEventListener('click', async () => { await navigator.clipboard?.writeText(bowl.notationPlain || buildNotation(bowl).plain); b.textContent = 'Copied ✓'; setTimeout(() => (b.textContent = 'Copy notation'), 1400); });
@@ -50,6 +51,11 @@ export async function renderDetail(root, { id }) {
 
   // Per-bowl export views (distinct from the archive-wide data backup).
   root.appendChild(exportBlock(bowl));
+
+  // The Panel — a formal multi-agent consultation on this bowl (uses your key).
+  const consult = el('section', { class: 'consult-block no-print' });
+  root.appendChild(consult);
+  mountConsultation(consult, bowl);
 
   // Signature radar (headline axes).
   const hf = headlineFields();
