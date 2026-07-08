@@ -9,7 +9,7 @@
 //   meta    — counters & settings (keyPath: key)
 
 const DB_NAME = 'lagman-log';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 let _dbPromise = null;
 
@@ -26,6 +26,7 @@ function openDB() {
       }
       if (!db.objectStoreNames.contains('drafts')) db.createObjectStore('drafts', { keyPath: 'key' });
       if (!db.objectStoreNames.contains('meta')) db.createObjectStore('meta', { keyPath: 'key' });
+      if (!db.objectStoreNames.contains('consultations')) db.createObjectStore('consultations', { keyPath: 'id' });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
@@ -82,6 +83,11 @@ export function allDraftKeys() { return tx('drafts', 'readonly', (os) => reqP(os
 // ---- Meta -------------------------------------------------------------------
 export function getMeta(key) { return tx('meta', 'readonly', (os) => reqP(os.get(key))).then((m) => (m ? m.value : null)); }
 export function setMeta(key, value) { return tx('meta', 'readwrite', (os) => reqP(os.put({ key, value }))); }
+
+// ---- Consultations (cached AI panel readings, keyed by bowl id) -------------
+export function getConsultation(id) { return tx('consultations', 'readonly', (os) => reqP(os.get(id))); }
+export function putConsultation(id, data) { return tx('consultations', 'readwrite', (os) => reqP(os.put({ id, ...data }))); }
+export function deleteConsultation(id) { return tx('consultations', 'readwrite', (os) => reqP(os.delete(id))); }
 
 // ---- Bulk (import / restore) ------------------------------------------------
 export async function replaceAll(bowls) {

@@ -2,6 +2,7 @@
 // No dependencies. Everything scales crisply at any size.
 
 import { el, fmtNum } from './util.js';
+import { familyOf } from './schema.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
 function svgEl(tag, attrs = {}) {
@@ -11,17 +12,18 @@ function svgEl(tag, attrs = {}) {
 }
 
 // A single labelled spectrum bar: a track with a marker where the value sits.
-export function spectrumBar(field, value, colorVar = 'var(--accent)') {
+export function spectrumBar(field, value) {
   const min = field.min ?? 0, max = field.max ?? 10;
   const pct = Math.max(0, Math.min(1, ((Number(value) || 0) - min) / (max - min))) * 100;
-  const row = el('div', { class: 'spec-row' }, [
+  const fam = familyOf(field.id);
+  const row = el('div', { class: 'spec-row', style: fam ? `--fam:var(--c-${fam})` : null }, [
     el('div', { class: 'spec-head' }, [
-      el('span', { class: 'spec-label' }, field.label),
-      el('span', { class: 'spec-value mono' }, fmtNum(value ?? 0)),
+      el('span', { class: 'spec-label' }, [fam ? el('span', { class: 'swatch' }) : null, field.label]),
+      el('span', { class: 'spec-value' }, fmtNum(value ?? 0)),
     ]),
     el('div', { class: 'spec-track' }, [
-      el('div', { class: 'spec-fill', style: `width:${pct}%;background:${colorVar}` }),
-      el('div', { class: 'spec-marker', style: `left:${pct}%;border-color:${colorVar}` }),
+      el('div', { class: 'spec-fill', style: `width:${pct}%` }),
+      el('div', { class: 'spec-marker', style: `left:${pct}%` }),
     ]),
     el('div', { class: 'spec-ends' }, [el('span', {}, field.left || String(min)), el('span', {}, field.right || String(max))]),
   ]);
@@ -63,4 +65,4 @@ export function radarSVG(axes, series, { size = 260, pad = 34 } = {}) {
   return svg;
 }
 
-export const SERIES_COLORS = ['var(--accent)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-4)', 'var(--accent-5)'];
+export const SERIES_COLORS = ['var(--accent)', 'var(--c-spice)', 'var(--c-meat)', 'var(--c-veg)', 'var(--c-broth)'];

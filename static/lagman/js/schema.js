@@ -242,19 +242,23 @@ export const SECTIONS = [
 // Zero-value spices are omitted so the formula stays legible. This list is the
 // explicit, auditable definition of what appears in the formula.
 export const NOTATION_GROUPS = [
-  { tokens: ['culturalOrigin'] },
-  { tokens: ['spiceComplexity'] },
-  { inner: '·', omitZero: true, tokens: ['cumin', 'starAnise', 'sichuanPepper', 'blackPepper', 'dill', 'coriander', 'garlic', 'chiliHeat', 'otherSpices'] },
-  { tokens: ['fatOil'] },
-  { tokens: ['clarity'] },
-  { tokens: ['liquidLevel'] },
-  { tokens: ['tomato'] },
-  { tokens: ['meatTypes'] },
-  { inner: '·', tokens: ['meatQuality', 'meatRatio'] },
-  { inner: '·', tokens: ['noodlePull', 'noodleTexture', 'noodleWidth', 'noodleFreshness'] },
-  { inner: '·', tokens: ['vegVarietyCount', 'vegTexture', 'vegRatio'] },
-  { tokens: ['harmony'] },
+  { family: 'origin', tokens: ['culturalOrigin'] },
+  { family: 'spice', tokens: ['spiceComplexity'] },
+  { family: 'spice', inner: '·', omitZero: true, tokens: ['cumin', 'starAnise', 'sichuanPepper', 'blackPepper', 'dill', 'coriander', 'garlic', 'chiliHeat', 'otherSpices'] },
+  { family: 'fat', tokens: ['fatOil'] },
+  { family: 'broth', tokens: ['clarity'] },
+  { family: 'broth', tokens: ['liquidLevel'] },
+  { family: 'broth', tokens: ['tomato'] },
+  { family: 'meat', tokens: ['meatTypes'] },
+  { family: 'meat', inner: '·', tokens: ['meatQuality', 'meatRatio'] },
+  { family: 'noodle', inner: '·', tokens: ['noodlePull', 'noodleTexture', 'noodleWidth', 'noodleFreshness'] },
+  { family: 'veg', inner: '·', tokens: ['vegVarietyCount', 'vegTexture', 'vegRatio'] },
+  { family: 'harmony', tokens: ['harmony'] },
 ];
+
+// Colour-coding: each scored axis belongs to an ingredient "family" whose muted
+// pigment tints its dot, bar, and notation tokens. Derived from the section.
+export const FAMILY_OF_SECTION = { origin: 'origin', spice: 'spice', fat: 'fat', broth: 'broth', meat: 'meat', noodles: 'noodle', veg: 'veg', harmony: 'harmony' };
 
 // ---- Derived helpers --------------------------------------------------------
 const _fieldIndex = {};
@@ -268,6 +272,7 @@ for (const section of SECTIONS) {
 export function getField(id) { return _fieldIndex[id]; }
 export function allFields() { return Object.values(_fieldIndex); }
 export function sectionOf(id) { return _fieldIndex[id]?.section; }
+export function familyOf(id) { return FAMILY_OF_SECTION[sectionOf(id)] || null; }
 
 // Fields that carry a numeric axis value (used by detail bars, radar, naming).
 export function scoredFields() {

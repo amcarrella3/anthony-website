@@ -6,6 +6,7 @@ import { renderDetail } from './views/detail.js';
 import { renderCompare } from './views/compare.js';
 import { renderLegend } from './views/legend.js';
 import { renderExport } from './views/exporter.js';
+import { renderSettings } from './views/settings.js';
 
 const view = () => document.getElementById('view');
 
@@ -22,6 +23,7 @@ const ROUTES = [
   { re: /^#\/compare$/, nav: 'compare', run: (r) => renderCompare(r) },
   { re: /^#\/legend$/, nav: null, run: (r) => renderLegend(r) },
   { re: /^#\/export$/, nav: 'export', run: (r) => renderExport(r) },
+  { re: /^#\/settings$/, nav: 'settings', run: (r) => renderSettings(r) },
 ];
 
 async function route() {
@@ -45,11 +47,34 @@ function setActiveNav(nav) {
   for (const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('active', a.dataset.nav === nav);
 }
 
+// ---- Chrome: dome brand mark + light/dark toggle ----------------------------
+function applyThemeGlyph() {
+  const t = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = t === 'dark' ? '☾' : '☀';
+  const meta = document.getElementById('meta-theme-color');
+  if (meta) meta.setAttribute('content', t === 'dark' ? '#0f1416' : '#f0ece3');
+}
+function initChrome() {
+  const btn = document.getElementById('theme-toggle');
+  if (btn && !btn.dataset.wired) {
+    btn.dataset.wired = '1';
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('lagman-theme', next); } catch (e) { /* private mode */ }
+      applyThemeGlyph();
+    });
+  }
+  applyThemeGlyph();
+}
+
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', () => {
+  initChrome();
   route();
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
 });
 
-// If DOMContentLoaded already fired (module loaded late), route now.
-if (document.readyState !== 'loading') route();
+// If DOMContentLoaded already fired (module loaded late), init + route now.
+if (document.readyState !== 'loading') { initChrome(); route(); }

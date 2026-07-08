@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0e0f12" />
+  <meta name="theme-color" content="#0f1416" id="meta-theme-color" />
   <meta name="robots" content="noindex, nofollow" />
+  <script>
+    /* No-flash theme: set data-theme before the stylesheet applies. */
+    (function () {
+      try {
+        var t = localStorage.getItem('lagman-theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
   <title>Lagman Log — Anthony Carrella</title>
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
@@ -14,16 +24,20 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#/archive" data-nav="archive">
-      <span class="brand-mark mono">Lg</span>
+      <span class="brand-mark" aria-label="Lagman Log"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1" opacity="0.85"/><circle cx="12" cy="12" r="3" fill="var(--accent)"/></svg></span>
       <span class="brand-name">Lagman Log</span>
     </a>
-    <nav class="topnav">
-      <a href="#/archive" data-nav="archive">Archive</a>
-      <a href="#/new" data-nav="new" class="nav-new">+ New</a>
-      <a href="#/compare" data-nav="compare">Compare</a>
-      <a href="#/export" data-nav="export">Export</a>
-      <a href="/instruments/" class="nav-site" title="Back to Instruments">↖&#xFE0E; Instruments</a>
-    </nav>
+    <div class="topbar-right">
+      <nav class="topnav">
+        <a href="#/archive" data-nav="archive">Archive</a>
+        <a href="#/new" data-nav="new" class="nav-new">+ New</a>
+        <a href="#/compare" data-nav="compare">Compare</a>
+        <a href="#/export" data-nav="export">Export</a>
+        <a href="/instruments/" class="nav-site" title="Back to Instruments">↖&#xFE0E; Instruments</a>
+      </nav>
+      <a class="theme-toggle iconlink" href="#/settings" title="Settings" aria-label="Settings">⚙</a>
+      <button id="theme-toggle" class="theme-toggle" type="button" title="Toggle light / dark" aria-label="Toggle light or dark mode">☾</button>
+    </div>
   </header>
 
   <main id="view" class="view"><!-- views render here --></main>

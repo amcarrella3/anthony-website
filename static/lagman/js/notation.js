@@ -61,19 +61,18 @@ function renderTok(t, mode) {
   return `${t.token}${t.sub}`;
 }
 
-export function buildNotation(bowl) {
-  const groupStrs = { html: [], plain: [] };
+// family -> CSS class suffix used by the colour-coded notation (.notation .n-*)
+const FAM_CLASS = { origin: 'or', spice: 'sp', fat: 'ft', broth: 'br', meat: 'mt', noodle: 'nd', veg: 'vg', harmony: 'h' };
 
+export function buildNotation(bowl) {
+  const groups = []; // { family, html, plain }
   for (const g of NOTATION_GROUPS) {
     const toks = [];
     for (const fid of g.tokens) {
       const field = getField(fid);
       if (!field) continue;
       if (field.notation?.repeater) {
-        for (const t of repeaterTokens(field, bowl)) {
-          if (g.omitZero && t.zero) continue;
-          toks.push(t);
-        }
+        for (const t of repeaterTokens(field, bowl)) { if (g.omitZero && t.zero) continue; toks.push(t); }
         continue;
       }
       const t = tokenValue(field, bowl);
@@ -83,13 +82,21 @@ export function buildNotation(bowl) {
     }
     if (!toks.length) continue;
     const inner = g.inner || '';
-    groupStrs.html.push(toks.map((t) => renderTok(t, 'html')).join(inner));
-    groupStrs.plain.push(toks.map((t) => renderTok(t, 'plain')).join(inner));
+    groups.push({ family: g.family || 'harmony', html: toks.map((t) => renderTok(t, 'html')).join(inner), plain: toks.map((t) => renderTok(t, 'plain')).join(inner) });
   }
 
-  const n = bowl.bowlNumber || 0;
-  const html = `Lg<sub>${esc(fmtNum(n))}</sub>(${groupStrs.html.join('-')})`;
-  const plain = `Lg${fmtNum(n)}(${groupStrs.plain.join('-')})`;
+  const n = fmtNum(bowl.bowlNumber || 0);
+  // Colour-coded HTML: merge consecutive same-family groups into one tinted span
+  // (within-family '-' tinted, between-family '-' and the parens grey).
+  const runs = [];
+  for (let i = 0; i < groups.length;) {
+    const fam = groups[i].family; const parts = []; let j = i;
+    while (j < groups.length && groups[j].family === fam) { parts.push(groups[j].html); j++; }
+    runs.push(`<span class="n-${FAM_CLASS[fam] || 'h'}">${parts.join('-')}</span>`);
+    i = j;
+  }
+  const html = `Lg<sub>${esc(n)}</sub><span class="g">(</span>${runs.join('<span class="g">-</span>')}<span class="g">)</span>`;
+  const plain = `Lg${n}(${groups.map((g) => g.plain).join('-')})`;
   return { html, plain };
 }
 
